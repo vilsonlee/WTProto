@@ -13,49 +13,49 @@
 		CE62856B239A2A4B005849A9 /* WTProtocal.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62855D239A2A4B005849A9 /* WTProtocal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE6285DE239A2AEE005849A9 /* WTProtoVCardAvatarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628577239A2AEC005849A9 /* WTProtoVCardAvatarModule.m */; };
 		CE6285DF239A2AEE005849A9 /* WTProtoVCardCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628578239A2AEC005849A9 /* WTProtoVCardCoreDataStorage.m */; };
-		CE6285E0239A2AEE005849A9 /* WTProtoVCardTempModule.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628579239A2AEC005849A9 /* WTProtoVCardTempModule.h */; };
-		CE6285E1239A2AEE005849A9 /* WTProtoVCardCoreDataStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62857A239A2AEC005849A9 /* WTProtoVCardCoreDataStorage.h */; };
-		CE6285E2239A2AEE005849A9 /* WTProtoVCardAvatarModule.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62857B239A2AEC005849A9 /* WTProtoVCardAvatarModule.h */; };
+		CE6285E0239A2AEE005849A9 /* WTProtoVCardTempModule.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628579239A2AEC005849A9 /* WTProtoVCardTempModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE6285E1239A2AEE005849A9 /* WTProtoVCardCoreDataStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62857A239A2AEC005849A9 /* WTProtoVCardCoreDataStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE6285E2239A2AEE005849A9 /* WTProtoVCardAvatarModule.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62857B239A2AEC005849A9 /* WTProtoVCardAvatarModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE6285E3239A2AEE005849A9 /* WTProtoVCardTempModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62857C239A2AEC005849A9 /* WTProtoVCardTempModule.m */; };
 		CE6285E4239A2AEE005849A9 /* WTProtoUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62857E239A2AEC005849A9 /* WTProtoUser.m */; };
-		CE6285E5239A2AEE005849A9 /* WTProtoUser.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62857F239A2AEC005849A9 /* WTProtoUser.h */; };
+		CE6285E5239A2AEE005849A9 /* WTProtoUser.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62857F239A2AEC005849A9 /* WTProtoUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE6285E6239A2AEE005849A9 /* WTProtoBlocking.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628581239A2AED005849A9 /* WTProtoBlocking.m */; };
-		CE6285E7239A2AEE005849A9 /* WTProtoBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628582239A2AED005849A9 /* WTProtoBlock.h */; };
-		CE6285E8239A2AEE005849A9 /* WTProtoBlocking.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628583239A2AED005849A9 /* WTProtoBlocking.h */; };
+		CE6285E7239A2AEE005849A9 /* WTProtoBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628582239A2AED005849A9 /* WTProtoBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE6285E8239A2AEE005849A9 /* WTProtoBlocking.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628583239A2AED005849A9 /* WTProtoBlocking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE6285E9239A2AEE005849A9 /* WTProtoBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628584239A2AED005849A9 /* WTProtoBlock.m */; };
-		CE6285EA239A2AEE005849A9 /* WTProtoRoom.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628586239A2AED005849A9 /* WTProtoRoom.h */; };
-		CE6285EB239A2AEE005849A9 /* WTProtoGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628587239A2AED005849A9 /* WTProtoGroup.h */; };
-		CE6285EC239A2AEE005849A9 /* WTProtoMUC.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628588239A2AED005849A9 /* WTProtoMUC.h */; };
+		CE6285EA239A2AEE005849A9 /* WTProtoRoom.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628586239A2AED005849A9 /* WTProtoRoom.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE6285EB239A2AEE005849A9 /* WTProtoGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628587239A2AED005849A9 /* WTProtoGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE6285EC239A2AEE005849A9 /* WTProtoMUC.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628588239A2AED005849A9 /* WTProtoMUC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE6285ED239A2AEE005849A9 /* WTProtoRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628589239A2AED005849A9 /* WTProtoRoom.m */; };
 		CE6285EE239A2AEE005849A9 /* WTProtoMUC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62858A239A2AED005849A9 /* WTProtoMUC.m */; };
 		CE6285EF239A2AEE005849A9 /* WTProtoGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62858B239A2AED005849A9 /* WTProtoGroup.m */; };
-		CE6285F0239A2AEE005849A9 /* SimplePing.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62858E239A2AED005849A9 /* SimplePing.h */; };
-		CE6285F1239A2AEE005849A9 /* WTProtoAutoPing.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62858F239A2AED005849A9 /* WTProtoAutoPing.h */; };
-		CE6285F2239A2AEE005849A9 /* WTPingTester.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628590239A2AED005849A9 /* WTPingTester.h */; };
+		CE6285F0239A2AEE005849A9 /* SimplePing.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62858E239A2AED005849A9 /* SimplePing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE6285F1239A2AEE005849A9 /* WTProtoAutoPing.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62858F239A2AED005849A9 /* WTProtoAutoPing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE6285F2239A2AEE005849A9 /* WTPingTester.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628590239A2AED005849A9 /* WTPingTester.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE6285F3239A2AEE005849A9 /* WTProtoPing.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628591239A2AED005849A9 /* WTProtoPing.m */; };
-		CE6285F4239A2AEE005849A9 /* WTProtoManualPing.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628592239A2AED005849A9 /* WTProtoManualPing.h */; };
+		CE6285F4239A2AEE005849A9 /* WTProtoManualPing.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628592239A2AED005849A9 /* WTProtoManualPing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE6285F5239A2AEE005849A9 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628593239A2AED005849A9 /* SimplePing.m */; };
 		CE6285F6239A2AEE005849A9 /* WTPingTester.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628594239A2AED005849A9 /* WTPingTester.m */; };
 		CE6285F7239A2AEE005849A9 /* WTProtoAutoPing.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628595239A2AED005849A9 /* WTProtoAutoPing.m */; };
 		CE6285F8239A2AEE005849A9 /* WTProtoManualPing.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628596239A2AED005849A9 /* WTProtoManualPing.m */; };
-		CE6285F9239A2AEE005849A9 /* WTProtoPing.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628597239A2AED005849A9 /* WTProtoPing.h */; };
+		CE6285F9239A2AEE005849A9 /* WTProtoPing.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628597239A2AED005849A9 /* WTProtoPing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE6285FA239A2AEE005849A9 /* WTProtoAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628599239A2AED005849A9 /* WTProtoAuth.m */; };
-		CE6285FB239A2AEE005849A9 /* WTProtoAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62859A239A2AED005849A9 /* WTProtoAuth.h */; };
+		CE6285FB239A2AEE005849A9 /* WTProtoAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62859A239A2AED005849A9 /* WTProtoAuth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE6285FC239A2AEE005849A9 /* WTProtoServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62859C239A2AED005849A9 /* WTProtoServerAddress.m */; };
-		CE6285FD239A2AEE005849A9 /* WTProtoServerAddressSet.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62859D239A2AED005849A9 /* WTProtoServerAddressSet.h */; };
+		CE6285FD239A2AEE005849A9 /* WTProtoServerAddressSet.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62859D239A2AED005849A9 /* WTProtoServerAddressSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE6285FE239A2AEE005849A9 /* WTProtoServerAddressSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62859E239A2AED005849A9 /* WTProtoServerAddressSet.m */; };
-		CE6285FF239A2AEE005849A9 /* WTProtoServerAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62859F239A2AED005849A9 /* WTProtoServerAddress.h */; };
-		CE628600239A2AEE005849A9 /* WTProtoRegister.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285A1239A2AED005849A9 /* WTProtoRegister.h */; };
+		CE6285FF239A2AEE005849A9 /* WTProtoServerAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62859F239A2AED005849A9 /* WTProtoServerAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE628600239A2AEE005849A9 /* WTProtoRegister.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285A1239A2AED005849A9 /* WTProtoRegister.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE628601239A2AEE005849A9 /* WTProtoRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285A2239A2AED005849A9 /* WTProtoRegister.m */; };
-		CE628602239A2AEE005849A9 /* WTProtoReconnect.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285A4239A2AED005849A9 /* WTProtoReconnect.h */; };
+		CE628602239A2AEE005849A9 /* WTProtoReconnect.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285A4239A2AED005849A9 /* WTProtoReconnect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE628603239A2AEE005849A9 /* WTProtoReConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285A5239A2AED005849A9 /* WTProtoReConnection.m */; };
 		CE628604239A2AEE005849A9 /* WTProtoConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285A6239A2AED005849A9 /* WTProtoConnection.m */; };
 		CE628605239A2AEE005849A9 /* WTProtoReconnect.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285A7239A2AED005849A9 /* WTProtoReconnect.m */; };
-		CE628606239A2AEE005849A9 /* WTProtoConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285A8239A2AED005849A9 /* WTProtoConnection.h */; };
-		CE628607239A2AEE005849A9 /* WTProtoReConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285A9239A2AED005849A9 /* WTProtoReConnection.h */; };
-		CE628608239A2AEE005849A9 /* WTProtoRosters.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285AB239A2AED005849A9 /* WTProtoRosters.h */; };
-		CE628609239A2AEE005849A9 /* WTProtoRosterCoreDataStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285AC239A2AED005849A9 /* WTProtoRosterCoreDataStorage.h */; };
-		CE62860A239A2AEE005849A9 /* WTProtoRoster.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285AD239A2AED005849A9 /* WTProtoRoster.h */; };
+		CE628606239A2AEE005849A9 /* WTProtoConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285A8239A2AED005849A9 /* WTProtoConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE628607239A2AEE005849A9 /* WTProtoReConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285A9239A2AED005849A9 /* WTProtoReConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE628608239A2AEE005849A9 /* WTProtoRosters.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285AB239A2AED005849A9 /* WTProtoRosters.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE628609239A2AEE005849A9 /* WTProtoRosterCoreDataStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285AC239A2AED005849A9 /* WTProtoRosterCoreDataStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE62860A239A2AEE005849A9 /* WTProtoRoster.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285AD239A2AED005849A9 /* WTProtoRoster.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE62860B239A2AEE005849A9 /* WTProtoRosters.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285AE239A2AED005849A9 /* WTProtoRosters.m */; };
 		CE62860C239A2AEE005849A9 /* WTProtoRoster.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285AF239A2AED005849A9 /* WTProtoRoster.m */; };
 		CE62860D239A2AEE005849A9 /* WTProtoRosterCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285B0239A2AED005849A9 /* WTProtoRosterCoreDataStorage.m */; };
@@ -63,37 +63,37 @@
 		CE62860F239A2AEE005849A9 /* WTProtoStreamManagementMemoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285B3239A2AED005849A9 /* WTProtoStreamManagementMemoryStorage.m */; };
 		CE628610239A2AEE005849A9 /* WTProtoStream.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285B4239A2AED005849A9 /* WTProtoStream.m */; };
 		CE628611239A2AEE005849A9 /* WTProtoStreamManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285B5239A2AED005849A9 /* WTProtoStreamManager.m */; };
-		CE628612239A2AEE005849A9 /* WTProtoStream.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285B6239A2AED005849A9 /* WTProtoStream.h */; };
-		CE628613239A2AEE005849A9 /* WTProtoStreamManagementMemoryStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285B7239A2AED005849A9 /* WTProtoStreamManagementMemoryStorage.h */; };
-		CE628614239A2AEE005849A9 /* WTProtoStreamManagement.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285B8239A2AED005849A9 /* WTProtoStreamManagement.h */; };
-		CE628615239A2AEE005849A9 /* WTProtoStreamManager.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285B9239A2AED005849A9 /* WTProtoStreamManager.h */; };
+		CE628612239A2AEE005849A9 /* WTProtoStream.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285B6239A2AED005849A9 /* WTProtoStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE628613239A2AEE005849A9 /* WTProtoStreamManagementMemoryStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285B7239A2AED005849A9 /* WTProtoStreamManagementMemoryStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE628614239A2AEE005849A9 /* WTProtoStreamManagement.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285B8239A2AED005849A9 /* WTProtoStreamManagement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE628615239A2AEE005849A9 /* WTProtoStreamManager.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285B9239A2AED005849A9 /* WTProtoStreamManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE628616239A2AEE005849A9 /* WTProto.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285BA239A2AED005849A9 /* WTProto.m */; };
 		CE628617239A2AEE005849A9 /* WTProtoPresence.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285BD239A2AED005849A9 /* WTProtoPresence.m */; };
 		CE628618239A2AEE005849A9 /* WTProtoGroupPresent.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285BE239A2AED005849A9 /* WTProtoGroupPresent.m */; };
-		CE628619239A2AEE005849A9 /* WTProtoPresence.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285BF239A2AED005849A9 /* WTProtoPresence.h */; };
-		CE62861A239A2AEE005849A9 /* WTProtoGroupPresent.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285C0239A2AED005849A9 /* WTProtoGroupPresent.h */; };
-		CE62861B239A2AEE005849A9 /* WTProtoMessageCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285C2239A2AED005849A9 /* WTProtoMessageCenter.h */; };
+		CE628619239A2AEE005849A9 /* WTProtoPresence.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285BF239A2AED005849A9 /* WTProtoPresence.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE62861A239A2AEE005849A9 /* WTProtoGroupPresent.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285C0239A2AED005849A9 /* WTProtoGroupPresent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE62861B239A2AEE005849A9 /* WTProtoMessageCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285C2239A2AED005849A9 /* WTProtoMessageCenter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE62861C239A2AEE005849A9 /* WTProtoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285C3239A2AED005849A9 /* WTProtoMessage.m */; };
 		CE62861D239A2AEE005849A9 /* WTProtoMessageCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285C4239A2AED005849A9 /* WTProtoMessageCenter.m */; };
-		CE62861E239A2AEE005849A9 /* WTProtoMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285C5239A2AED005849A9 /* WTProtoMessage.h */; };
-		CE62861F239A2AEE005849A9 /* WTProtoIQ.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285C7239A2AED005849A9 /* WTProtoIQ.h */; };
+		CE62861E239A2AEE005849A9 /* WTProtoMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285C5239A2AED005849A9 /* WTProtoMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE62861F239A2AEE005849A9 /* WTProtoIQ.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285C7239A2AED005849A9 /* WTProtoIQ.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE628620239A2AEE005849A9 /* WTProtoGroupIQ.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285C8239A2AED005849A9 /* WTProtoGroupIQ.m */; };
-		CE628621239A2AEE005849A9 /* WTProtoGroupIQ.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285C9239A2AED005849A9 /* WTProtoGroupIQ.h */; };
+		CE628621239A2AEE005849A9 /* WTProtoGroupIQ.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285C9239A2AED005849A9 /* WTProtoGroupIQ.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE628622239A2AEE005849A9 /* WTProtoIQ.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285CA239A2AED005849A9 /* WTProtoIQ.m */; };
-		CE628623239A2AEE005849A9 /* NSObject+PerformSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285CC239A2AED005849A9 /* NSObject+PerformSelector.h */; };
-		CE628624239A2AEE005849A9 /* NSString+pyFirstLetter.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285CD239A2AED005849A9 /* NSString+pyFirstLetter.h */; };
-		CE628625239A2AEE005849A9 /* WTProtoQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285CE239A2AED005849A9 /* WTProtoQueue.h */; };
-		CE628626239A2AEE005849A9 /* WTProtoTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285CF239A2AED005849A9 /* WTProtoTimer.h */; };
+		CE628623239A2AEE005849A9 /* NSObject+PerformSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285CC239A2AED005849A9 /* NSObject+PerformSelector.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE628624239A2AEE005849A9 /* NSString+pyFirstLetter.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285CD239A2AED005849A9 /* NSString+pyFirstLetter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE628625239A2AEE005849A9 /* WTProtoQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285CE239A2AED005849A9 /* WTProtoQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE628626239A2AEE005849A9 /* WTProtoTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285CF239A2AED005849A9 /* WTProtoTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE628627239A2AEE005849A9 /* WTProtoLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285D0239A2AED005849A9 /* WTProtoLogging.m */; };
 		CE628628239A2AEE005849A9 /* WTProtoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285D1239A2AED005849A9 /* WTProtoQueue.m */; };
 		CE628629239A2AEE005849A9 /* NSString+pyFirstLetter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285D2239A2AED005849A9 /* NSString+pyFirstLetter.m */; };
 		CE62862A239A2AEE005849A9 /* NSObject+PerformSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285D3239A2AED005849A9 /* NSObject+PerformSelector.m */; };
 		CE62862B239A2AEE005849A9 /* WTProtoTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285D4239A2AED005849A9 /* WTProtoTimer.m */; };
-		CE62862C239A2AEE005849A9 /* WTProtoLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285D5239A2AED005849A9 /* WTProtoLogging.h */; };
-		CE62862D239A2AEE005849A9 /* WTProtoIDTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285D7239A2AEE005849A9 /* WTProtoIDTracker.h */; };
+		CE62862C239A2AEE005849A9 /* WTProtoLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285D5239A2AED005849A9 /* WTProtoLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE62862D239A2AEE005849A9 /* WTProtoIDTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285D7239A2AEE005849A9 /* WTProtoIDTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE62862E239A2AEE005849A9 /* WTProtoIDTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285D8239A2AEE005849A9 /* WTProtoIDTracker.m */; };
-		CE62862F239A2AEE005849A9 /* WTProto.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285D9239A2AEE005849A9 /* WTProto.h */; };
-		CE628630239A2AEE005849A9 /* XMLDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285DC239A2AEE005849A9 /* XMLDictionary.h */; };
+		CE62862F239A2AEE005849A9 /* WTProto.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285D9239A2AEE005849A9 /* WTProto.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE628630239A2AEE005849A9 /* XMLDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285DC239A2AEE005849A9 /* XMLDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE628631239A2AEE005849A9 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285DD239A2AEE005849A9 /* XMLDictionary.m */; };
 /* End PBXBuildFile section */
 
@@ -237,7 +237,6 @@
 				5C80F58B38CAEAB264C7F3E1 /* Pods-WTProto-WTProtocal.debug.xcconfig */,
 				E03035C29B6E96F895FD6FB8 /* Pods-WTProto-WTProtocal.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -265,9 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				CE628574239A2AEC005849A9 /* WTProto */,
-				CE6285D9239A2AEE005849A9 /* WTProto.h */,
-				CE6285BA239A2AED005849A9 /* WTProto.m */,
-				CE62855D239A2A4B005849A9 /* WTProtocal.h */,
 				CE62855E239A2A4B005849A9 /* Info.plist */,
 			);
 			path = WTProtocal;
@@ -285,6 +281,7 @@
 		CE628574239A2AEC005849A9 /* WTProto */ = {
 			isa = PBXGroup;
 			children = (
+				CE628BC9239B8080005849A9 /* Interface */,
 				CE628575239A2AEC005849A9 /* DataCenter */,
 				CE628585239A2AED005849A9 /* MUC */,
 				CE62858C239A2AED005849A9 /* Connection */,
@@ -537,6 +534,16 @@
 				CE6285DD239A2AEE005849A9 /* XMLDictionary.m */,
 			);
 			path = XMLDictionary;
+			sourceTree = "<group>";
+		};
+		CE628BC9239B8080005849A9 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				CE6285D9239A2AEE005849A9 /* WTProto.h */,
+				CE6285BA239A2AED005849A9 /* WTProto.m */,
+				CE62855D239A2A4B005849A9 /* WTProtocal.h */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
