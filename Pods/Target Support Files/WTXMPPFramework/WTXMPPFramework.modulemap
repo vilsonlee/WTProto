@@ -1,0 +1,6 @@
+framework module WTXMPPFramework {
+  umbrella header "WTXMPPFramework-umbrella.h"
+
+  export *
+  module * { export * }
+}
