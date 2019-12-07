@@ -425,8 +425,8 @@
 		CE6285AA239A2AED005849A9 /* Roster */ = {
 			isa = PBXGroup;
 			children = (
-				CE6285AE239A2AED005849A9 /* WTProtoRosters.m */,
 				CE6285AB239A2AED005849A9 /* WTProtoRosters.h */,
+				CE6285AE239A2AED005849A9 /* WTProtoRosters.m */,
 				CE6285AD239A2AED005849A9 /* WTProtoRoster.h */,
 				CE6285AF239A2AED005849A9 /* WTProtoRoster.m */,
 				CE6285AC239A2AED005849A9 /* WTProtoRosterCoreDataStorage.h */,

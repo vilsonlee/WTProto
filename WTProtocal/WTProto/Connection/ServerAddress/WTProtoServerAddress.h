@@ -8,12 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import <netinet/in.h>
-
-#include <netdb.h>
-#include <resolv.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
