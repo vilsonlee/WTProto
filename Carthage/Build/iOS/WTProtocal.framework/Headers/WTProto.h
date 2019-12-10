@@ -108,10 +108,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (WTProtoQueue *)ProtoQueue;
 
-+ (WTProto *)shareWTProtoPhoneNumber:(NSString *)phoneNumber
-                              Domain:(NSString *)domain
-                            Resource:(NSString *)resource;
-
 + (WTProto *)shareWTProtoUserID:(NSString *)UserID
                          Domain:(NSString *)domain
                        Resource:(NSString *)resource

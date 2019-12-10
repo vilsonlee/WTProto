@@ -1,0 +1,6 @@
+framework module WTProtocal {
+  umbrella header "WTProtocal.h"
+
+  export *
+  module * { export * }
+}

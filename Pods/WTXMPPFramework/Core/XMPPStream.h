@@ -113,11 +113,16 @@ Vilson: FIXE:
 @property (nonatomic, copy) NSString *verifiCode;//验证码
 @property (nonatomic, copy) NSString *verifiMsgLanguage;//app显示语言(决定验证码短讯的语言)
 
-@property (nonatomic, copy) NSString *iPhoneName;//手机别名
-@property (nonatomic, copy) NSString *deviceType;//设备类型版本
+@property (nonatomic, copy) NSString *deviceToken;//设备推送token
 
 @property (nonatomic, copy) NSString *loginSource;//来源哪个APP
 @property (nonatomic, copy) NSString *loginAuthType;//验证登录类型(check/getmsg/checkmsg)
+
+@property (nonatomic, copy) NSString *currentDeviceName;      //当前操作系统
+@property (nonatomic, copy) NSString *currentAPPVersion;      //当前APP版本
+@property (nonatomic, copy) NSString *currentDeviceOS;        //当前操作系统
+
+
 
 /**
  * The server's hostname that should be used to make the TCP connection.

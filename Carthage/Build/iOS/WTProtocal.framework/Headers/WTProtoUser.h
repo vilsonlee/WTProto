@@ -52,27 +52,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly)NSString *nickName;            //昵称
 @property (nonatomic, copy, readonly)NSString *deviceToken;         //设备Tokekn 用于推送
 
-@property (nonatomic, copy, readonly)NSString *currentDeviceName;   //用户当前操作系统
-@property (nonatomic, copy, readonly)NSString *currentAPPVersion;   //用户当前APP版本
-@property (nonatomic, copy, readonly)NSString *currentDeviceOS;     //用户当前操作系统
-
 
 - (instancetype)initProtoUserWithUserID:(NSString *)userID
                                  domain:(NSString *)domain
                                resource:(NSString *)resource
                                userType:(WTProtoUserType)userType
                             phoneNumber:(NSString *)phoneNumber
-                              phoneCode:(NSString *)phoneCode
                                password:(NSString *)password
                                deviceID:(NSString *)deviceID
-                            deviceToken:(NSString *)deviceToken
                              verifiCode:(NSString *)verifiCode
                       verifiMsgLanguage:(NSString *)verifiMsgLanguage
                             loginSource:(NSString *)loginSource
-                          loginAuthType:(WTProtoUserLoginAuthType)loginAuthType
-                      currentDeviceName:(NSString *)currentDeviceName
-                      currentAPPVersion:(NSString *)currentAPPVersion
-                        currentDeviceOS:(NSString *)currentDeviceOS;
+                          loginAuthType:(WTProtoUserLoginAuthType)loginAuthType;
 
 
 
@@ -93,10 +84,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setPhoneCode:(NSString * _Nonnull)phoneCode;
 - (void)setNickName:(NSString * _Nonnull)nickName;
 - (void)setDeviceToken:(NSString * _Nonnull)deviceToken;
-
-- (void)setCurrentDeviceName:(NSString * _Nonnull)currentDeviceName;
-- (void)setCurrentAPPVersion:(NSString * _Nonnull)currentAPPVersion;
-- (void)setCurrentDeviceOS:(NSString * _Nonnull)currentDeviceOS;
 
 - (WTProtoUserLoginAuthType)getEnumLoginAuthTyp;
 - (WTProtoUserType)getEnumUserType;

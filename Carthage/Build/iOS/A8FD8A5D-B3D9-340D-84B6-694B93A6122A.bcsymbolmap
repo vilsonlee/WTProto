@@ -1,0 +1,1161 @@
+BCSymbolMap Version: 2.0
+-[WTProtoRoom joinRoomUsingNickname:history:inviteUsers:roomName:]
+-[WTProtoRoom joinRoomUsingNickname:history:password:inviteUsers:roomName:]
+___75-[WTProtoRoom joinRoomUsingNickname:history:password:inviteUsers:roomName:]_block_invoke
+___copy_helper_block_e8_32s40s48s56s64s72s
+___destroy_helper_block_e8_32s40s48s56s64s72s
+-[WTProtoRoom WTpreJoinWithNickname:]
+-[WTProtoRoom configNewRoom]
+-[WTProtoRoom setGroupConfigInviteConfirmWithFlag:]
+-[WTProtoRoom setGroupConfigdestoryWithTime:]
+-[WTProtoRoom setGroupConfigScreenshotsnotify:]
+-[WTProtoRoom setGroupConfigPrivateChatFlag:]
+-[WTProtoRoom setGroupConfigGroupName:]
+-[WTProtoRoom setGroupConfigGroupIcon:]
+-[WTProtoRoom setGroupConfigGroupDescription:]
++[WTProtoRoom initWithXMPPRoom:]
+___block_descriptor_88_e8_32s40s48s56s64s72s_e5_v8?0l
+Apple clang version 11.0.0 (clang-1100.0.33.12)
+/Users/user/WTProto/WTProtocal/WTProto/MUC/WTProtoRoom.m
+/Users/user/WTProto
+WTProtocal/WTProto/MUC/WTProtoRoom.m
+__destroy_helper_block_e8_32s40s48s56s64s72s
+__copy_helper_block_e8_32s40s48s56s64s72s
+__75-[WTProtoRoom joinRoomUsingNickname:history:password:inviteUsers:roomName:]_block_invoke
++[WTProtoConnection tcpQueue]
+___29+[WTProtoConnection tcpQueue]_block_invoke
++[WTProtoConnection shareConnecionWithProtoStream:interface:]
+___61+[WTProtoConnection shareConnecionWithProtoStream:interface:]_block_invoke
+___copy_helper_block_e8_32s40s
+___destroy_helper_block_e8_32s40s
+-[WTProtoConnection initWithProtoStream:interface:]
+-[WTProtoConnection addProtoConnectionDelegate:delegateQueue:]
+___62-[WTProtoConnection addProtoConnectionDelegate:delegateQueue:]_block_invoke
+___copy_helper_block_e8_32s40s48s
+___destroy_helper_block_e8_32s40s48s
+-[WTProtoConnection removeProtoConnectionDelegate:delegateQueue:]
+___65-[WTProtoConnection removeProtoConnectionDelegate:delegateQueue:]_block_invoke
+-[WTProtoConnection removeProtoConnectionDelegate:]
+___51-[WTProtoConnection removeProtoConnectionDelegate:]_block_invoke
+-[WTProtoConnection connectWithTimeout:error:]
+-[WTProtoConnection disconnect]
+-[WTProtoConnection resetConnectionStream:]
+-[WTProtoConnection xmppStreamWillConnect:]
+-[WTProtoConnection xmppStream:socketDidConnect:]
+-[WTProtoConnection xmppStreamDidStartNegotiation:]
+-[WTProtoConnection xmppStream:willSecureWithSettings:]
+-[WTProtoConnection xmppStream:didReceiveTrust:completionHandler:]
+-[WTProtoConnection xmppStreamDidSecure:]
+-[WTProtoConnection xmppStreamDidConnect:]
+-[WTProtoConnection xmppStreamConnectDidTimeout:]
+-[WTProtoConnection xmppStreamDidDisconnect:withError:]
+-[WTProtoConnection xmppStream:didReceiveError:]
+-[WTProtoConnection connectStream]
+-[WTProtoConnection connectUser]
+-[WTProtoConnection serverAddress]
+-[WTProtoConnection .cxx_destruct]
+_tcpQueue.tcpqueue
+_tcpQueue.onceToken
+___block_descriptor_32_e5_v8?0l
+___block_literal_global
+_shareConnecionWithProtoStream:interface:.protoConnection
+_shareConnecionWithProtoStream:interface:.onceToken
+___block_descriptor_48_e8_32s40s_e5_v8?0l
+___block_descriptor_56_e8_32s40s48s_e5_v8?0l
+__OBJC_PROTOCOL_$_NSObject
+__OBJC_LABEL_PROTOCOL_$_NSObject
+__OBJC_PROTOCOL_$_XMPPStreamDelegate
+__OBJC_LABEL_PROTOCOL_$_XMPPStreamDelegate
+__OBJC_PROTOCOL_$_WTProtoStreamDelegate
+__OBJC_LABEL_PROTOCOL_$_WTProtoStreamDelegate
+_OBJC_IVAR_$_WTProtoConnection.protoConnectionQueue
+_OBJC_IVAR_$_WTProtoConnection.protoConnectionMulticasDelegate
+_OBJC_IVAR_$_WTProtoConnection._connectStream
+_OBJC_IVAR_$_WTProtoConnection._connectUser
+_OBJC_IVAR_$_WTProtoConnection._serverAddress
+/Users/user/WTProto/WTProtocal/WTProto/Connection/Connect/WTProtoConnection.m
+WTProtocal/WTProto/Connection/Connect/WTProtoConnection.m
+WTProtocal/WTProto/Connection/Connect/WTProtoConnection.h
+__51-[WTProtoConnection removeProtoConnectionDelegate:]_block_invoke
+__65-[WTProtoConnection removeProtoConnectionDelegate:delegateQueue:]_block_invoke
+__destroy_helper_block_e8_32s40s48s
+__copy_helper_block_e8_32s40s48s
+__62-[WTProtoConnection addProtoConnectionDelegate:delegateQueue:]_block_invoke
+__destroy_helper_block_e8_32s40s
+__copy_helper_block_e8_32s40s
+__61+[WTProtoConnection shareConnecionWithProtoStream:interface:]_block_invoke
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.2.sdk/usr/include/dispatch/once.h
+__29+[WTProtoConnection tcpQueue]_block_invoke
+-[WTProtoServerAddressSet initWithAddressList:]
+-[WTProtoServerAddressSet initWithCoder:]
+-[WTProtoServerAddressSet encodeWithCoder:]
+-[WTProtoServerAddressSet isEqual:]
+-[WTProtoServerAddressSet description]
+-[WTProtoServerAddressSet firstAddress]
+-[WTProtoServerAddressSet addressList]
+-[WTProtoServerAddressSet .cxx_destruct]
+__OBJC_PROTOCOL_$_NSCoding
+__OBJC_LABEL_PROTOCOL_$_NSCoding
+_OBJC_IVAR_$_WTProtoServerAddressSet._addressList
+/Users/user/WTProto/WTProtocal/WTProto/Connection/ServerAddress/WTProtoServerAddressSet.m
+WTProtocal/WTProto/Connection/ServerAddress/WTProtoServerAddressSet.m
+WTProtocal/WTProto/Connection/ServerAddress/WTProtoServerAddressSet.h
+/Users/user/WTProto/WTProtocal/WTProto/DataCenter/vCared/WTProtoVCardAvatarModule.m
++[WTProtoGroupPresent presenceGroupWithRoomID:]
+/Users/user/WTProto/WTProtocal/WTProto/message/Present/WTProtoGroupPresent.m
+WTProtocal/WTProto/message/Present/WTProtoGroupPresent.m
+/Users/user/WTProto/WTProtocal/WTProto/DataCenter/vCared/WTProtoVCardTempModule.m
+/Users/user/WTProto/WTProtocal/WTProto/Connection/Connect/WTProtoReconnect.m
++[NSString(pyFirstLetter) pyFirstLetter:]
+/Users/user/WTProto/WTProtocal/WTProto/Utils/NSString+pyFirstLetter.m
+WTProtocal/WTProto/Utils/NSString+pyFirstLetter.m
+/Users/user/WTProto/WTProtocal/WTProto/MUC/WTProtoMUC.m
+/Users/user/WTProto/WTProtocal/WTProto/Roster/WTProtoRoster.m
++[WTProtoGroupIQ IQ_GetRoomInfoWithRoomID:]
++[WTProtoGroupIQ IQ_InviteUserSubscribesWithFromUser:RoomID:roomName:joinType:Friends:inviterNickName:inviterID:reason:]
++[WTProtoGroupIQ IQ_GetGroupListByFromUser:]
++[WTProtoGroupIQ IQ_GetGroupMembersListWithFromUser:RoomID:]
++[WTProtoGroupIQ IQ_ExitUserSubscribesWithFromUser:RoomID:roomName:roomOwnerID:memberGroupNickName:]
++[WTProtoGroupIQ IQ_RemoveMemberUnscribesChatRoomWithFromUser:RoomID:roomName:roomOwnerID:memberGroupNickName:Friends:]
++[WTProtoGroupIQ IQ_SaveGroupToContactListWithFromUser:RoomJid:state:]
++[WTProtoGroupIQ IQ_UnDisturbWithFromUser:RoomID:state:]
++[WTProtoGroupIQ IQ_ModifyRoomNickNameWithFromUser:RoomID:nickname:changeflag:]
++[WTProtoGroupIQ IQ_ExChangeGroupOwnerAuthorityWithFromUser:RoomID:newOwernick:newOwerID:]
++[WTProtoGroupIQ IQ_SetGroupAdminWithFromUser:Memebers:roomJid:style:]
++[WTProtoGroupIQ IQ_GetGroupQuiteMemberListWithFromUser:RoomID:]
++[WTProtoGroupIQ IQ_SetGroupBannedMemberListWithFromUser:RoomID:memebers:nickName:style:]
++[WTProtoGroupIQ IQ_SetGroupBannedAllWithFromUser:RoomID:nickName:style:]
++[WTProtoGroupIQ IQ_GetGroupBannedMemberListWithFromUser:RoomID:]
++[WTProtoGroupIQ IQ_GetGroupActivityMemberWithFromUser:RoomID:activityTime:]
++[WTProtoGroupIQ IQ_SetGroupMemberRemarkNameWithFromUser:RoomID:memberID:noteName:]
++[WTProtoGroupIQ parse_IQ_GetRoomInfo:parseResult:]
++[WTProtoGroupIQ parse_IQ_InviteUserSubscribes:parseResult:]
++[WTProtoGroupIQ parse_IQ_GetGroupList:parseResult:]
++[WTProtoGroupIQ parse_IQ_GetGroupMembersList:parseResult:]
++[WTProtoGroupIQ parse_IQ_ExitUserSubscribes:parseResult:]
++[WTProtoGroupIQ parse_IQ_RemoveMemberUnscribesChatRoom:parseResult:]
++[WTProtoGroupIQ parse_IQ_SaveGroupToContactList:parseResult:]
++[WTProtoGroupIQ parse_IQ_UnDisturb:parseResult:]
++[WTProtoGroupIQ parse_IQ_ModifyRoomNickName:parseResult:]
++[WTProtoGroupIQ parse_IQ_ExChangeGroupOwnerAuthority:parseResult:]
++[WTProtoGroupIQ parse_IQ_SetGroupAdmin:parseResult:]
++[WTProtoGroupIQ parse_IQ_GetGroupQuiteMemberList:parseResult:]
++[WTProtoGroupIQ parse_IQ_SetGroupBannedMemberList:parseResult:]
++[WTProtoGroupIQ parse_IQ_SetGroupBannedAll:parseResult:]
++[WTProtoGroupIQ parse_IQ_GetGroupBannedMemberList:parseResult:]
++[WTProtoGroupIQ parse_IQ_GetGroupActivityMember:parseResult:]
++[WTProtoGroupIQ parse_IQ_SetGroupMemberRemarkName:parseResult:]
+/Users/user/WTProto/WTProtocal/WTProto/message/iq/WTProtoGroupIQ.m
+WTProtocal/WTProto/message/iq/WTProtoGroupIQ.m
+/Users/user/WTProto/WTProtocal/WTProto/DataCenter/Block/WTProtoBlocking.m
+-[WTPingTester initWithHostName:]
+-[WTPingTester startPing]
+-[WTPingTester stopPing]
+-[WTPingTester actionTimer]
+-[WTPingTester sendPingData]
+-[WTPingTester simplePing:didStartWithAddress:]
+-[WTPingTester simplePing:didFailWithError:]
+-[WTPingTester simplePing:didSendPacket:sequenceNumber:]
+___56-[WTPingTester simplePing:didSendPacket:sequenceNumber:]_block_invoke
+-[WTPingTester simplePing:didFailToSendPacket:sequenceNumber:error:]
+-[WTPingTester simplePing:didReceivePingResponsePacket:sequenceNumber:]
+___71-[WTPingTester simplePing:didReceivePingResponsePacket:sequenceNumber:]_block_invoke
+___copy_helper_block_e8_32s
+___destroy_helper_block_e8_32s
+-[WTPingTester simplePing:didReceiveUnexpectedPacket:]
+-[WTPingTester delegate]
+-[WTPingTester setDelegate:]
+-[WTPingTester simplePing]
+-[WTPingTester setSimplePing:]
+-[WTPingTester pingItems]
+-[WTPingTester setPingItems:]
+-[WTPingTester .cxx_destruct]
+-[WTPingItem sequence]
+-[WTPingItem setSequence:]
+___block_descriptor_42_e8_32s_e27_v32?0"WTPingItem"8Q16^B24l
+__OBJC_PROTOCOL_$_SimplePingDelegate
+__OBJC_LABEL_PROTOCOL_$_SimplePingDelegate
+_OBJC_IVAR_$_WTPingTester._timer
+_OBJC_IVAR_$_WTPingTester._beginDate
+_OBJC_IVAR_$_WTPingTester._delegate
+_OBJC_IVAR_$_WTPingTester._simplePing
+_OBJC_IVAR_$_WTPingTester._pingItems
+_OBJC_IVAR_$_WTPingItem._sequence
+/Users/user/WTProto/WTProtocal/WTProto/Connection/Ping/WTPingTester.m
+WTProtocal/WTProto/Connection/Ping/WTPingTester.h
+WTProtocal/WTProto/Connection/Ping/WTPingTester.m
+__destroy_helper_block_e8_32s
+__copy_helper_block_e8_32s
+__71-[WTPingTester simplePing:didReceivePingResponsePacket:sequenceNumber:]_block_invoke
+__56-[WTPingTester simplePing:didSendPacket:sequenceNumber:]_block_invoke
+/Users/user/WTProto/WTProtocal/WTProto/stream/WTProtoStreamManagement.m
++[WTProtoPing pingQueue]
+___24+[WTProtoPing pingQueue]_block_invoke
++[WTProtoPing sharePingWithProtoStream:interface:]
+___50+[WTProtoPing sharePingWithProtoStream:interface:]_block_invoke
+-[WTProtoPing initWithPingWithProtoStream:interface:]
+-[WTProtoPing addProtoPingDelegate:delegateQueue:]
+___50-[WTProtoPing addProtoPingDelegate:delegateQueue:]_block_invoke
+-[WTProtoPing removeProtoPingDelegate:delegateQueue:]
+___53-[WTProtoPing removeProtoPingDelegate:delegateQueue:]_block_invoke
+-[WTProtoPing removeProtoPingDelegate:]
+___39-[WTProtoPing removeProtoPingDelegate:]_block_invoke
+-[WTProtoPing setPingInterval:]
+-[WTProtoPing setPingTimeout:]
+-[WTProtoPing setTargetUser:]
+-[WTProtoPing setRespondsToQueries:]
+-[WTProtoPing sendPingToServer]
+-[WTProtoPing sendPingToServerWithTimeout:]
+-[WTProtoPing sendPingToJID:]
+-[WTProtoPing sendPingToJID:withTimeout:]
+-[WTProtoPing xmppPing:didReceivePong:withRTT:]
+-[WTProtoPing xmppPing:didNotReceivePong:dueToTimeout:]
+-[WTProtoPing xmppAutoPingDidSendPing:]
+-[WTProtoPing xmppAutoPingDidReceivePong:]
+-[WTProtoPing xmppAutoPingDidTimeout:]
+-[WTProtoPing pingStream]
+-[WTProtoPing protoAutoPing]
+-[WTProtoPing protoManualPing]
+-[WTProtoPing pingInterval]
+-[WTProtoPing pingTimeout]
+-[WTProtoPing targetUser]
+-[WTProtoPing lastReceiveTime]
+-[WTProtoPing respondsToQueries]
+-[WTProtoPing .cxx_destruct]
+_pingQueue.pingQueue
+_pingQueue.onceToken
+_sharePingWithProtoStream:interface:.protoPing
+_sharePingWithProtoStream:interface:.onceToken
+__OBJC_PROTOCOL_$_XMPPAutoPingDelegate
+__OBJC_LABEL_PROTOCOL_$_XMPPAutoPingDelegate
+__OBJC_PROTOCOL_$_XMPPPingDelegate
+__OBJC_LABEL_PROTOCOL_$_XMPPPingDelegate
+_OBJC_IVAR_$_WTProtoPing.protoPingQueue
+_OBJC_IVAR_$_WTProtoPing.protoPingMulticasDelegate
+_OBJC_IVAR_$_WTProtoPing._respondsToQueries
+_OBJC_IVAR_$_WTProtoPing._pingStream
+_OBJC_IVAR_$_WTProtoPing._protoAutoPing
+_OBJC_IVAR_$_WTProtoPing._protoManualPing
+_OBJC_IVAR_$_WTProtoPing._pingInterval
+_OBJC_IVAR_$_WTProtoPing._pingTimeout
+_OBJC_IVAR_$_WTProtoPing._targetUser
+_OBJC_IVAR_$_WTProtoPing._lastReceiveTime
+/Users/user/WTProto/WTProtocal/WTProto/Connection/Ping/WTProtoPing.m
+WTProtocal/WTProto/Connection/Ping/WTProtoPing.m
+WTProtocal/WTProto/Connection/Ping/WTProtoPing.h
+__39-[WTProtoPing removeProtoPingDelegate:]_block_invoke
+__53-[WTProtoPing removeProtoPingDelegate:delegateQueue:]_block_invoke
+__50-[WTProtoPing addProtoPingDelegate:delegateQueue:]_block_invoke
+__50+[WTProtoPing sharePingWithProtoStream:interface:]_block_invoke
+__24+[WTProtoPing pingQueue]_block_invoke
++[WTProtoPresence presenceFromElement:]
++[WTProtoPresence presence]
++[WTProtoPresence presenceWithType:]
++[WTProtoPresence presenceWithType:to:]
+/Users/user/WTProto/WTProtocal/WTProto/message/Present/WTProtoPresence.m
+WTProtocal/WTProto/message/Present/WTProtoPresence.m
++[WTProtoBlock blockQueue]
+___26+[WTProtoBlock blockQueue]_block_invoke
++[WTProtoBlock shareBlockWithProtoStream:interface:]
+___52+[WTProtoBlock shareBlockWithProtoStream:interface:]_block_invoke
+-[WTProtoBlock initWithBlockWithProtoStream:interface:]
+-[WTProtoBlock addProtoBlockDelegate:delegateQueue:]
+___52-[WTProtoBlock addProtoBlockDelegate:delegateQueue:]_block_invoke
+-[WTProtoBlock removeProtoBlockDelegate:delegateQueue:]
+___55-[WTProtoBlock removeProtoBlockDelegate:delegateQueue:]_block_invoke
+-[WTProtoBlock removeProtoBlockDelegate:]
+___41-[WTProtoBlock removeProtoBlockDelegate:]_block_invoke
+-[WTProtoBlock setAutoClearBlockingListInfo:]
+-[WTProtoBlock setAutoRetrieveBlockingListItems:]
+-[WTProtoBlock xmppBlocking:didReceivedBlockingList:]
+-[WTProtoBlock xmppBlocking:didNotReceivedBlockingListDueToError:]
+-[WTProtoBlock xmppBlocking:didReceivePushWithBlockingList:]
+-[WTProtoBlock xmppBlocking:didBlockJID:]
+-[WTProtoBlock xmppBlocking:didNotBlockJID:error:]
+-[WTProtoBlock xmppBlocking:didUnblockJID:]
+-[WTProtoBlock xmppBlocking:didNotUnblockJID:error:]
+-[WTProtoBlock xmppBlocking:didUnblockAllWithError:]
+-[WTProtoBlock xmppBlocking:didNotUnblockAllDueToError:]
+-[WTProtoBlock blockStream]
+-[WTProtoBlock protoBlocking]
+-[WTProtoBlock autoRetrieveBlockingListItems]
+-[WTProtoBlock autoClearBlockingListInfo]
+-[WTProtoBlock blockingDict]
+-[WTProtoBlock .cxx_destruct]
+_blockQueue.blockQueue
+_blockQueue.onceToken
+_shareBlockWithProtoStream:interface:.protoBlock
+_shareBlockWithProtoStream:interface:.onceToken
+__OBJC_PROTOCOL_$_XMPPBlockingDelegate
+__OBJC_LABEL_PROTOCOL_$_XMPPBlockingDelegate
+_OBJC_IVAR_$_WTProtoBlock.protoBlockQueue
+_OBJC_IVAR_$_WTProtoBlock.protoBlockMulticasDelegate
+_OBJC_IVAR_$_WTProtoBlock._autoRetrieveBlockingListItems
+_OBJC_IVAR_$_WTProtoBlock._autoClearBlockingListInfo
+_OBJC_IVAR_$_WTProtoBlock._blockStream
+_OBJC_IVAR_$_WTProtoBlock._protoBlocking
+_OBJC_IVAR_$_WTProtoBlock._blockingDict
+/Users/user/WTProto/WTProtocal/WTProto/DataCenter/Block/WTProtoBlock.m
+WTProtocal/WTProto/DataCenter/Block/WTProtoBlock.m
+WTProtocal/WTProto/DataCenter/Block/WTProtoBlock.h
+__41-[WTProtoBlock removeProtoBlockDelegate:]_block_invoke
+__55-[WTProtoBlock removeProtoBlockDelegate:delegateQueue:]_block_invoke
+__52-[WTProtoBlock addProtoBlockDelegate:delegateQueue:]_block_invoke
+__52+[WTProtoBlock shareBlockWithProtoStream:interface:]_block_invoke
+__26+[WTProtoBlock blockQueue]_block_invoke
++[XMLDictionaryParser sharedInstance]
+___37+[XMLDictionaryParser sharedInstance]_block_invoke
+-[XMLDictionaryParser init]
+-[XMLDictionaryParser copyWithZone:]
+-[XMLDictionaryParser dictionaryWithParser:]
+-[XMLDictionaryParser dictionaryWithData:]
+-[XMLDictionaryParser dictionaryWithString:]
+-[XMLDictionaryParser dictionaryWithFile:]
++[XMLDictionaryParser XMLStringForNode:withNodeName:]
+___53+[XMLDictionaryParser XMLStringForNode:withNodeName:]_block_invoke
+-[XMLDictionaryParser endText]
+-[XMLDictionaryParser addText:]
+-[XMLDictionaryParser parser:didStartElement:namespaceURI:qualifiedName:attributes:]
+-[XMLDictionaryParser nameForNode:inDictionary:]
+-[XMLDictionaryParser parser:didEndElement:namespaceURI:qualifiedName:]
+-[XMLDictionaryParser parser:foundCharacters:]
+-[XMLDictionaryParser parser:foundCDATA:]
+-[XMLDictionaryParser parser:foundComment:]
+-[XMLDictionaryParser collapseTextNodes]
+-[XMLDictionaryParser setCollapseTextNodes:]
+-[XMLDictionaryParser stripEmptyNodes]
+-[XMLDictionaryParser setStripEmptyNodes:]
+-[XMLDictionaryParser trimWhiteSpace]
+-[XMLDictionaryParser setTrimWhiteSpace:]
+-[XMLDictionaryParser alwaysUseArrays]
+-[XMLDictionaryParser setAlwaysUseArrays:]
+-[XMLDictionaryParser preserveComments]
+-[XMLDictionaryParser setPreserveComments:]
+-[XMLDictionaryParser wrapRootNode]
+-[XMLDictionaryParser setWrapRootNode:]
+-[XMLDictionaryParser attributesMode]
+-[XMLDictionaryParser setAttributesMode:]
+-[XMLDictionaryParser nodeNameMode]
+-[XMLDictionaryParser setNodeNameMode:]
+-[XMLDictionaryParser root]
+-[XMLDictionaryParser setRoot:]
+-[XMLDictionaryParser stack]
+-[XMLDictionaryParser setStack:]
+-[XMLDictionaryParser text]
+-[XMLDictionaryParser setText:]
+-[XMLDictionaryParser .cxx_destruct]
++[NSDictionary(XMLDictionary) dictionaryWithXMLParser:]
++[NSDictionary(XMLDictionary) dictionaryWithXMLData:]
++[NSDictionary(XMLDictionary) dictionaryWithXMLString:]
++[NSDictionary(XMLDictionary) dictionaryWithXMLFile:]
+-[NSDictionary(XMLDictionary) attributes]
+-[NSDictionary(XMLDictionary) childNodes]
+-[NSDictionary(XMLDictionary) comments]
+-[NSDictionary(XMLDictionary) nodeName]
+-[NSDictionary(XMLDictionary) innerText]
+-[NSDictionary(XMLDictionary) innerXML]
+-[NSDictionary(XMLDictionary) XMLString]
+-[NSDictionary(XMLDictionary) arrayValueForKeyPath:]
+-[NSDictionary(XMLDictionary) stringValueForKeyPath:]
+-[NSDictionary(XMLDictionary) dictionaryValueForKeyPath:]
+-[NSString(XMLDictionary) XMLEncodedString]
+_sharedInstance.once
+_sharedInstance.sharedInstance
+___block_descriptor_40_e8_32s_e35_v32?0"NSString"8"NSString"16^B24l
+__OBJC_PROTOCOL_$_NSXMLParserDelegate
+__OBJC_LABEL_PROTOCOL_$_NSXMLParserDelegate
+__OBJC_PROTOCOL_$_NSCopying
+__OBJC_LABEL_PROTOCOL_$_NSCopying
+_OBJC_IVAR_$_XMLDictionaryParser._collapseTextNodes
+_OBJC_IVAR_$_XMLDictionaryParser._stripEmptyNodes
+_OBJC_IVAR_$_XMLDictionaryParser._trimWhiteSpace
+_OBJC_IVAR_$_XMLDictionaryParser._alwaysUseArrays
+_OBJC_IVAR_$_XMLDictionaryParser._preserveComments
+_OBJC_IVAR_$_XMLDictionaryParser._wrapRootNode
+_OBJC_IVAR_$_XMLDictionaryParser._attributesMode
+_OBJC_IVAR_$_XMLDictionaryParser._nodeNameMode
+_OBJC_IVAR_$_XMLDictionaryParser._root
+_OBJC_IVAR_$_XMLDictionaryParser._stack
+_OBJC_IVAR_$_XMLDictionaryParser._text
+/Users/user/WTProto/WTProtocal/WTProto/ThirdParty/XMLDictionary/XMLDictionary.m
+WTProtocal/WTProto/ThirdParty/XMLDictionary/XMLDictionary.m
+WTProtocal/WTProto/ThirdParty/XMLDictionary/XMLDictionary.h
+__53+[XMLDictionaryParser XMLStringForNode:withNodeName:]_block_invoke
+__37+[XMLDictionaryParser sharedInstance]_block_invoke
+/Users/user/WTProto/WTProtocal/WTProto/message/message/WTProtoMessage.m
+_loggingFunction
+_WTLogEnabledValue
+/Users/user/WTProto/WTProtocal/WTProto/Utils/WTProtoLogging.m
+WTLogSetEnabled
+WTProtocal/WTProto/Utils/WTProtoLogging.m
+WTLogSetLoggingFunction
+WTLog
+WTLogEnabled
+/Users/user/WTProto/WTProtocal/WTProto/stream/WTProtoStreamManagementMemoryStorage.m
+-[SimplePing initWithHostName:]
+-[SimplePing dealloc]
+-[SimplePing hostAddressFamily]
+-[SimplePing didFailWithError:]
+-[SimplePing didFailWithHostStreamError:]
+-[SimplePing pingPacketWithType:payload:requiresChecksum:]
+_in_cksum
+-[SimplePing sendPingWithData:]
++[SimplePing icmpHeaderOffsetInIPv4Packet:]
+-[SimplePing validateSequenceNumber:]
+-[SimplePing validatePing4ResponsePacket:sequenceNumber:]
+-[SimplePing validatePing6ResponsePacket:sequenceNumber:]
+-[SimplePing validatePingResponsePacket:sequenceNumber:]
+-[SimplePing readData]
+-[SimplePing startWithHostAddress]
+_SocketReadCallback
+-[SimplePing hostResolutionDone]
+-[SimplePing start]
+_HostResolveCallback
+-[SimplePing stopHostResolution]
+-[SimplePing stopSocket]
+-[SimplePing stop]
+-[SimplePing hostName]
+-[SimplePing delegate]
+-[SimplePing setDelegate:]
+-[SimplePing addressStyle]
+-[SimplePing setAddressStyle:]
+-[SimplePing hostAddress]
+-[SimplePing setHostAddress:]
+-[SimplePing identifier]
+-[SimplePing nextSequenceNumber]
+-[SimplePing setNextSequenceNumber:]
+-[SimplePing nextSequenceNumberHasWrapped]
+-[SimplePing setNextSequenceNumberHasWrapped:]
+-[SimplePing host]
+-[SimplePing setHost:]
+-[SimplePing socket]
+-[SimplePing setSocket:]
+-[SimplePing .cxx_destruct]
+-[SimplePing dealloc].cold.1
+-[SimplePing dealloc].cold.2
+-[SimplePing didFailWithError:].cold.1
+-[SimplePing pingPacketWithType:payload:requiresChecksum:].cold.1
+-[SimplePing sendPingWithData:].cold.1
+-[SimplePing sendPingWithData:].cold.2
+-[SimplePing sendPingWithData:].cold.3
+-[SimplePing sendPingWithData:].cold.4
+-[SimplePing validatePingResponsePacket:sequenceNumber:].cold.1
+-[SimplePing readData].cold.1
+-[SimplePing readData].cold.2
+-[SimplePing startWithHostAddress].cold.1
+-[SimplePing startWithHostAddress].cold.2
+-[SimplePing startWithHostAddress].cold.3
+-[SimplePing startWithHostAddress].cold.4
+-[SimplePing startWithHostAddress].cold.5
+_SocketReadCallback.cold.1
+_SocketReadCallback.cold.2
+_SocketReadCallback.cold.3
+_SocketReadCallback.cold.4
+_SocketReadCallback.cold.5
+-[SimplePing start].cold.1
+-[SimplePing start].cold.2
+-[SimplePing start].cold.3
+_HostResolveCallback.cold.1
+_HostResolveCallback.cold.2
+_HostResolveCallback.cold.3
+_OBJC_IVAR_$_SimplePing._nextSequenceNumberHasWrapped
+_OBJC_IVAR_$_SimplePing._identifier
+_OBJC_IVAR_$_SimplePing._nextSequenceNumber
+_OBJC_IVAR_$_SimplePing._hostName
+_OBJC_IVAR_$_SimplePing._delegate
+_OBJC_IVAR_$_SimplePing._addressStyle
+_OBJC_IVAR_$_SimplePing._hostAddress
+_OBJC_IVAR_$_SimplePing._host
+_OBJC_IVAR_$_SimplePing._socket
+/Users/user/WTProto/WTProtocal/WTProto/Connection/Ping/SimplePing.m
+HostResolveCallback
+WTProtocal/WTProto/Connection/Ping/SimplePing.m
+SocketReadCallback
+WTProtocal/WTProto/Connection/Ping/SimplePing.h
+NSMakeRange
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
+in_cksum
++[WTProtoReConnection reConnectQueue]
+___37+[WTProtoReConnection reConnectQueue]_block_invoke
++[WTProtoReConnection shareReConnecionWithProtoStream:ReconnectDelay:ReconnectTimerInterval:interface:]
+___103+[WTProtoReConnection shareReConnecionWithProtoStream:ReconnectDelay:ReconnectTimerInterval:interface:]_block_invoke
+-[WTProtoReConnection initReConnecionWithProtoStream:ReconnectDelay:ReconnectTimerInterval:interface:]
+-[WTProtoReConnection addProtoReConnectionDelegate:delegateQueue:]
+___66-[WTProtoReConnection addProtoReConnectionDelegate:delegateQueue:]_block_invoke
+-[WTProtoReConnection removeProtoReConnectionDelegate:delegateQueue:]
+___69-[WTProtoReConnection removeProtoReConnectionDelegate:delegateQueue:]_block_invoke
+-[WTProtoReConnection removeProtoReConnectionDelegate:]
+___55-[WTProtoReConnection removeProtoReConnectionDelegate:]_block_invoke
+-[WTProtoReConnection setAutoReconnect:]
+-[WTProtoReConnection setUsesOldSchoolSecureConnect:]
+-[WTProtoReConnection setReconnectDelay:]
+-[WTProtoReConnection setReconnectTimerInterval:]
+-[WTProtoReConnection Stop]
+-[WTProtoReConnection ManualStart]
+-[WTProtoReConnection xmppReconnect:didDetectAccidentalDisconnect:]
+-[WTProtoReConnection xmppReconnect:shouldAttemptAutoReconnect:]
+-[WTProtoReConnection reConnectStream]
+-[WTProtoReConnection autoReconnect]
+-[WTProtoReConnection usesOldSchoolSecureConnect]
+-[WTProtoReConnection reconnectDelay]
+-[WTProtoReConnection reconnectTimerInterval]
+-[WTProtoReConnection .cxx_destruct]
+_reConnectQueue.reConnectqueue
+_reConnectQueue.onceToken
+_shareReConnecionWithProtoStream:ReconnectDelay:ReconnectTimerInterval:interface:.protoReConnection
+_shareReConnecionWithProtoStream:ReconnectDelay:ReconnectTimerInterval:interface:.onceToken
+___block_descriptor_64_e8_32s40s_e5_v8?0l
+__OBJC_PROTOCOL_$_XMPPReconnectDelegate
+__OBJC_LABEL_PROTOCOL_$_XMPPReconnectDelegate
+_OBJC_IVAR_$_WTProtoReConnection.protoReConnectionQueue
+_OBJC_IVAR_$_WTProtoReConnection.protoReconnect
+_OBJC_IVAR_$_WTProtoReConnection.protoReConnectionMulticasDelegate
+_OBJC_IVAR_$_WTProtoReConnection._autoReconnect
+_OBJC_IVAR_$_WTProtoReConnection._usesOldSchoolSecureConnect
+_OBJC_IVAR_$_WTProtoReConnection._reConnectStream
+_OBJC_IVAR_$_WTProtoReConnection._reconnectDelay
+_OBJC_IVAR_$_WTProtoReConnection._reconnectTimerInterval
+/Users/user/WTProto/WTProtocal/WTProto/Connection/Connect/WTProtoReConnection.m
+WTProtocal/WTProto/Connection/Connect/WTProtoReConnection.m
+WTProtocal/WTProto/Connection/Connect/WTProtoReConnection.h
+__55-[WTProtoReConnection removeProtoReConnectionDelegate:]_block_invoke
+__69-[WTProtoReConnection removeProtoReConnectionDelegate:delegateQueue:]_block_invoke
+__66-[WTProtoReConnection addProtoReConnectionDelegate:delegateQueue:]_block_invoke
+__103+[WTProtoReConnection shareReConnecionWithProtoStream:ReconnectDelay:ReconnectTimerInterval:interface:]_block_invoke
+__37+[WTProtoReConnection reConnectQueue]_block_invoke
+-[NSObject(PerformSelector) performSelector:withObjects:]
+/Users/user/WTProto/WTProtocal/WTProto/Utils/NSObject+PerformSelector.m
+WTProtocal/WTProto/Utils/NSObject+PerformSelector.m
+-[WTProtoQueue init]
+-[WTProtoQueue initWithName:]
+-[WTProtoQueue initWithName:concurrent:]
+-[WTProtoQueue dealloc]
++[WTProtoQueue mainQueue]
+___25+[WTProtoQueue mainQueue]_block_invoke
++[WTProtoQueue concurrentDefaultQueue]
+___38+[WTProtoQueue concurrentDefaultQueue]_block_invoke
++[WTProtoQueue concurrentLowQueue]
+___34+[WTProtoQueue concurrentLowQueue]_block_invoke
+-[WTProtoQueue nativeQueue]
+-[WTProtoQueue isCurrentQueue]
+-[WTProtoQueue dispatch:]
+-[WTProtoQueue dispatchOnQueue:]
+-[WTProtoQueue dispatchOnQueue:synchronous:]
+-[WTProtoQueue .cxx_destruct]
+_mainQueue.queue
+_mainQueue.onceToken
+_concurrentDefaultQueue.queue
+_concurrentDefaultQueue.onceToken
+___block_literal_global.3
+_concurrentLowQueue.queue
+_concurrentLowQueue.onceToken
+___block_literal_global.4
+_OBJC_IVAR_$_WTProtoQueue._isMainQueue
+_OBJC_IVAR_$_WTProtoQueue._queue
+_OBJC_IVAR_$_WTProtoQueue._name
+/Users/user/WTProto/WTProtocal/WTProto/Utils/WTProtoQueue.m
+WTProtocal/WTProto/Utils/WTProtoQueue.m
+__34+[WTProtoQueue concurrentLowQueue]_block_invoke
+__38+[WTProtoQueue concurrentDefaultQueue]_block_invoke
+__25+[WTProtoQueue mainQueue]_block_invoke
+-[WTProtoStream initWithProtoUser:ServerAddress:StartTLSPolicy:StreamCompressionMode:]
+-[WTProtoStream commonProtoSteamInitWithProtoUser:ServerAddress:StartTLSPolicy:StreamCompressionMode:]
+-[WTProtoStream resetStreamUser:]
+-[WTProtoStream initStreamStartTLSPolicy:]
+-[WTProtoStream initStreamCompressionMode:]
+-[WTProtoStream addDelegate:delegateQueue:]
+___43-[WTProtoStream addDelegate:delegateQueue:]_block_invoke
+-[WTProtoStream removeDelegate:delegateQueue:]
+___46-[WTProtoStream removeDelegate:delegateQueue:]_block_invoke
+-[WTProtoStream removeDelegate:]
+___32-[WTProtoStream removeDelegate:]_block_invoke
+-[WTProtoStream streamUser]
+-[WTProtoStream serverAddress]
+-[WTProtoStream .cxx_destruct]
+_OBJC_IVAR_$_WTProtoStream.protoSteamQueue
+_OBJC_IVAR_$_WTProtoStream.protoStreamMulticasDelegate
+_OBJC_IVAR_$_WTProtoStream._streamUser
+_OBJC_IVAR_$_WTProtoStream._serverAddress
+/Users/user/WTProto/WTProtocal/WTProto/stream/WTProtoStream.m
+WTProtocal/WTProto/stream/WTProtoStream.m
+WTProtocal/WTProto/stream/WTProtoStream.h
+__32-[WTProtoStream removeDelegate:]_block_invoke
+__46-[WTProtoStream removeDelegate:delegateQueue:]_block_invoke
+__43-[WTProtoStream addDelegate:delegateQueue:]_block_invoke
+-[WTProtoTimer initWithTimeout:repeat:completion:queue:]
+-[WTProtoTimer dealloc]
+-[WTProtoTimer start]
+___21-[WTProtoTimer start]_block_invoke
+-[WTProtoTimer fireAndInvalidate]
+-[WTProtoTimer invalidate]
+-[WTProtoTimer isScheduled]
+-[WTProtoTimer resetTimeout:]
+-[WTProtoTimer remainingTime]
+-[WTProtoTimer timeoutDate]
+-[WTProtoTimer setTimeoutDate:]
+-[WTProtoTimer timer]
+-[WTProtoTimer setTimer:]
+-[WTProtoTimer timeout]
+-[WTProtoTimer setTimeout:]
+-[WTProtoTimer repeat]
+-[WTProtoTimer setRepeat:]
+-[WTProtoTimer completion]
+-[WTProtoTimer setCompletion:]
+-[WTProtoTimer queue]
+-[WTProtoTimer setQueue:]
+-[WTProtoTimer .cxx_destruct]
+___block_descriptor_40_e8_32s_e5_v8?0l
+_OBJC_IVAR_$_WTProtoTimer._repeat
+_OBJC_IVAR_$_WTProtoTimer._timeoutDate
+_OBJC_IVAR_$_WTProtoTimer._timer
+_OBJC_IVAR_$_WTProtoTimer._timeout
+_OBJC_IVAR_$_WTProtoTimer._completion
+_OBJC_IVAR_$_WTProtoTimer._queue
+/Users/user/WTProto/WTProtocal/WTProto/Utils/WTProtoTimer.m
+WTProtocal/WTProto/Utils/WTProtoTimer.m
+WTProtocal/WTProto/Utils/WTProtoTimer.h
+__21-[WTProtoTimer start]_block_invoke
++[WTProtoMessageCenter messageCenterQueue_Serial]
+___49+[WTProtoMessageCenter messageCenterQueue_Serial]_block_invoke
++[WTProtoMessageCenter messageCenterQueue_Concurrent]
+___53+[WTProtoMessageCenter messageCenterQueue_Concurrent]_block_invoke
++[WTProtoMessageCenter shareMessagerCenterWithProtoStream:interface:]
+___69+[WTProtoMessageCenter shareMessagerCenterWithProtoStream:interface:]_block_invoke
+-[WTProtoMessageCenter initMessageMessagerCenterWithProtoStream:interface:]
+-[WTProtoMessageCenter addProtoMessageCenterDelegate:delegateQueue:]
+___68-[WTProtoMessageCenter addProtoMessageCenterDelegate:delegateQueue:]_block_invoke
+-[WTProtoMessageCenter removeProtoMessageCenterDelegate:delegateQueue:]
+___71-[WTProtoMessageCenter removeProtoMessageCenterDelegate:delegateQueue:]_block_invoke
+-[WTProtoMessageCenter removeProtoMessageCenterDelegate:]
+___57-[WTProtoMessageCenter removeProtoMessageCenterDelegate:]_block_invoke
+-[WTProtoMessageCenter xmppStream:didSendMessage:]
+-[WTProtoMessageCenter xmppStream:didFailToSendMessage:error:]
+-[WTProtoMessageCenter xmppStream:didReceiveMessage:]
+___53-[WTProtoMessageCenter xmppStream:didReceiveMessage:]_block_invoke
+-[WTProtoMessageCenter messageCenterStream]
+-[WTProtoMessageCenter messageCenterUser]
+-[WTProtoMessageCenter .cxx_destruct]
+_messageCenterQueue_Serial.messageCenterQueue
+_messageCenterQueue_Serial.onceToken
+_messageCenterQueue_Concurrent.messageCenterQueue
+_messageCenterQueue_Concurrent.onceToken
+___block_literal_global.9
+_shareMessagerCenterWithProtoStream:interface:.protoMessageCenter
+_shareMessagerCenterWithProtoStream:interface:.onceToken
+___block_literal_global.43
+_OBJC_IVAR_$_WTProtoMessageCenter.protoMessageCenterQueue_Concurrent
+_OBJC_IVAR_$_WTProtoMessageCenter.protoMessageCenterQueue_Serial
+_OBJC_IVAR_$_WTProtoMessageCenter.protoMessageCenterMulticasDelegate
+_OBJC_IVAR_$_WTProtoMessageCenter._messageCenterStream
+_OBJC_IVAR_$_WTProtoMessageCenter._messageCenterUser
+/Users/user/WTProto/WTProtocal/WTProto/message/message/WTProtoMessageCenter.m
+WTProtocal/WTProto/message/message/WTProtoMessageCenter.m
+WTProtocal/WTProto/message/message/WTProtoMessageCenter.h
+__53-[WTProtoMessageCenter xmppStream:didReceiveMessage:]_block_invoke
+__57-[WTProtoMessageCenter removeProtoMessageCenterDelegate:]_block_invoke
+__71-[WTProtoMessageCenter removeProtoMessageCenterDelegate:delegateQueue:]_block_invoke
+__68-[WTProtoMessageCenter addProtoMessageCenterDelegate:delegateQueue:]_block_invoke
+__69+[WTProtoMessageCenter shareMessagerCenterWithProtoStream:interface:]_block_invoke
+__53+[WTProtoMessageCenter messageCenterQueue_Concurrent]_block_invoke
+__49+[WTProtoMessageCenter messageCenterQueue_Serial]_block_invoke
+/Users/user/WTProto/WTProtocal/WTProto/Connection/Ping/WTProtoAutoPing.m
+-[WTProtoUser initProtoUserWithUserID:domain:resource:userType:phoneNumber:password:deviceID:verifiCode:verifiMsgLanguage:loginSource:loginAuthType:]
+-[WTProtoUser getUserType:]
+-[WTProtoUser getLoginAuthTyp:]
+-[WTProtoUser getEnumUserType]
+-[WTProtoUser getEnumLoginAuthTyp]
+-[WTProtoUser setUserID:]
+-[WTProtoUser setPhoneNumber:]
+-[WTProtoUser setPassword:]
+-[WTProtoUser setDeviceID:]
+-[WTProtoUser setVerifiCode:]
+-[WTProtoUser setVerifiMsgLanguage:]
+-[WTProtoUser setLoginSource:]
+-[WTProtoUser setLoginAuthType:]
+-[WTProtoUser setUserType:]
+-[WTProtoUser setCountriesCode:]
+-[WTProtoUser setCountrieName:]
+-[WTProtoUser setPhoneCode:]
+-[WTProtoUser setNickName:]
+-[WTProtoUser setDeviceToken:]
+-[WTProtoUser fullPhoneNumber]
+-[WTProtoUser getSource]
+-[WTProtoUser userID]
+-[WTProtoUser userType]
+-[WTProtoUser phoneNumber]
+-[WTProtoUser password]
+-[WTProtoUser deviceID]
+-[WTProtoUser verifiCode]
+-[WTProtoUser verifiMsgLanguage]
+-[WTProtoUser loginSource]
+-[WTProtoUser loginAuthType]
+-[WTProtoUser countriesCode]
+-[WTProtoUser countrieName]
+-[WTProtoUser phoneCode]
+-[WTProtoUser nickName]
+-[WTProtoUser deviceToken]
+-[WTProtoUser .cxx_destruct]
+_OBJC_IVAR_$_WTProtoUser._userID
+_OBJC_IVAR_$_WTProtoUser._phoneNumber
+_OBJC_IVAR_$_WTProtoUser._password
+_OBJC_IVAR_$_WTProtoUser._deviceID
+_OBJC_IVAR_$_WTProtoUser._verifiCode
+_OBJC_IVAR_$_WTProtoUser._verifiMsgLanguage
+_OBJC_IVAR_$_WTProtoUser._loginSource
+_OBJC_IVAR_$_WTProtoUser._userType
+_OBJC_IVAR_$_WTProtoUser._loginAuthType
+_OBJC_IVAR_$_WTProtoUser._countriesCode
+_OBJC_IVAR_$_WTProtoUser._countrieName
+_OBJC_IVAR_$_WTProtoUser._phoneCode
+_OBJC_IVAR_$_WTProtoUser._nickName
+_OBJC_IVAR_$_WTProtoUser._deviceToken
+/Users/user/WTProto/WTProtocal/WTProto/DataCenter/User/WTProtoUser.m
+WTProtocal/WTProto/DataCenter/User/WTProtoUser.m
+WTProtocal/WTProto/DataCenter/User/WTProtoUser.h
+/Users/user/WTProto/WTProtocal/WTProto/Tracker/WTProtoIDTracker.m
++[WTProtoGroup groupQueue]
+___26+[WTProtoGroup groupQueue]_block_invoke
++[WTProtoGroup shareGroupWithProtoStream:interface:]
+___52+[WTProtoGroup shareGroupWithProtoStream:interface:]_block_invoke
+-[WTProtoGroup initGroupWithProtoStream:interface:]
+-[WTProtoGroup creatRoomWithRoomID:]
+-[WTProtoGroup IQ_Result_distributie_Dic]
+-[WTProtoGroup addProtoGroupDelegate:delegateQueue:]
+___52-[WTProtoGroup addProtoGroupDelegate:delegateQueue:]_block_invoke
+-[WTProtoGroup removeProtoGroupDelegate:delegateQueue:]
+___55-[WTProtoGroup removeProtoGroupDelegate:delegateQueue:]_block_invoke
+-[WTProtoGroup removeProtoGroupDelegate:]
+___41-[WTProtoGroup removeProtoGroupDelegate:]_block_invoke
+-[WTProtoGroup IQ_Result_distributieWithSEL:methodID:fetchID:]
+-[WTProtoGroup setProtoRoom:]
+-[WTProtoGroup inviteUserChatMembers:]
+-[WTProtoGroup joinRoomWithJid:Nickname:roomName:inviteUsers:]
+-[WTProtoGroup presenceGroupWithRoomId:]
+-[WTProtoGroup request_IQ_GetRoomInfoWithRoomID:]
+-[WTProtoGroup request_IQ_InviteUserSubscribesWithFromUser:RoomID:roomName:joinType:Friends:inviterNickName:inviterID:reason:]
+-[WTProtoGroup request_IQ_GetGroupListByFromUser:]
+-[WTProtoGroup request_IQ_GetGroupMembersListWithFromUser:RoomID:]
+-[WTProtoGroup request_IQ_ExitUserSubscribesWithFromUser:RoomID:roomName:roomOwnerID:memberGroupNickName:]
+-[WTProtoGroup request_IQ_RemoveMemberUnscribesChatRoomWithFromUser:RoomID:roomName:roomOwnerID:memberGroupNickName:Friends:]
+-[WTProtoGroup request_IQ_SaveGroupToContactListWithFromUser:RoomJid:state:]
+-[WTProtoGroup request_IQ_UnDisturbWithFromUser:RoomID:state:]
+-[WTProtoGroup request_IQ_ModifyRoomNickNameWithFromUser:RoomID:nickname:changeflag:]
+-[WTProtoGroup request_IQ_ExChangeGroupOwnerAuthorityWithFromUser:RoomID:newOwernick:newOwerID:]
+-[WTProtoGroup request_IQ_SetGroupAdminWithFromUser:Memebers:roomJid:style:]
+-[WTProtoGroup request_IQ_GetGroupQuiteMemberListWithFromUser:RoomID:]
+-[WTProtoGroup request_IQ_SetGroupBannedMemberListWithFromUser:RoomID:memebers:nickName:style:]
+-[WTProtoGroup request_IQ_SetGroupBannedAllWithFromUser:RoomID:nickName:style:]
+-[WTProtoGroup request_IQ_GetGroupBannedMemberListWithFromUser:RoomID:]
+-[WTProtoGroup request_IQ_GetGroupActivityMemberWithFromUser:RoomID:activityTime:]
+-[WTProtoGroup request_IQ_SetGroupMemberRemarkNameWithFromUser:RoomID:memberID:noteName:]
+-[WTProtoGroup handeleResult_IQ_GetRoomInfo:]
+___45-[WTProtoGroup handeleResult_IQ_GetRoomInfo:]_block_invoke
+___copy_helper_block_e8_32s40w
+___destroy_helper_block_e8_32s40w
+-[WTProtoGroup handeleResult_IQ_InviteUserSubscribes:]
+___54-[WTProtoGroup handeleResult_IQ_InviteUserSubscribes:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_GetGroupList:]
+___46-[WTProtoGroup handeleResult_IQ_GetGroupList:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_GetGroupMembersList:]
+___53-[WTProtoGroup handeleResult_IQ_GetGroupMembersList:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_ExitUserSubscribes:]
+___52-[WTProtoGroup handeleResult_IQ_ExitUserSubscribes:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_RemoveMemberUnscribesChatRoom:]
+___63-[WTProtoGroup handeleResult_IQ_RemoveMemberUnscribesChatRoom:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_SaveGroupToContactList:]
+___56-[WTProtoGroup handeleResult_IQ_SaveGroupToContactList:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_UnDisturb:]
+___43-[WTProtoGroup handeleResult_IQ_UnDisturb:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_ModifyRoomNickName:]
+___52-[WTProtoGroup handeleResult_IQ_ModifyRoomNickName:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_ExChangeGroupOwnerAuthority:]
+___61-[WTProtoGroup handeleResult_IQ_ExChangeGroupOwnerAuthority:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_SetGroupAdmin:]
+___47-[WTProtoGroup handeleResult_IQ_SetGroupAdmin:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_GetGroupQuiteMemberList:]
+___57-[WTProtoGroup handeleResult_IQ_GetGroupQuiteMemberList:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_SetGroupBannedMemberList:]
+___58-[WTProtoGroup handeleResult_IQ_SetGroupBannedMemberList:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_SetGroupBannedAll:]
+___51-[WTProtoGroup handeleResult_IQ_SetGroupBannedAll:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_GetGroupBannedMemberList:]
+___58-[WTProtoGroup handeleResult_IQ_GetGroupBannedMemberList:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_GetGroupActivityMember:]
+___56-[WTProtoGroup handeleResult_IQ_GetGroupActivityMember:]_block_invoke
+-[WTProtoGroup handeleResult_IQ_SetGroupMemberRemarkName:]
+___58-[WTProtoGroup handeleResult_IQ_SetGroupMemberRemarkName:]_block_invoke
+-[WTProtoGroup setGroupConfigInviteConfirmWithFlag:roomID:]
+-[WTProtoGroup setGroupConfigdestoryWithTime:roomID:]
+-[WTProtoGroup setGroupConfigScreenshotsnotify:roomID:]
+-[WTProtoGroup setGroupConfigPrivateChatFlag:roomID:]
+-[WTProtoGroup setGroupConfigGroupName:roomID:]
+-[WTProtoGroup setGroupConfigGroupIcon:roomID:]
+-[WTProtoGroup setGroupConfigGroupDescription:roomID:]
+-[WTProtoGroup xmppRoomDidCreate:]
+-[WTProtoGroup xmppRoomDidCreateFail:code:]
+-[WTProtoGroup xmppRoomDidJoin:]
+-[WTProtoGroup xmppRoom:didConfigure:]
+-[WTProtoGroup xmppRoom:didNotConfigure:]
+-[WTProtoGroup xmppRoom:didFetchConfigurationForm:]
+-[WTProtoGroup xmppRoom:didFetchModeratorsList:]
+-[WTProtoGroup xmppRoom:didNotFetchModeratorsList:]
+-[WTProtoGroup xmppRoom:didFetchMembersList:]
+-[WTProtoGroup xmppRoom:didNotFetchMembersList:]
+-[WTProtoGroup xmppRoomDidLeave:]
+-[WTProtoGroup xmppStream:didReceivePresence:]
+-[WTProtoGroup xmppStream:didFailToSendPresence:error:]
+-[WTProtoGroup xmppStream:didReceiveIQ:]
+-[WTProtoGroup xmppStream:didFailToSendIQ:error:]
+-[WTProtoGroup addtracker:timeout:]
+-[WTProtoGroup IQsendTimeout:withInfo:]
+-[WTProtoGroup groupStream]
+-[WTProtoGroup protoMUC]
+-[WTProtoGroup protoRoom]
+-[WTProtoGroup protoTracker]
+-[WTProtoGroup setIQ_Result_distributie_Dic:]
+-[WTProtoGroup .cxx_destruct]
+_groupQueue.groupQueue
+_groupQueue.onceToken
+_shareGroupWithProtoStream:interface:.protoGroup
+_shareGroupWithProtoStream:interface:.onceToken
+___block_descriptor_48_e8_32s40w_e11_v20?0B812l
+__OBJC_PROTOCOL_$_XMPPMUCDelegate
+__OBJC_LABEL_PROTOCOL_$_XMPPMUCDelegate
+__OBJC_PROTOCOL_$_XMPPRoomDelegate
+__OBJC_LABEL_PROTOCOL_$_XMPPRoomDelegate
+_OBJC_IVAR_$_WTProtoGroup.protoGroupQueue
+_OBJC_IVAR_$_WTProtoGroup.protoGroupMulticasDelegate
+_OBJC_IVAR_$_WTProtoGroup.create_room_failure
+_OBJC_IVAR_$_WTProtoGroup._groupStream
+_OBJC_IVAR_$_WTProtoGroup._protoMUC
+_OBJC_IVAR_$_WTProtoGroup._protoRoom
+_OBJC_IVAR_$_WTProtoGroup._protoTracker
+_OBJC_IVAR_$_WTProtoGroup._IQ_Result_distributie_Dic
+/Users/user/WTProto/WTProtocal/WTProto/MUC/WTProtoGroup.m
+WTProtocal/WTProto/MUC/WTProtoGroup.m
+WTProtocal/WTProto/MUC/WTProtoGroup.h
+__58-[WTProtoGroup handeleResult_IQ_SetGroupMemberRemarkName:]_block_invoke
+__56-[WTProtoGroup handeleResult_IQ_GetGroupActivityMember:]_block_invoke
+__58-[WTProtoGroup handeleResult_IQ_GetGroupBannedMemberList:]_block_invoke
+__51-[WTProtoGroup handeleResult_IQ_SetGroupBannedAll:]_block_invoke
+__58-[WTProtoGroup handeleResult_IQ_SetGroupBannedMemberList:]_block_invoke
+__57-[WTProtoGroup handeleResult_IQ_GetGroupQuiteMemberList:]_block_invoke
+__47-[WTProtoGroup handeleResult_IQ_SetGroupAdmin:]_block_invoke
+__61-[WTProtoGroup handeleResult_IQ_ExChangeGroupOwnerAuthority:]_block_invoke
+__52-[WTProtoGroup handeleResult_IQ_ModifyRoomNickName:]_block_invoke
+__43-[WTProtoGroup handeleResult_IQ_UnDisturb:]_block_invoke
+__56-[WTProtoGroup handeleResult_IQ_SaveGroupToContactList:]_block_invoke
+__63-[WTProtoGroup handeleResult_IQ_RemoveMemberUnscribesChatRoom:]_block_invoke
+__52-[WTProtoGroup handeleResult_IQ_ExitUserSubscribes:]_block_invoke
+__53-[WTProtoGroup handeleResult_IQ_GetGroupMembersList:]_block_invoke
+__46-[WTProtoGroup handeleResult_IQ_GetGroupList:]_block_invoke
+__54-[WTProtoGroup handeleResult_IQ_InviteUserSubscribes:]_block_invoke
+__destroy_helper_block_e8_32s40w
+__copy_helper_block_e8_32s40w
+__45-[WTProtoGroup handeleResult_IQ_GetRoomInfo:]_block_invoke
+__41-[WTProtoGroup removeProtoGroupDelegate:]_block_invoke
+__55-[WTProtoGroup removeProtoGroupDelegate:delegateQueue:]_block_invoke
+__52-[WTProtoGroup addProtoGroupDelegate:delegateQueue:]_block_invoke
+__52+[WTProtoGroup shareGroupWithProtoStream:interface:]_block_invoke
+__26+[WTProtoGroup groupQueue]_block_invoke
++[WTProto ProtoQueue]
+___21+[WTProto ProtoQueue]_block_invoke
++[WTProto shareWTProtoUserID:Domain:Resource:Password:]
+___55+[WTProto shareWTProtoUserID:Domain:Resource:Password:]_block_invoke
+___copy_helper_block_e8_32s40s48s56s
+___destroy_helper_block_e8_32s40s48s56s
+-[WTProto initMTProtoWithUserID:Domain:Resource:Password:]
+-[WTProto ProtoFuctionModuleInitializationWithProtoStream:]
+-[WTProto ProtoFuctionModuleSetDelegate]
+-[WTProto addWTProtoDelegate:delegateQueue:]
+___44-[WTProto addWTProtoDelegate:delegateQueue:]_block_invoke
+-[WTProto removeWTProtoDelegate:delegateQueue:]
+___47-[WTProto removeWTProtoDelegate:delegateQueue:]_block_invoke
+-[WTProto removeWTProtoDelegate:]
+___33-[WTProto removeWTProtoDelegate:]_block_invoke
+-[WTProto Start]
+-[WTProto Stop]
+-[WTProto ProtoCheckUser]
+-[WTProto ProtoRegisterUserWithNickName:CountrieName:]
+-[WTProto ProtoReconnectByResettingStreamUserWithUserID:domain:resource:userType:phoneNumber:password:deviceID:verifiCode:verifiMsgLanguage:loginSource:loginAuthType:]
+-[WTProto ProtoGetVerifiCodeWithRegister:]
+-[WTProto ProtoGotoAuthWithSuccessRegister:]
+-[WTProto ProtoGotoCheckVerifiCodeWithAuth:VerifiCode:]
+-[WTProto ProtoGotoAuthWithSuccessCheckVerifiCod:UserInfoMessage:]
+-[WTProto WTProtoConnection:connectState:withError:]
+-[WTProto WTProtoRegister:RegisterStatus:withError:]
+-[WTProto WTProtoAuth:AuthenticateState:withError:]
+-[WTProto protoUser]
+-[WTProto protoStream]
+-[WTProto serverAddress]
+-[WTProto proStreamManager]
+-[WTProto protoConnection]
+-[WTProto protoRegister]
+-[WTProto protoAuth]
+-[WTProto protoReConnection]
+-[WTProto protoBlock]
+-[WTProto protoPing]
+-[WTProto protoRosters]
+-[WTProto protoGroup]
+-[WTProto protoMessageCenter]
+-[WTProto .cxx_destruct]
+_ProtoQueue.protoQueue
+_ProtoQueue.onceToken
+_shareWTProtoUserID:Domain:Resource:Password:.proto
+_shareWTProtoUserID:Domain:Resource:Password:.onceToken
+___block_descriptor_64_e8_32s40s48s56s_e5_v8?0l
+__OBJC_PROTOCOL_$_WTProtoStreamManagerDelegate
+__OBJC_LABEL_PROTOCOL_$_WTProtoStreamManagerDelegate
+__OBJC_PROTOCOL_$_WTProtoConnectionDelegate
+__OBJC_LABEL_PROTOCOL_$_WTProtoConnectionDelegate
+__OBJC_PROTOCOL_$_WTProtoRegisterDelegate
+__OBJC_LABEL_PROTOCOL_$_WTProtoRegisterDelegate
+__OBJC_PROTOCOL_$_WTProtoAuthDelegate
+__OBJC_LABEL_PROTOCOL_$_WTProtoAuthDelegate
+__OBJC_PROTOCOL_$_WTProtoReConnectionDelegate
+__OBJC_LABEL_PROTOCOL_$_WTProtoReConnectionDelegate
+__OBJC_PROTOCOL_$_WTProtoBlockDelegate
+__OBJC_LABEL_PROTOCOL_$_WTProtoBlockDelegate
+__OBJC_PROTOCOL_$_WTProtoPingDelegate
+__OBJC_LABEL_PROTOCOL_$_WTProtoPingDelegate
+__OBJC_PROTOCOL_$_WTProtoRostersDelegate
+__OBJC_LABEL_PROTOCOL_$_WTProtoRostersDelegate
+__OBJC_PROTOCOL_$_WTProtoGroupDelegate
+__OBJC_LABEL_PROTOCOL_$_WTProtoGroupDelegate
+__OBJC_PROTOCOL_$_WTProtoMessageCenterDelegate
+__OBJC_LABEL_PROTOCOL_$_WTProtoMessageCenterDelegate
+_OBJC_IVAR_$_WTProto._protoQueue
+_OBJC_IVAR_$_WTProto.protoMulticasDelegate
+_OBJC_IVAR_$_WTProto._protoUser
+_OBJC_IVAR_$_WTProto._serverAddress
+_OBJC_IVAR_$_WTProto._protoStream
+_OBJC_IVAR_$_WTProto._proStreamManager
+_OBJC_IVAR_$_WTProto._protoConnection
+_OBJC_IVAR_$_WTProto._protoRegister
+_OBJC_IVAR_$_WTProto._protoAuth
+_OBJC_IVAR_$_WTProto._protoReConnection
+_OBJC_IVAR_$_WTProto._protoBlock
+_OBJC_IVAR_$_WTProto._protoPing
+_OBJC_IVAR_$_WTProto._protoRosters
+_OBJC_IVAR_$_WTProto._protoGroup
+_OBJC_IVAR_$_WTProto._protoMessageCenter
+/Users/user/WTProto/WTProtocal/WTProto/Interface/WTProto.m
+WTProtocal/WTProto/Interface/WTProto.m
+WTProtocal/WTProto/Interface/WTProto.h
+__33-[WTProto removeWTProtoDelegate:]_block_invoke
+__47-[WTProto removeWTProtoDelegate:delegateQueue:]_block_invoke
+__44-[WTProto addWTProtoDelegate:delegateQueue:]_block_invoke
+__destroy_helper_block_e8_32s40s48s56s
+__copy_helper_block_e8_32s40s48s56s
+__55+[WTProto shareWTProtoUserID:Domain:Resource:Password:]_block_invoke
+__21+[WTProto ProtoQueue]_block_invoke
++[WTProtoAuth authQueue]
+___24+[WTProtoAuth authQueue]_block_invoke
++[WTProtoAuth shareAuthWithProtoStream:interface:]
+___50+[WTProtoAuth shareAuthWithProtoStream:interface:]_block_invoke
+-[WTProtoAuth initAuthWithProtoStream:interface:]
+-[WTProtoAuth addProtoAuthDelegate:delegateQueue:]
+___50-[WTProtoAuth addProtoAuthDelegate:delegateQueue:]_block_invoke
+-[WTProtoAuth removeProtoAuthDelegate:delegateQueue:]
+___53-[WTProtoAuth removeProtoAuthDelegate:delegateQueue:]_block_invoke
+-[WTProtoAuth removeProtoAuthDelegate:]
+___39-[WTProtoAuth removeProtoAuthDelegate:]_block_invoke
+-[WTProtoAuth resetAuthStream:]
+-[WTProtoAuth authenticateWithError:]
+-[WTProtoAuth xmppStreamDidAuthenticate:]
+-[WTProtoAuth xmppStream:didNotAuthenticate:]
+-[WTProtoAuth authStream]
+-[WTProtoAuth authUser]
+-[WTProtoAuth serverAddress]
+-[WTProtoAuth .cxx_destruct]
+_authQueue.queue
+_authQueue.onceToken
+_shareAuthWithProtoStream:interface:.protoAuth
+_shareAuthWithProtoStream:interface:.onceToken
+_OBJC_IVAR_$_WTProtoAuth.protoAuthQueue
+_OBJC_IVAR_$_WTProtoAuth.protoAuthMulticasDelegate
+_OBJC_IVAR_$_WTProtoAuth._authStream
+_OBJC_IVAR_$_WTProtoAuth._authUser
+_OBJC_IVAR_$_WTProtoAuth._serverAddress
+/Users/user/WTProto/WTProtocal/WTProto/Connection/Auth/WTProtoAuth.m
+WTProtocal/WTProto/Connection/Auth/WTProtoAuth.m
+WTProtocal/WTProto/Connection/Auth/WTProtoAuth.h
+__39-[WTProtoAuth removeProtoAuthDelegate:]_block_invoke
+__53-[WTProtoAuth removeProtoAuthDelegate:delegateQueue:]_block_invoke
+__50-[WTProtoAuth addProtoAuthDelegate:delegateQueue:]_block_invoke
+__50+[WTProtoAuth shareAuthWithProtoStream:interface:]_block_invoke
+__24+[WTProtoAuth authQueue]_block_invoke
++[WTProtoRegister registerQueue]
+___32+[WTProtoRegister registerQueue]_block_invoke
++[WTProtoRegister shareRegisterWithProtoStream:interface:]
+___58+[WTProtoRegister shareRegisterWithProtoStream:interface:]_block_invoke
+-[WTProtoRegister initRegisterWithProtoStream:interface:]
+-[WTProtoRegister addProtoRegisterDelegate:delegateQueue:]
+___58-[WTProtoRegister addProtoRegisterDelegate:delegateQueue:]_block_invoke
+-[WTProtoRegister removeProtoRegisterDelegate:delegateQueue:]
+___61-[WTProtoRegister removeProtoRegisterDelegate:delegateQueue:]_block_invoke
+-[WTProtoRegister removeProtoRegisterDelegate:]
+___47-[WTProtoRegister removeProtoRegisterDelegate:]_block_invoke
+-[WTProtoRegister resetRegisterStream:]
+-[WTProtoRegister checkRegister]
+-[WTProtoRegister registerWithError:]
+-[WTProtoRegister createDefaultFieldElement]
+-[WTProtoRegister createFieldElementWithStringValue:fieldElementType:varString:]
+-[WTProtoRegister xmppStreamDidRegister:response:]
+-[WTProtoRegister xmppStream:didNotRegister:]
+-[WTProtoRegister registerStream]
+-[WTProtoRegister registerUser]
+-[WTProtoRegister serverAddress]
+-[WTProtoRegister .cxx_destruct]
+_registerQueue.queue
+_registerQueue.onceToken
+_shareRegisterWithProtoStream:interface:.protoRegister
+_shareRegisterWithProtoStream:interface:.onceToken
+_OBJC_IVAR_$_WTProtoRegister.protoRegisterQueue
+_OBJC_IVAR_$_WTProtoRegister.protoRegisterMulticasDelegate
+_OBJC_IVAR_$_WTProtoRegister._registerStream
+_OBJC_IVAR_$_WTProtoRegister._registerUser
+_OBJC_IVAR_$_WTProtoRegister._serverAddress
+/Users/user/WTProto/WTProtocal/WTProto/Connection/register/WTProtoRegister.m
+WTProtocal/WTProto/Connection/register/WTProtoRegister.m
+WTProtocal/WTProto/Connection/register/WTProtoRegister.h
+__47-[WTProtoRegister removeProtoRegisterDelegate:]_block_invoke
+__61-[WTProtoRegister removeProtoRegisterDelegate:delegateQueue:]_block_invoke
+__58-[WTProtoRegister addProtoRegisterDelegate:delegateQueue:]_block_invoke
+__58+[WTProtoRegister shareRegisterWithProtoStream:interface:]_block_invoke
+__32+[WTProtoRegister registerQueue]_block_invoke
++[WTProtoRosters rostersQueue]
+___30+[WTProtoRosters rostersQueue]_block_invoke
++[WTProtoRosters shareRostersWithProtoStream:interface:]
+___56+[WTProtoRosters shareRostersWithProtoStream:interface:]_block_invoke
+-[WTProtoRosters initRostersWithProtoStream:interface:]
+-[WTProtoRosters addProtoRostersDelegate:delegateQueue:]
+___56-[WTProtoRosters addProtoRostersDelegate:delegateQueue:]_block_invoke
+-[WTProtoRosters removeProtoRostersDelegate:delegateQueue:]
+___59-[WTProtoRosters removeProtoRostersDelegate:delegateQueue:]_block_invoke
+-[WTProtoRosters removeProtoRostersDelegate:]
+___45-[WTProtoRosters removeProtoRostersDelegate:]_block_invoke
+-[WTProtoRosters fetchRoster]
+-[WTProtoRosters fetchRosterVersion:]
+-[WTProtoRosters addUser:source:reason:verify:]
+-[WTProtoRosters addUser:withNickname:]
+-[WTProtoRosters addUser:withNickname:groups:]
+-[WTProtoRosters addUser:withNickname:groups:subscribeToPresence:]
+-[WTProtoRosters removeUser:]
+-[WTProtoRosters setNickname:forUser:]
+-[WTProtoRosters subscribePresenceToUser:]
+-[WTProtoRosters unsubscribePresenceFromUser:]
+-[WTProtoRosters revokePresencePermissionFromUser:]
+-[WTProtoRosters acceptPresenceSubscriptionRequestFrom:andAddToRoster:]
+-[WTProtoRosters rejectPresenceSubscriptionRequestFrom:]
+-[WTProtoRosters xmppRoster:didReceivePresenceSubscriptionRequest:]
+-[WTProtoRosters xmppRoster:didReceiveRosterPush:]
+-[WTProtoRosters xmppRosterDidBeginPopulating:withVersion:]
+-[WTProtoRosters xmppRosterDidEndPopulating:]
+-[WTProtoRosters xmppRoster:didReceiveRosterItem:]
+-[WTProtoRosters RostersStream]
+-[WTProtoRosters ProtoRoster]
+-[WTProtoRosters protoRosterCoreDataStorage]
+-[WTProtoRosters autoFetchRoster]
+-[WTProtoRosters setAutoFetchRoster:]
+-[WTProtoRosters autoClearAllUsersAndResources]
+-[WTProtoRosters setAutoClearAllUsersAndResources:]
+-[WTProtoRosters autoAcceptKnownPresenceSubscriptionRequests]
+-[WTProtoRosters setAutoAcceptKnownPresenceSubscriptionRequests:]
+-[WTProtoRosters allowRosterlessOperation]
+-[WTProtoRosters setAllowRosterlessOperation:]
+-[WTProtoRosters hasRequestedRoster]
+-[WTProtoRosters isPopulating]
+-[WTProtoRosters hasRoster]
+-[WTProtoRosters .cxx_destruct]
+_rostersQueue.rostersQueue
+_rostersQueue.onceToken
+_shareRostersWithProtoStream:interface:.protoRoster
+_shareRostersWithProtoStream:interface:.onceToken
+__OBJC_PROTOCOL_$_XMPPRosterDelegate
+__OBJC_LABEL_PROTOCOL_$_XMPPRosterDelegate
+_OBJC_IVAR_$_WTProtoRosters.protoRostersQueue
+_OBJC_IVAR_$_WTProtoRosters.protoRostersMulticasDelegate
+_OBJC_IVAR_$_WTProtoRosters._autoFetchRoster
+_OBJC_IVAR_$_WTProtoRosters._autoClearAllUsersAndResources
+_OBJC_IVAR_$_WTProtoRosters._autoAcceptKnownPresenceSubscriptionRequests
+_OBJC_IVAR_$_WTProtoRosters._allowRosterlessOperation
+_OBJC_IVAR_$_WTProtoRosters._hasRequestedRoster
+_OBJC_IVAR_$_WTProtoRosters._isPopulating
+_OBJC_IVAR_$_WTProtoRosters._hasRoster
+_OBJC_IVAR_$_WTProtoRosters._RostersStream
+_OBJC_IVAR_$_WTProtoRosters._ProtoRoster
+_OBJC_IVAR_$_WTProtoRosters._protoRosterCoreDataStorage
+/Users/user/WTProto/WTProtocal/WTProto/Roster/WTProtoRosters.m
+WTProtocal/WTProto/Roster/WTProtoRosters.m
+WTProtocal/WTProto/Roster/WTProtoRosters.h
+__45-[WTProtoRosters removeProtoRostersDelegate:]_block_invoke
+__59-[WTProtoRosters removeProtoRostersDelegate:delegateQueue:]_block_invoke
+__56-[WTProtoRosters addProtoRostersDelegate:delegateQueue:]_block_invoke
+__56+[WTProtoRosters shareRostersWithProtoStream:interface:]_block_invoke
+__30+[WTProtoRosters rostersQueue]_block_invoke
+-[WTProtoServerAddress initWithHost:port:]
+-[WTProtoServerAddress isEqualToAddress:]
+-[WTProtoServerAddress isIpv6]
+-[WTProtoServerAddress encodeWithCoder:]
+-[WTProtoServerAddress initWithCoder:]
++[WTProtoServerAddress realmToIP:]
++[WTProtoServerAddress parsingIPAddress:]
++[WTProtoServerAddress getIPAddressByHostName:]
+-[WTProtoServerAddress description]
+-[WTProtoServerAddress host]
+-[WTProtoServerAddress ip]
+-[WTProtoServerAddress port]
+-[WTProtoServerAddress .cxx_destruct]
+_OBJC_IVAR_$_WTProtoServerAddress._port
+_OBJC_IVAR_$_WTProtoServerAddress._host
+_OBJC_IVAR_$_WTProtoServerAddress._ip
+/Users/user/WTProto/WTProtocal/WTProto/Connection/ServerAddress/WTProtoServerAddress.m
+WTProtocal/WTProto/Connection/ServerAddress/WTProtoServerAddress.m
+WTProtocal/WTProto/Connection/ServerAddress/WTProtoServerAddress.h
+/Users/user/WTProto/WTProtocal/WTProto/DataCenter/vCared/WTProtoVCardCoreDataStorage.m
++[WTProtoIQ iq]
++[WTProtoIQ iqWithType:]
++[WTProtoIQ iqWithType:to:]
++[WTProtoIQ iqWithType:to:elementID:]
++[WTProtoIQ iqWithType:to:elementID:child:]
++[WTProtoIQ iqWithType:elementID:]
++[WTProtoIQ iqWithType:elementID:child:]
++[WTProtoIQ iqWithType:child:]
+/Users/user/WTProto/WTProtocal/WTProto/message/iq/WTProtoIQ.m
+WTProtocal/WTProto/message/iq/WTProtoIQ.m
+/Users/user/WTProto/WTProtocal/WTProto/Connection/Ping/WTProtoManualPing.m
+/Users/user/WTProto/WTProtocal/WTProto/Roster/WTProtoRosterCoreDataStorage.m
++[WTProtoStreamManager streamManagerQueue]
+___42+[WTProtoStreamManager streamManagerQueue]_block_invoke
++[WTProtoStreamManager shareStreamManagerWithProtoStream:interface:]
+___68+[WTProtoStreamManager shareStreamManagerWithProtoStream:interface:]_block_invoke
+-[WTProtoStreamManager initStreamManagerWithProtoStream:interface:]
+-[WTProtoStreamManager addProtoStreamManagerDelegate:delegateQueue:]
+___68-[WTProtoStreamManager addProtoStreamManagerDelegate:delegateQueue:]_block_invoke
+-[WTProtoStreamManager removeProtoStreamManagerDelegate:delegateQueue:]
+___71-[WTProtoStreamManager removeProtoStreamManagerDelegate:delegateQueue:]_block_invoke
+-[WTProtoStreamManager removeProtoStreamManagerDelegate:]
+___57-[WTProtoStreamManager removeProtoStreamManagerDelegate:]_block_invoke
+-[WTProtoStreamManager ManagerStream]
+-[WTProtoStreamManager ProtoStreamManagement]
+-[WTProtoStreamManager ProtoStreamManagementMemoryStorage]
+-[WTProtoStreamManager .cxx_destruct]
+_streamManagerQueue.streamManagerQueue
+_streamManagerQueue.onceToken
+_shareStreamManagerWithProtoStream:interface:.protoStreamManager
+_shareStreamManagerWithProtoStream:interface:.onceToken
+_OBJC_IVAR_$_WTProtoStreamManager.protoStreamManagerQueue
+_OBJC_IVAR_$_WTProtoStreamManager.protoStreamManagerMulticasDelegate
+_OBJC_IVAR_$_WTProtoStreamManager._ManagerStream
+_OBJC_IVAR_$_WTProtoStreamManager._ProtoStreamManagement
+_OBJC_IVAR_$_WTProtoStreamManager._ProtoStreamManagementMemoryStorage
+/Users/user/WTProto/WTProtocal/WTProto/stream/WTProtoStreamManager.m
+WTProtocal/WTProto/stream/WTProtoStreamManager.m
+WTProtocal/WTProto/stream/WTProtoStreamManager.h
+__57-[WTProtoStreamManager removeProtoStreamManagerDelegate:]_block_invoke
+__71-[WTProtoStreamManager removeProtoStreamManagerDelegate:delegateQueue:]_block_invoke
+__68-[WTProtoStreamManager addProtoStreamManagerDelegate:delegateQueue:]_block_invoke
+__68+[WTProtoStreamManager shareStreamManagerWithProtoStream:interface:]_block_invoke
+__42+[WTProtoStreamManager streamManagerQueue]_block_invoke
+/Users/user/Library/Developer/Xcode/DerivedData/WTProtocal-bsgfhbnurbzlblcwqjfcmeogjcbk/Build/Intermediates.noindex/ArchiveIntermediates/WTProtocal/IntermediateBuildFilesPath/WTProtocal.build/Release-iphoneos/WTProtocal.build/DerivedSources/WTProtocal_vers.c

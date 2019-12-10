@@ -60,11 +60,14 @@ Vilson: FIXE:
 @property (nonatomic, copy) NSString *verifiCode;//验证码
 @property (nonatomic, copy) NSString *verifiMsgLanguage;//app显示语言(决定验证码短讯的语言)
 
-@property (nonatomic, copy) NSString *iPhoneName;//手机别名
-@property (nonatomic, copy) NSString *deviceType;//设备类型版本
+@property (nonatomic, copy) NSString *deviceToken;//设备推送token
 
 @property (nonatomic, copy) NSString *loginSource;//来源哪个APP
 @property (nonatomic, copy) NSString *authOptype;//验证登录类型(check/getmsg/checkmsg)
+
+@property (nonatomic, copy) NSString *currentDeviceName;      //当前操作系统
+@property (nonatomic, copy) NSString *currentAPPVersion;      //当前APP版本
+@property (nonatomic, copy) NSString *currentDeviceOS;        //当前操作系统
 
 
 @end
@@ -84,13 +87,15 @@ Vilson: FIXE:
 -(id)initWithStream:(XMPPStream *)stream
            password:(NSString *)password
            deviceID:(NSString *)deviceID
+        deviceToken:(NSString *)deviceToken
            userType:(NSString *)userType
          authOpType:(NSString *)authOpType
          verifiCode:(NSString *)verifiCode
-         iPhoneName:(NSString *)iphoneName
-         deviceType:(NSString *)deviceType
         loginSource:(NSString *)loginSource
   verifiMsgLanguage:(NSString *)verifiMsgLanguage
+  currentDeviceName:(NSString *)currentDeviceName
+  currentAPPVersion:(NSString *)currentAPPVersion
+    currentDeviceOS:(NSString *)currentDeviceOS
 {
     if (self = [self initWithStream:stream
                            username:nil
@@ -100,11 +105,12 @@ Vilson: FIXE:
         self.userType           = userType;
         self.authOptype         = authOpType;
         self.verifiCode         = verifiCode;
-        self.iPhoneName         = iphoneName;
-        self.deviceType         = deviceType;
+        self.deviceToken        = deviceToken;
         self.loginSource        = loginSource;
         self.verifiMsgLanguage  = verifiMsgLanguage;
-        
+        self.currentDeviceName  = currentDeviceName;
+        self.currentAPPVersion  = currentAPPVersion;
+        self.currentDeviceOS    = currentDeviceOS;
     }
     return self;
 }
@@ -247,10 +253,10 @@ Vilson: FIXE:
                                             self.deviceID,
                                             self.verifiCode,
                                             @"i",
-                                            deviceTokenStr,
-                                            currentVersion,
-                                            @"VilsonX",
-                                            @"iPhone iOS 12.2",
+                                            self.deviceToken,
+                                            self.currentAPPVersion,
+                                            self.currentDeviceName,
+                                            self.currentDeviceOS,
                                             self.loginSource,
                                             self.verifiMsgLanguage];
     

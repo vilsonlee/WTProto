@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "1.0.0",
+  "iOS" : [
+    {
+      "name" : "WTProtocal",
+      "hash" : "b98610a861a7ae90593e11ae4a01c48bc939bed20ccbb56cc75edd63542897af"
+    }
+  ]
+}

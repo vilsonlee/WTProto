@@ -115,13 +115,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)initWithStream:(XMPPStream *)stream
             password:(NSString *)password
             deviceID:(NSString *)deviceID
+         deviceToken:(NSString *)deviceToken
             userType:(NSString *)userType
           authOpType:(NSString *)authOpType
           verifiCode:(NSString *)verifiCode
-          iPhoneName:(NSString *)iphoneName
-          deviceType:(NSString *)deviceType
          loginSource:(NSString *)loginSource
-   verifiMsgLanguage:(NSString *)verifiMsgLanguage;
+   verifiMsgLanguage:(NSString *)verifiMsgLanguage
+   currentDeviceName:(NSString *)currentDeviceName
+   currentAPPVersion:(NSString *)currentAPPVersion
+     currentDeviceOS:(NSString *)currentDeviceOS;
 
 
 @end

@@ -19,16 +19,22 @@
 @implementation WTProtoUser
 
 - (instancetype)initProtoUserWithUserID:(NSString *)userID
-                             domain:(NSString *)domain
-                           resource:(NSString *)resource
-                           userType:(WTProtoUserType)userType
-                        phoneNumber:(NSString *)phoneNumber
-                           password:(NSString *)password
-                           deviceID:(NSString *)deviceID
-                         verifiCode:(NSString *)verifiCode
-                  verifiMsgLanguage:(NSString *)verifiMsgLanguage
-                        loginSource:(NSString *)loginSource
-                      loginAuthType:(WTProtoUserLoginAuthType)loginAuthTyp{
+                                 domain:(NSString *)domain
+                               resource:(NSString *)resource
+                               userType:(WTProtoUserType)userType
+                            phoneNumber:(NSString *)phoneNumber
+                              phoneCode:(nonnull NSString *)phoneCode
+                               password:(NSString *)password
+                               deviceID:(NSString *)deviceID
+                            deviceToken:(NSString *)deviceToken
+                             verifiCode:(NSString *)verifiCode
+                      verifiMsgLanguage:(NSString *)verifiMsgLanguage
+                            loginSource:(NSString *)loginSource
+                          loginAuthType:(WTProtoUserLoginAuthType)loginAuthTyp
+                      currentDeviceName:(nonnull NSString *)currentDeviceName
+                      currentAPPVersion:(nonnull NSString *)currentAPPVersion
+                        currentDeviceOS:(nonnull NSString *)currentDeviceOS
+{
     
     
     if (self = [super initJidwithUser:userID
@@ -37,11 +43,17 @@
         
         _userID                 = [self user];
         _phoneNumber            = phoneNumber;
+        _phoneCode              = phoneCode;
         _password               = password;
         _deviceID               = deviceID;
+        _deviceToken            = deviceToken;
         _verifiCode             = verifiCode;
         _verifiMsgLanguage      = verifiMsgLanguage;
         _loginSource            = loginSource;
+        
+        _currentDeviceName      = currentDeviceName;
+        _currentAPPVersion      = currentAPPVersion;
+        _currentDeviceOS        = currentDeviceOS;
         
         _userType               = [self getUserType:userType];
         _loginAuthType          = [self getLoginAuthTyp:loginAuthTyp];
@@ -202,6 +214,22 @@
 }
 
 
+-(void)setCurrentDeviceName:(NSString *)currentDeviceName
+{
+    _currentDeviceName = currentDeviceName;
+}
+
+
+-(void)setCurrentAPPVersion:(NSString *)currentAPPVersion
+{
+    _currentAPPVersion  = currentAPPVersion;
+}
+
+
+-(void)setCurrentDeviceOS:(NSString *)currentDeviceOS
+{
+    _currentDeviceOS = currentDeviceOS;
+}
 
 
 -(NSString*)fullPhoneNumber

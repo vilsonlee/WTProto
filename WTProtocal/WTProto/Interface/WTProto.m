@@ -6,6 +6,7 @@
 //  Copyright © 2019 Vilson. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "WTProto.h"
 #import "WTProtoLogging.h"
 #import "WTProtoQueue.h"
@@ -74,28 +75,51 @@
 }
 
 
++ (WTProto *)shareWTProtoPhoneNumber:(NSString *)phoneNumber
+                              Domain:(NSString *)domain
+                            Resource:(NSString *)resource
+{
+    return [WTProto defaultShareWTProtoUserID:phoneNumber
+                                       Domain:domain
+                                     Resource:resource
+                                     Password:@""
+                                     UserType:WTProtoUserTypePhoneNumber];
+}
+
+
 + (WTProto *)shareWTProtoUserID:(NSString *)UserID
                          Domain:(NSString *)domain
                        Resource:(NSString *)resource
                        Password:(NSString *)password
 {
     
-    
-    static WTProto *proto = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        proto = [[WTProto alloc]initMTProtoWithUserID:UserID
-                                               Domain:domain
-                                             Resource:resource
-                                             Password:password];
-        
-        [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:XMPP_LOG_FLAG_SEND_RECV];
-    });
-    return proto;
-    
-    
-    
+    return [WTProto defaultShareWTProtoUserID:UserID
+                                       Domain:domain
+                                     Resource:resource
+                                     Password:password
+                                     UserType:WTProtoUserTypeUserID];
+}
+
+
++ (WTProto *)defaultShareWTProtoUserID:(NSString *)UserID
+                               Domain:(NSString *)domain
+                             Resource:(NSString *)resource
+                             Password:(NSString *)password
+                             UserType:(WTProtoUserType)userType
+{
+        static WTProto *proto = nil;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+          
+          proto = [[WTProto alloc]initMTProtoWithUserID:UserID
+                                                 Domain:domain
+                                               Resource:resource
+                                               Password:password
+                                               UserType:userType];
+          
+          [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:XMPP_LOG_FLAG_SEND_RECV];
+      });
+      return proto;
 }
 
 
@@ -103,7 +127,7 @@
                               Domain:(NSString *)domain
                             Resource:(NSString *)resource
                             Password:(NSString *)password
-
+                            UserType:(WTProtoUserType)userType
 {
     
     #ifdef DEBUG
@@ -115,19 +139,43 @@
     if (self = [super init])
     {
         #pragma mark - init a new Proto User.
+        ///FIXME:phoneNumber 初始值有待修改
+        NSString* phoneNumber = @"";
+        
+        if (userType == WTProtoUserTypePhoneNumber) {
+            phoneNumber = UserID;
+        }
+        
+        
+        UIDevice *protoDecive = [UIDevice currentDevice];
+        
+        NSString *deviceID           = protoDecive.identifierForVendor.UUIDString;
+        
+        NSString *currentDeviceName  = protoDecive.name;
+        NSString *currentAPPVersion  = [NSString stringWithFormat:@"%@",
+                                       [[[NSBundle mainBundle] infoDictionary]
+                                          objectForKey:@"CFBundleShortVersionString"]];
+        
+        NSString *currentDeviceOS    = [NSString stringWithFormat:@"%@_%@",
+                                       [UIDevice currentDevice].systemName,
+                                       [UIDevice currentDevice].systemVersion];
+
         _protoUser = [[WTProtoUser alloc]initProtoUserWithUserID:UserID
                                                           domain:domain
                                                         resource:resource
-                                                        userType:WTProtoUserTypePhoneNumber
-                                                     phoneNumber:@"13434386688"
+                                                        userType:userType
+                                                     phoneNumber:phoneNumber
+                                                       phoneCode:@"+86"
                                                         password:password
-                                                        deviceID:@"3a6c35d4c1c2b88fbfd9c37ed2adbfd9bca35f58"
+                                                        deviceID:deviceID
+                                                     deviceToken:@""
                                                       verifiCode:@""
                                                verifiMsgLanguage:@"en"
                                                      loginSource:resource
-                                                   loginAuthType:WTProtoUserLoginAuthTypeCheckUser];
-
-        [_protoUser setPhoneCode:@"+86"];
+                                                   loginAuthType:WTProtoUserLoginAuthTypeCheckUser
+                                               currentDeviceName:currentDeviceName
+                                               currentAPPVersion:currentAPPVersion
+                                                 currentDeviceOS:currentDeviceOS];
         
         
         #pragma mark - init a new Proto Server Address.
@@ -309,16 +357,21 @@
 #pragma mark - WTProto User Register & Auth
 
 - (void)ProtoReconnectByResettingStreamUserWithUserID:(NSString *)userID
-                                                 domain:(NSString *)domain
-                                               resource:(NSString *)resource
-                                               userType:(WTProtoUserType)userType
-                                            phoneNumber:(NSString *)phoneNumber
-                                               password:(NSString *)password
-                                               deviceID:(NSString *)deviceID
-                                             verifiCode:(NSString *)verifiCode
-                                      verifiMsgLanguage:(NSString *)verifiMsgLanguage
-                                            loginSource:(NSString *)loginSource
-                                          loginAuthType:(WTProtoUserLoginAuthType)loginAuthTyp
+                                               domain:(NSString *)domain
+                                             resource:(NSString *)resource
+                                             userType:(WTProtoUserType)userType
+                                          phoneNumber:(NSString *)phoneNumber
+                                            phoneCode:(NSString *)phoneCode
+                                             password:(NSString *)password
+                                             deviceID:(NSString *)deviceID
+                                          deviceToken:(NSString *)deviceToken
+                                           verifiCode:(NSString *)verifiCode
+                                    verifiMsgLanguage:(NSString *)verifiMsgLanguage
+                                          loginSource:(NSString *)loginSource
+                                        loginAuthType:(WTProtoUserLoginAuthType)loginAuthTyp
+                                    currentDeviceName:(NSString *)currentDeviceName
+                                    currentAPPVersion:(NSString *)currentAPPVersion
+                                      currentDeviceOS:(NSString *)currentDeviceOS
 {
     [_protoConnection disconnect];
     
@@ -327,13 +380,17 @@
                                                                    resource:resource
                                                                    userType:userType
                                                                 phoneNumber:phoneNumber
+                                                                  phoneCode:phoneCode
                                                                    password:password
                                                                    deviceID:deviceID
+                                                                deviceToken:deviceToken
                                                                  verifiCode:verifiCode
                                                           verifiMsgLanguage:verifiMsgLanguage
                                                                 loginSource:loginSource
-                                                              loginAuthType:loginAuthTyp];
-    
+                                                              loginAuthType:loginAuthTyp
+                                                          currentDeviceName:currentDeviceName
+                                                          currentAPPVersion:currentAPPVersion
+                                                            currentDeviceOS:currentDeviceOS];
     _protoUser = newProtoUser;
     
     [_protoStream resetStreamUser:_protoUser];
@@ -343,21 +400,25 @@
 }
 
 
-
-
 - (void)ProtoGetVerifiCodeWithRegister:(WTProtoRegister *)protoRegister
 {
     [self ProtoReconnectByResettingStreamUserWithUserID:[protoRegister.registerUser fullPhoneNumber]
-                                                   domain:[protoRegister.registerUser domain]
-                                                 resource:[protoRegister.registerUser resource]
-                                                 userType:WTProtoUserTypePhoneNumber
-                                              phoneNumber:protoRegister.registerUser.phoneNumber
-                                                 password:protoRegister.registerUser.password
-                                                 deviceID:protoRegister.registerUser.deviceID
-                                               verifiCode:protoRegister.registerUser.deviceID
-                                        verifiMsgLanguage:protoRegister.registerUser.verifiMsgLanguage
-                                              loginSource:protoRegister.registerUser.loginSource
-                                            loginAuthType:WTProtoUserLoginAuthTypeGetVerifiCode];
+                                                 domain:[protoRegister.registerUser domain]
+                                               resource:[protoRegister.registerUser resource]
+                                               userType:WTProtoUserTypePhoneNumber
+                                            phoneNumber:protoRegister.registerUser.phoneNumber
+                                              phoneCode:protoRegister.registerUser.phoneCode
+                                               password:protoRegister.registerUser.password
+                                               deviceID:protoRegister.registerUser.deviceID
+                                            deviceToken:protoRegister.registerUser.deviceToken
+                                             verifiCode:protoRegister.registerUser.deviceID
+                                      verifiMsgLanguage:protoRegister.registerUser.verifiMsgLanguage
+                                            loginSource:protoRegister.registerUser.loginSource
+                                          loginAuthType:WTProtoUserLoginAuthTypeGetVerifiCode
+                                      currentDeviceName:protoRegister.registerUser.currentDeviceName
+                                      currentAPPVersion:protoRegister.registerUser.currentAPPVersion
+                                        currentDeviceOS:protoRegister.registerUser.currentDeviceOS
+     ];
     
 }
 
@@ -365,55 +426,72 @@
 - (void)ProtoGotoAuthWithSuccessRegister:(WTProtoRegister *)protoRegister
 {
     [self ProtoReconnectByResettingStreamUserWithUserID:protoRegister.registerUser.userID
-                                                   domain:[protoRegister.registerUser domain]
-                                                 resource:[protoRegister.registerUser resource]
-                                                 userType:WTProtoUserTypeUserID
-                                              phoneNumber:protoRegister.registerUser.phoneNumber
-                                                 password:protoRegister.registerUser.password
-                                                 deviceID:protoRegister.registerUser.deviceID
-                                               verifiCode:protoRegister.registerUser.verifiCode
-                                        verifiMsgLanguage:protoRegister.registerUser.verifiMsgLanguage
-                                              loginSource:protoRegister.registerUser.loginSource
-                                            loginAuthType:WTProtoUserLoginAuthTypeCheckUser];
+                                                 domain:[protoRegister.registerUser domain]
+                                               resource:[protoRegister.registerUser resource]
+                                               userType:WTProtoUserTypeUserID
+                                            phoneNumber:protoRegister.registerUser.phoneNumber
+                                              phoneCode:protoRegister.registerUser.phoneCode
+                                               password:protoRegister.registerUser.password
+                                               deviceID:protoRegister.registerUser.deviceID
+                                            deviceToken:protoRegister.registerUser.deviceToken
+                                             verifiCode:protoRegister.registerUser.verifiCode
+                                      verifiMsgLanguage:protoRegister.registerUser.verifiMsgLanguage
+                                            loginSource:protoRegister.registerUser.loginSource
+                                          loginAuthType:WTProtoUserLoginAuthTypeCheckUser
+                                      currentDeviceName:protoRegister.registerUser.currentDeviceName
+                                      currentAPPVersion:protoRegister.registerUser.currentAPPVersion
+                                        currentDeviceOS:protoRegister.registerUser.currentDeviceOS
+     
+     ];
 }
+
 
 -(void)ProtoGotoCheckVerifiCodeWithAuth:(WTProtoAuth *)protoAuth VerifiCode:(NSString*)verifiCode
 {
     [self ProtoReconnectByResettingStreamUserWithUserID:[protoAuth.authUser fullPhoneNumber]
-                                                   domain:[protoAuth.authUser domain]
-                                                 resource:[protoAuth.authUser resource]
-                                                 userType:WTProtoUserTypePhoneNumber
-                                              phoneNumber:protoAuth.authUser.phoneNumber
-                                                 password:protoAuth.authUser.password
-                                                 deviceID:protoAuth.authUser.deviceID
-                                               verifiCode:verifiCode
-                                        verifiMsgLanguage:protoAuth.authUser.verifiMsgLanguage
-                                              loginSource:protoAuth.authUser.loginSource
-                                            loginAuthType:WTProtoUserLoginAuthTypeCheckVerifiCode];
+                                                 domain:[protoAuth.authUser domain]
+                                               resource:[protoAuth.authUser resource]
+                                               userType:WTProtoUserTypePhoneNumber
+                                            phoneNumber:protoAuth.authUser.phoneNumber
+                                              phoneCode:protoAuth.authUser.phoneCode
+                                               password:protoAuth.authUser.password
+                                               deviceID:protoAuth.authUser.deviceID
+                                            deviceToken:protoAuth.authUser.deviceToken
+                                             verifiCode:verifiCode
+                                      verifiMsgLanguage:protoAuth.authUser.verifiMsgLanguage
+                                            loginSource:protoAuth.authUser.loginSource
+                                          loginAuthType:WTProtoUserLoginAuthTypeCheckVerifiCode
+                                      currentDeviceName:protoAuth.authUser.currentDeviceName
+                                      currentAPPVersion:protoAuth.authUser.currentAPPVersion
+                                        currentDeviceOS:protoAuth.authUser.currentDeviceOS
+     ];
 }
 
 
 -(void)ProtoGotoAuthWithSuccessCheckVerifiCod:(WTProtoAuth *)protoAuth UserInfoMessage:(NSString*)userInfoMessage{
-    
     
     NSString * jidStr   = [[userInfoMessage  componentsSeparatedByString:@" == "] firstObject];
     NSString * userID   = [[jidStr        componentsSeparatedByString:@"@"]    firstObject];
     NSString * password = [[userInfoMessage  componentsSeparatedByString:@" == "] lastObject];
     
     [self ProtoReconnectByResettingStreamUserWithUserID:userID
-                                                   domain:[protoAuth.authUser domain]
-                                                 resource:[protoAuth.authUser resource]
-                                                 userType:WTProtoUserTypeUserID
-                                              phoneNumber:protoAuth.authUser.phoneNumber
-                                                 password:password
-                                                 deviceID:protoAuth.authUser.deviceID
-                                               verifiCode:protoAuth.authUser.verifiCode
-                                        verifiMsgLanguage:protoAuth.authUser.verifiMsgLanguage
-                                              loginSource:protoAuth.authUser.loginSource
-                                            loginAuthType:WTProtoUserLoginAuthTypeCheckUser];
-    
+                                                 domain:[protoAuth.authUser domain]
+                                               resource:[protoAuth.authUser resource]
+                                               userType:WTProtoUserTypeUserID
+                                            phoneNumber:protoAuth.authUser.phoneNumber
+                                              phoneCode:protoAuth.authUser.phoneCode
+                                               password:password
+                                               deviceID:protoAuth.authUser.deviceID
+                                            deviceToken:protoAuth.authUser.deviceToken
+                                             verifiCode:protoAuth.authUser.verifiCode
+                                      verifiMsgLanguage:protoAuth.authUser.verifiMsgLanguage
+                                            loginSource:protoAuth.authUser.loginSource
+                                          loginAuthType:WTProtoUserLoginAuthTypeCheckUser
+                                      currentDeviceName:protoAuth.authUser.currentDeviceName
+                                      currentAPPVersion:protoAuth.authUser.currentAPPVersion
+                                        currentDeviceOS:protoAuth.authUser.currentDeviceOS
+     ];
 }
-
 
 
 #pragma mark - WTProtoConnection delegate - Connection State

@@ -69,15 +69,17 @@
     self.myJID                   = user;
     
     self.deviceID                = user.deviceID;
+    self.deviceToken             = user.deviceToken;
     self.userType                = user.userType;
     self.password                = user.password;
     self.verifiCode              = user.verifiCode;
     self.verifiMsgLanguage       = user.verifiMsgLanguage;
-    self.iPhoneName              = @"iPhoneX";
-    self.deviceType              = @"iPhoneX";
     self.loginSource             = user.loginSource;
     self.loginAuthType           = user.loginAuthType;
     
+    self.currentDeviceName       = user.currentDeviceName;
+    self.currentAPPVersion       = user.currentAPPVersion;
+    self.currentDeviceOS         = user.currentDeviceOS;
 }
 
 -(void)resetStreamUser:(WTProtoUser*)user
@@ -85,12 +87,17 @@
     _streamUser                  = user;
     self.myJID                   = user;
     self.deviceID                = user.deviceID;
+    self.deviceToken             = user.deviceToken;
     self.userType                = user.userType;
     self.password                = user.password;
     self.verifiCode              = user.verifiCode;
     self.verifiMsgLanguage       = user.verifiMsgLanguage;
     self.loginSource             = user.loginSource;
     self.loginAuthType           = user.loginAuthType;
+       
+    self.currentDeviceName       = user.currentDeviceName;
+    self.currentAPPVersion       = user.currentAPPVersion;
+    self.currentDeviceOS         = user.currentDeviceOS;
 }
 
 
