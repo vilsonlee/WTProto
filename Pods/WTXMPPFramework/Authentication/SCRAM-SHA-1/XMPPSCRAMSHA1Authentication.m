@@ -233,18 +233,7 @@ Vilson: FIXE:
     self.clientNonce = [XMPPStream generateUUID];
     
     self.clientFirstMessageBare = [NSString stringWithFormat:@"n=%@,r=%@",self.username,self.clientNonce];
-    
-    
-    //推送token
-    NSString * deviceTokenStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
-    
-    deviceTokenStr = @"";
-    //当前版本号
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         
-    //@"1.0.1";
-    NSString * currentVersion = [NSString stringWithFormat:@"%@",version];
-    
     NSString * newClientFirstMessageBare = [NSString stringWithFormat:@"n=%@,r=%@,t=%@,l=%@,d=%@,m=%@,p=%@,dt=%@,v=%@,n=%@,t=%@,r=%@,l=%@",
                                             self.username,
                                             self.clientNonce,
