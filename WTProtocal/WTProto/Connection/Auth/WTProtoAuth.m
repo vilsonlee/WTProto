@@ -12,6 +12,11 @@
 #import "WTProtoQueue.h"
 #import "WTProtoServerAddress.h"
 
+static WTProtoAuth *protoAuth = nil;
+static dispatch_once_t onceToken;
+
+static WTProtoQueue *queue = nil;
+static dispatch_once_t queueOnceToken;
 
 @interface WTProtoAuth ()<WTProtoStreamDelegate>
 {
@@ -26,9 +31,7 @@
 
 +(WTProtoQueue*)authQueue{
     
-    static WTProtoQueue *queue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
+    dispatch_once(&queueOnceToken, ^
     {
         queue = [[WTProtoQueue alloc] initWithName:"org.wtproto.Queue:auth"];
     });
@@ -37,10 +40,19 @@
 }
 
 
++ (void)dellocSelf
+{
+    protoAuth = nil;
+    onceToken = 0l;
+    
+    queue = nil;
+    queueOnceToken  = 0l;
+    
+}
+
+
 +(WTProtoAuth *)shareAuthWithProtoStream:(WTProtoStream *)protoStream interface:(NSString *)interface
 {
-    static WTProtoAuth *protoAuth = nil;
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
         protoAuth = [[WTProtoAuth alloc]initAuthWithProtoStream:protoStream

@@ -61,6 +61,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly)WTProtoRoom      *protoRoom;
 @property (nonatomic, strong, readonly)WTProtoIDTracker *protoTracker;
 
+
++ (void)dellocSelf;
+
 + (WTProtoQueue *)groupQueue;
 
 + (WTProtoGroup *)shareGroupWithProtoStream:(WTProtoStream *)protoStream

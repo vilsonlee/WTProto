@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly)WTProtoStreamManagementMemoryStorage *ProtoStreamManagementMemoryStorage;
 
 
++ (void)dellocSelf;
+
 + (WTProtoQueue *)streamManagerQueue;
 
 + (WTProtoStreamManager *)shareStreamManagerWithProtoStream:(WTProtoStream *)protoStream

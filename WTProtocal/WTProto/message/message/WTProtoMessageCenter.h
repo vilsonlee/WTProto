@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (WTProtoQueue *)messageCenterQueue_Concurrent;
 + (WTProtoQueue *)messageCenterQueue_Serial;
 
-
++ (void)dellocSelf;
 
 
 + (WTProtoMessageCenter *)shareMessagerCenterWithProtoStream:(WTProtoStream *)protoStream

@@ -11,7 +11,14 @@
 #import "WTProtoStream.h"
 #import "WTProtoUser.h"
 #import "WTProtoAutoPing.h"
-#import "WTProtoManualPing.h"
+#import "WTProtoManualPing.h"、
+
+static WTProtoPing *protoPing = nil;
+static dispatch_once_t onceToken;
+
+static WTProtoQueue *pingQueue = nil;
+static dispatch_once_t queueOnceToken;
+
 
 @interface WTProtoPing()<XMPPAutoPingDelegate,XMPPPingDelegate>
 {
@@ -25,9 +32,7 @@
 
 + (WTProtoQueue *)pingQueue
 {
-    static WTProtoQueue *pingQueue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
+    dispatch_once(&queueOnceToken, ^
     {
         pingQueue = [[WTProtoQueue alloc] initWithName:"org.wtproto.Queue:ping"];
     });
@@ -35,11 +40,19 @@
 }
 
 
++ (void)dellocSelf
+{
+    protoPing = nil;
+    onceToken = 0l;
+    
+    pingQueue = nil;
+    queueOnceToken = 0l;
+}
+
+
 + (WTProtoPing *)sharePingWithProtoStream:(WTProtoStream *)protoStream
                                 interface:(NSString *)interface
 {
-    static WTProtoPing *protoPing = nil;
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
         protoPing = [[WTProtoPing alloc]initWithPingWithProtoStream:protoStream interface:interface];

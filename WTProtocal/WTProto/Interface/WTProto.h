@@ -11,6 +11,9 @@
  * WTProto is the most core class that manager the all the XMPP communication.
 **/
 
+
+#import <Foundation/Foundation.h>
+
 @class WTProto;
 @class WTProtoLogging;
 @class WTProtoQueue;
@@ -28,7 +31,6 @@
 @class WTProtoGroup;
 @class WTProtoMessageCenter;
 
-#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -106,20 +108,36 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly)WTProtoMessageCenter     *protoMessageCenter;
 
 
++ (void)dellocSelf;
+
 + (WTProtoQueue *)ProtoQueue;
+
+
++ (WTProto *)shareWTProtoDomain:(NSString *)domain Resource:(NSString *)resource;
+
 
 + (WTProto *)shareWTProtoPhoneNumber:(NSString *)phoneNumber
                               Domain:(NSString *)domain
                             Resource:(NSString *)resource;
+
 
 + (WTProto *)shareWTProtoUserID:(NSString *)UserID
                          Domain:(NSString *)domain
                        Resource:(NSString *)resource
                        Password:(NSString *)password;
 
+
+-(void)ProtoResetProtoUserWithUserID:(NSString *)userID
+                            password:(NSString *)password
+                            UserType:(NSInteger)userType
+                       loginAuthType:(NSInteger)loginAuthType;
+
+
 - (void)addWTProtoDelegate:(id)delegate delegateQueue:(dispatch_queue_t)delegateQueue;
 - (void)removeWTProtoDelegate:(id)delegate delegateQueue:(dispatch_queue_t)delegateQueue;
 - (void)removeWTProtoDelegate:(id)delegate;
+
+
 
 - (void)Start;
 
@@ -133,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)ProtoGotoCheckVerifiCodeWithAuth:(WTProtoAuth *)protoAuth VerifiCode:(NSString*)verifiCode;
 
-
+- (void)ProtoDellocFuctionModule;
 @end
 
 NS_ASSUME_NONNULL_END

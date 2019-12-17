@@ -47,6 +47,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly)WTProtoServerAddress* serverAddress;
 
 
++ (void)dellocSelf;
+
++ (WTProtoQueue *)registerQueue;
+
 + (WTProtoRegister *)shareRegisterWithProtoStream:(WTProtoStream *)protoStream interface:(NSString *)interface;
 
 

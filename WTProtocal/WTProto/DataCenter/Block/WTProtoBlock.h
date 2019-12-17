@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (readonly, strong) NSMutableDictionary *blockingDict;
 
-
++ (void)dellocSelf;
 
 + (WTProtoQueue *)blockQueue;
 

@@ -12,6 +12,11 @@
 #import "WTProtoQueue.h"
 #import "WTProtoTimer.h"
 
+static WTProtoConnection *protoConnection = nil;
+static dispatch_once_t onceToken;
+
+static WTProtoQueue *tcpqueue = nil;
+static dispatch_once_t queueOnceToken;
 
 @interface WTProtoConnection () <WTProtoStreamDelegate>
 
@@ -28,9 +33,7 @@
 
 + (WTProtoQueue *)tcpQueue
 {
-    static WTProtoQueue *tcpqueue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
+    dispatch_once(&queueOnceToken, ^
     {
         tcpqueue = [[WTProtoQueue alloc] initWithName:"org.wtproto.Queue:tcp"];
     });
@@ -39,11 +42,19 @@
 
 
 
++ (void)dellocSelf
+{
+    protoConnection = nil;
+    onceToken = 0l;
+    
+    tcpqueue = nil;
+    queueOnceToken  = 0l;
+}
+
+
 + (WTProtoConnection *)shareConnecionWithProtoStream:(WTProtoStream *)protoStream
                                            interface:(NSString *)interface{
-    
-    static WTProtoConnection *protoConnection = nil;
-    static dispatch_once_t onceToken;
+
     dispatch_once(&onceToken, ^{
         
         protoConnection = [[WTProtoConnection alloc]initWithProtoStream:protoStream

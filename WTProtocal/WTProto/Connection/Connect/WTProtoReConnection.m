@@ -13,6 +13,13 @@
 #import "WTProtoReconnect.h"
 #import "WTProtoTimer.h"
 
+static WTProtoReConnection *protoReConnection = nil;
+static dispatch_once_t onceToken;
+
+static WTProtoQueue *reConnectqueue = nil;
+static dispatch_once_t queueOnceToken;
+
+
 @interface WTProtoReConnection () <XMPPReconnectDelegate>
 {
     
@@ -26,13 +33,21 @@
 
 + (WTProtoQueue *)reConnectQueue{
     
-    static WTProtoQueue *reConnectqueue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
+    dispatch_once(&queueOnceToken, ^
     {
         reConnectqueue = [[WTProtoQueue alloc] initWithName:"org.wtproto.Queue:reConnect"];
     });
     return reConnectqueue;
+}
+
+
++ (void)dellocSelf
+{
+    protoReConnection = nil;
+    onceToken = 0l;
+    
+    reConnectqueue = nil;
+    queueOnceToken = 0l;
 }
 
 
@@ -41,9 +56,6 @@
                                   ReconnectTimerInterval:(NSTimeInterval )reconnectTimerInterval
                                                interface:(NSString *)interface
 {
-    
-    static WTProtoReConnection *protoReConnection = nil;
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
         protoReConnection = [[WTProtoReConnection alloc]initReConnecionWithProtoStream:protoStream

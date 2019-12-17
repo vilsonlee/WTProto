@@ -13,6 +13,13 @@
 #import "WTProtoServerAddress.h"
 #import "XMLDictionary.h"
 
+
+static WTProtoRegister *protoRegister = nil;
+static dispatch_once_t onceToken;
+
+static WTProtoQueue *queue = nil;
+static dispatch_once_t queueOnceToken;
+
 @interface WTProtoRegister ()<WTProtoStreamDelegate>
 {
     WTProtoQueue*  protoRegisterQueue;
@@ -27,9 +34,7 @@
 
 +(WTProtoQueue*)registerQueue{
     
-    static WTProtoQueue *queue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
+    dispatch_once(&queueOnceToken, ^
     {
         queue = [[WTProtoQueue alloc] initWithName:"org.wtproto.Queue:register"];
     });
@@ -38,11 +43,18 @@
 }
 
 
++ (void)dellocSelf
+{
+    protoRegister = nil;
+    onceToken = 0l;
+    
+    queue = nil;
+    queueOnceToken = 0l;
+}
+
 
 +(WTProtoRegister*)shareRegisterWithProtoStream:(WTProtoStream *)protoStream interface:(NSString *)interface{
     
-    static WTProtoRegister *protoRegister = nil;
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
         protoRegister = [[WTProtoRegister alloc]initRegisterWithProtoStream:protoStream

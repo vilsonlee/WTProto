@@ -12,6 +12,12 @@
 #import "WTProtoRoster.h"
 #import "WTProtoRosterCoreDataStorage.h"
 
+static WTProtoRosters *protoRoster = nil;
+static dispatch_once_t onceToken;
+
+static WTProtoQueue *rostersQueue = nil;
+static dispatch_once_t queueOnceToken;
+
 @interface WTProtoRosters()<XMPPRosterDelegate>
 {
     WTProtoQueue*  protoRostersQueue;
@@ -24,20 +30,27 @@
 
 + (WTProtoQueue *)rostersQueue
 {
-    static WTProtoQueue *rostersQueue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
+    dispatch_once(&queueOnceToken, ^
     {
         rostersQueue = [[WTProtoQueue alloc] initWithName:"org.wtproto.Queue:roster"];
     });
     return rostersQueue;
 }
 
+
++ (void)dellocSelf
+{
+    protoRoster = nil;
+    onceToken = 0l;
+    
+    rostersQueue = nil;
+    queueOnceToken = 0l;
+}
+
+
 + (WTProtoRosters *)shareRostersWithProtoStream:(WTProtoStream *)protoStream
                                       interface:(NSString *)interface
 {
-    static WTProtoRosters *protoRoster = nil;
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
         protoRoster = [[WTProtoRosters alloc]initRostersWithProtoStream:protoStream

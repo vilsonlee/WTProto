@@ -11,6 +11,13 @@
 #import "WTProtoQueue.h"
 #import "WTProtoTimer.h"
 
+
+static WTProtoMessageCenter *protoMessageCenter = nil;
+static dispatch_once_t onceToken;
+
+static WTProtoQueue *messageCenterQueue = nil;
+static dispatch_once_t queueOnceToken;
+
 @interface WTProtoMessageCenter () <WTProtoStreamDelegate>
 
 
@@ -29,9 +36,7 @@
 
 + (WTProtoQueue *)messageCenterQueue_Serial{
     
-    static WTProtoQueue *messageCenterQueue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
+        dispatch_once(&queueOnceToken, ^
     {
         messageCenterQueue = [[WTProtoQueue alloc] initWithName:"org.wtproto.Queue:messageCenter_Serial"];
     });
@@ -41,10 +46,8 @@
 
 
 + (WTProtoQueue *)messageCenterQueue_Concurrent{
-    
-    static WTProtoQueue *messageCenterQueue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
+
+    dispatch_once(&queueOnceToken, ^
     {
         messageCenterQueue = [[WTProtoQueue alloc] initWithName:"org.wtproto.Queue:messageCenter_Concurrent"
                                                      concurrent:YES];
@@ -54,17 +57,23 @@
 }
 
 
++ (void)dellocSelf
+{
+    protoMessageCenter = nil;
+    onceToken = 0l;
+    
+    messageCenterQueue = nil;
+    queueOnceToken = 0l;
+}
+
 
 + (WTProtoMessageCenter *)shareMessagerCenterWithProtoStream:(WTProtoStream *)protoStream
                                                    interface:(NSString *)interface
 {
-    static WTProtoMessageCenter *protoMessageCenter = nil;
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
         protoMessageCenter = [[WTProtoMessageCenter alloc]initMessageMessagerCenterWithProtoStream:protoStream
                                                                                          interface:interface];
-        
         [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:XMPP_LOG_FLAG_SEND_RECV];
     });
     return protoMessageCenter;

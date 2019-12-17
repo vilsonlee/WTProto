@@ -48,6 +48,9 @@ typedef NS_ENUM(NSUInteger, WTProtoConnectStatus) {
 
 @property (nonatomic, strong, readonly)WTProtoServerAddress* serverAddress;
 
+
++ (void)dellocSelf;
+
 + (WTProtoQueue *)tcpQueue;
 
 

@@ -31,6 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong,readonly)WTProtoStream* reConnectStream;
 
+
++ (void)dellocSelf;
+
 + (WTProtoQueue *)reConnectQueue;
 
 + (WTProtoReConnection *)shareReConnecionWithProtoStream:(WTProtoStream *)protoStream

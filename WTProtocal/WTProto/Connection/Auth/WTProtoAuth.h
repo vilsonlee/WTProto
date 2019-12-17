@@ -61,6 +61,9 @@ typedef NS_ENUM(NSUInteger, WTProtoUserAuthStatus) {
 
 @property (nonatomic, strong, readonly)WTProtoServerAddress* serverAddress;
 
+
++ (void)dellocSelf;
+
 + (WTProtoQueue *)authQueue;
 
 

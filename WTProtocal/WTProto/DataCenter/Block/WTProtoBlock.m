@@ -11,6 +11,11 @@
 #import "WTProtoStream.h"
 #import "WTProtoQueue.h"
 
+static WTProtoBlock *protoBlock = nil;
+static dispatch_once_t onceToken;
+
+static WTProtoQueue *blockQueue = nil;
+static dispatch_once_t queueOnceToken;
 
 @interface WTProtoBlock()<XMPPBlockingDelegate>
 {
@@ -23,19 +28,28 @@
 
 + (WTProtoQueue *)blockQueue
 {
-    static WTProtoQueue *blockQueue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
+    dispatch_once(&queueOnceToken, ^
     {
         blockQueue = [[WTProtoQueue alloc] initWithName:"org.wtproto.Queue:block"];
     });
     return blockQueue;
 }
 
+
++ (void)dellocSelf
+{
+    protoBlock = nil;
+    onceToken = 0l;
+    
+    blockQueue = nil;
+    queueOnceToken = 0l;
+}
+
+
+
+
 + (WTProtoBlock *)shareBlockWithProtoStream:(WTProtoStream *)protoStream interface:(NSString *)interface
 {
-    static WTProtoBlock *protoBlock = nil;
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
         protoBlock = [[WTProtoBlock alloc]initWithBlockWithProtoStream:protoStream interface:interface];

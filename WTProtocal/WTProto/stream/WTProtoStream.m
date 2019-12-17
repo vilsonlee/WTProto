@@ -80,6 +80,7 @@
     self.currentDeviceName       = user.currentDeviceName;
     self.currentAPPVersion       = user.currentAPPVersion;
     self.currentDeviceOS         = user.currentDeviceOS;
+    
 }
 
 -(void)resetStreamUser:(WTProtoUser*)user
@@ -94,7 +95,7 @@
     self.verifiMsgLanguage       = user.verifiMsgLanguage;
     self.loginSource             = user.loginSource;
     self.loginAuthType           = user.loginAuthType;
-       
+    
     self.currentDeviceName       = user.currentDeviceName;
     self.currentAPPVersion       = user.currentAPPVersion;
     self.currentDeviceOS         = user.currentDeviceOS;

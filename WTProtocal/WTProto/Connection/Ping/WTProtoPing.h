@@ -92,6 +92,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readwrite) BOOL respondsToQueries;
 
 
++ (void)dellocSelf;
+
+
 + (WTProtoQueue *)pingQueue;
 
 

@@ -21,6 +21,12 @@
 
 #define WEAKSELF                            typeof(self) __weak weakSelf = self;
 
+static WTProtoGroup *protoGroup= nil;
+static dispatch_once_t onceToken;
+
+static WTProtoQueue *groupQueue = nil;
+static dispatch_once_t queueOnceToken;
+
 @interface WTProtoGroup()<
                            WTProtoStreamDelegate,
                            XMPPMUCDelegate,
@@ -42,20 +48,27 @@
 #pragma mark -- 初始化
 + (WTProtoQueue *)groupQueue{
     
-    static WTProtoQueue *groupQueue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
+    dispatch_once(&queueOnceToken, ^
     {
         groupQueue = [[WTProtoQueue alloc] initWithName:"org.wtproto.Queue:group"];
     });
     return groupQueue;
 }
 
+
++ (void)dellocSelf
+{
+    protoGroup = nil;
+    onceToken = 0l;
+    
+    groupQueue = nil;
+    queueOnceToken = 0l;
+}
+
+
 + (WTProtoGroup *)shareGroupWithProtoStream:(WTProtoStream *)protoStream
                                   interface:(NSString *)interface
 {
-    static WTProtoGroup *protoGroup= nil;
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
         protoGroup = [[WTProtoGroup alloc]initGroupWithProtoStream:protoStream

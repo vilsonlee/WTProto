@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly)WTProtoRoster *ProtoRoster;
 @property (nonatomic, strong, readonly)WTProtoRosterCoreDataStorage *protoRosterCoreDataStorage;
 
++ (void)dellocSelf;
 
 + (WTProtoQueue *)rostersQueue;
 

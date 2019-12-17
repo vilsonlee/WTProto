@@ -12,6 +12,11 @@
 #import "WTProtoStreamManagement.h"
 #import "WTProtoStreamManagementMemoryStorage.h"
 
+static WTProtoQueue *streamManagerQueue = nil;
+static dispatch_once_t queueOnceToken;
+
+static WTProtoStreamManager *protoStreamManager = nil;
+static dispatch_once_t onceToken;
 
 @interface WTProtoStreamManager()
 {
@@ -22,12 +27,9 @@
 
 @implementation WTProtoStreamManager
 
-
 + (WTProtoQueue *)streamManagerQueue{
     
-    static WTProtoQueue *streamManagerQueue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
+    dispatch_once(&queueOnceToken, ^
     {
         streamManagerQueue = [[WTProtoQueue alloc] initWithName:"org.wtproto.Queue:streamQueue"];
     });
@@ -35,17 +37,24 @@
     
 }
 
+
++ (void)dellocSelf
+{
+    streamManagerQueue = nil;
+    queueOnceToken = 0l;
+    
+    protoStreamManager = nil;
+    onceToken = 0l;
+}
+
+
 + (WTProtoStreamManager *)shareStreamManagerWithProtoStream:(WTProtoStream *)protoStream
                                                   interface:(NSString *)interface
 {
-    static WTProtoStreamManager *protoStreamManager = nil;
-       static dispatch_once_t onceToken;
-       dispatch_once(&onceToken, ^{
-           
-           protoStreamManager = [[WTProtoStreamManager alloc]initStreamManagerWithProtoStream:protoStream
+    dispatch_once(&onceToken, ^{
+        protoStreamManager = [[WTProtoStreamManager alloc]initStreamManagerWithProtoStream:protoStream
                                                                                     interface:interface];
-           
-           [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:XMPP_LOG_FLAG_SEND_RECV];
+        [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:XMPP_LOG_FLAG_SEND_RECV];
        });
     
     return protoStreamManager;

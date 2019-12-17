@@ -24,6 +24,12 @@
 #import "WTProtoGroup.h"
 #import "WTProtoMessageCenter.h"
 
+static WTProto *proto = nil;
+static dispatch_once_t onceToken;
+
+static WTProtoQueue *protoQueue = nil;
+static dispatch_once_t queueOnceToken;
+
 @interface WTProto () <
                        WTProtoStreamManagerDelegate,
                        WTProtoConnectionDelegate,
@@ -62,16 +68,34 @@
 
 @implementation WTProto
 
++ (void)dellocSelf{
+        
+    queueOnceToken = 0l;
+    protoQueue = nil;
+    
+    onceToken = 0l;
+    proto = nil;
+}
+
+
 
 + (WTProtoQueue *)ProtoQueue
 {
-    static WTProtoQueue *protoQueue = nil;
     static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^
+    dispatch_once(&queueOnceToken, ^
     {
         protoQueue = [[WTProtoQueue alloc] initWithName:"org.wtproto.Queue"];
     });
     return protoQueue;
+}
+
++ (WTProto *)shareWTProtoDomain:(NSString *)domain Resource:(NSString *)resource
+{
+    return [WTProto defaultShareWTProtoUserID:@""
+                                       Domain:domain
+                                     Resource:resource
+                                     Password:@""
+                                     UserType:WTProtoUserTypePhoneNumber];
 }
 
 
@@ -102,13 +126,11 @@
 
 
 + (WTProto *)defaultShareWTProtoUserID:(NSString *)UserID
-                               Domain:(NSString *)domain
-                             Resource:(NSString *)resource
-                             Password:(NSString *)password
-                             UserType:(WTProtoUserType)userType
+                                Domain:(NSString *)domain
+                              Resource:(NSString *)resource
+                              Password:(NSString *)password
+                              UserType:(WTProtoUserType)userType
 {
-        static WTProto *proto = nil;
-        static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
           
           proto = [[WTProto alloc]initMTProtoWithUserID:UserID
@@ -139,6 +161,7 @@
     if (self = [super init])
     {
         #pragma mark - init a new Proto User.
+        
         ///FIXME:phoneNumber 初始值有待修改
         NSString* phoneNumber = @"";
         
@@ -176,7 +199,6 @@
                                                currentDeviceName:currentDeviceName
                                                currentAPPVersion:currentAPPVersion
                                                  currentDeviceOS:currentDeviceOS];
-        
         
         #pragma mark - init a new Proto Server Address.
         _serverAddress = [[WTProtoServerAddress alloc]initWithHost:@"im.77877.site" port:35000];
@@ -262,6 +284,76 @@
     protoMulticasDelegate = (GCDMulticastDelegate <WTProtoDelegate> *)[[GCDMulticastDelegate alloc] init];
     
 }
+
+
+-(void)ProtoResetProtoUserWithUserID:(NSString *)userID
+                            password:(NSString *)password
+                            UserType:(NSInteger)userType
+                       loginAuthType:(NSInteger)loginAuthType
+{
+    
+    NSString* phoneNumber = @"";
+    if (userType == WTProtoUserTypePhoneNumber) {
+        phoneNumber = userID;
+    }
+    
+    WTProtoUser *newProtoUser = [[WTProtoUser alloc]initProtoUserWithUserID:userID
+                                                                     domain:_protoUser.domain
+                                                                   resource:_protoUser.resource
+                                                                   userType:userType
+                                                                phoneNumber:_protoUser.phoneNumber
+                                                                  phoneCode:_protoUser.phoneNumber
+                                                                   password:password
+                                                                   deviceID:_protoUser.deviceID
+                                                                deviceToken:_protoUser.deviceToken
+                                                                 verifiCode:_protoUser.verifiCode
+                                                          verifiMsgLanguage:_protoUser.verifiMsgLanguage
+                                                                loginSource:_protoUser.loginSource
+                                                              loginAuthType:loginAuthType
+                                                          currentDeviceName:_protoUser.currentDeviceName
+                                                          currentAPPVersion:_protoUser.currentAPPVersion
+                                                            currentDeviceOS:_protoUser.currentDeviceOS];
+    _protoUser = newProtoUser;
+    
+    _protoStream = [[WTProtoStream alloc]initWithProtoUser:_protoUser
+                                             ServerAddress:_serverAddress
+                                            StartTLSPolicy:WTProtoStreamStartTLSPolicyRequired
+                                     StreamCompressionMode:WTProtoStreamCompressionBestCompression];
+    
+    
+//    [self ProtoDellocFuctionModule];
+//
+//    [self ProtoFuctionModuleInitializationWithProtoStream:_protoStream];
+//
+//    [self ProtoFuctionModuleSetDelegate];
+}
+
+-(void)ProtoDellocFuctionModule{
+    
+    _proStreamManager    = nil;
+    _protoConnection     = nil;
+    _protoRegister       = nil;
+    _protoAuth           = nil;
+    _protoReConnection   = nil;
+    _protoBlock          = nil;
+    _protoPing           = nil;
+    _protoRosters        = nil;
+    _protoGroup          = nil;
+    _protoMessageCenter  = nil;
+    
+    [WTProtoStreamManager       dellocSelf];
+    [WTProtoConnection          dellocSelf];
+    [WTProtoRegister            dellocSelf];
+    [WTProtoAuth                dellocSelf];
+    [WTProtoReConnection        dellocSelf];
+    [WTProtoBlock               dellocSelf];
+    [WTProtoPing                dellocSelf];
+    [WTProtoRosters             dellocSelf];
+    [WTProtoGroup               dellocSelf];
+    [WTProtoMessageCenter       dellocSelf];
+
+}
+
 
 #pragma mark - WTProto MulticasDelegate Add & Remove
 - (void)addWTProtoDelegate:(id)delegate delegateQueue:(dispatch_queue_t)delegateQueue
@@ -400,6 +492,8 @@
 }
 
 
+
+
 - (void)ProtoGetVerifiCodeWithRegister:(WTProtoRegister *)protoRegister
 {
     [self ProtoReconnectByResettingStreamUserWithUserID:[protoRegister.registerUser fullPhoneNumber]
@@ -445,7 +539,6 @@
      ];
 }
 
-
 -(void)ProtoGotoCheckVerifiCodeWithAuth:(WTProtoAuth *)protoAuth VerifiCode:(NSString*)verifiCode
 {
     [self ProtoReconnectByResettingStreamUserWithUserID:[protoAuth.authUser fullPhoneNumber]
@@ -470,6 +563,7 @@
 
 -(void)ProtoGotoAuthWithSuccessCheckVerifiCod:(WTProtoAuth *)protoAuth UserInfoMessage:(NSString*)userInfoMessage{
     
+    
     NSString * jidStr   = [[userInfoMessage  componentsSeparatedByString:@" == "] firstObject];
     NSString * userID   = [[jidStr        componentsSeparatedByString:@"@"]    firstObject];
     NSString * password = [[userInfoMessage  componentsSeparatedByString:@" == "] lastObject];
@@ -491,7 +585,9 @@
                                       currentAPPVersion:protoAuth.authUser.currentAPPVersion
                                         currentDeviceOS:protoAuth.authUser.currentDeviceOS
      ];
+    
 }
+
 
 
 #pragma mark - WTProtoConnection delegate - Connection State
