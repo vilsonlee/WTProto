@@ -6,7 +6,7 @@
 //  Copyright © 2019 Vilson. All rights reserved.
 //
 
-#import <XMPPFramework/XMPPFramework.h>
+#import <WTXMPPFramework/XMPPFramework.h>
 
 #define WT_IQ_TIME_OUT_INTERVAL 10 //消息请求，消息发送 超时时间
 

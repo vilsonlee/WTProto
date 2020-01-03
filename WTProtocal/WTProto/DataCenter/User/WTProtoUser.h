@@ -13,7 +13,7 @@
  deviceModel = iPhone
  */
 
-#import <XMPPFramework/XMPPFramework.h>
+#import <WTXMPPFramework/XMPPFramework.h>
 
 
 

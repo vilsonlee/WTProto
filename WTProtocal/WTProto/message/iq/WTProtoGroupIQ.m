@@ -10,7 +10,7 @@
 #import "WTProtoIQ.h"
 #import "WTProtoUser.h"
 #import "NSString+pyFirstLetter.h"
-#import <XMPPFramework/XMPPStream.h>
+#import <WTXMPPFramework/XMPPStream.h>
 
 @implementation WTProtoGroupIQ
 

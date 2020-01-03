@@ -6,7 +6,7 @@
 //  Copyright © 2019 Vilson. All rights reserved.
 //
 
-#import <XMPPFramework/XMPPFramework.h>
+#import <WTXMPPFramework/XMPPFramework.h>
 
 
 typedef NS_ENUM(NSUInteger, WTProtoStreamCompressionMode) {

@@ -7,7 +7,7 @@
 //
 
 #import "WTProtoReadAckMessage.h"
-#import "XMPPFramework/XMPPFramework.h"
+#import <WTXMPPFramework/XMPPFramework.h>
 #import "WTProtoStream.h"
 
 @implementation WTProtoReadAckMessage
