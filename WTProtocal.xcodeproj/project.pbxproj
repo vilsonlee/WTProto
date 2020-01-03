@@ -10,7 +10,6 @@
 		6D94795F0EE3E2D5B1C35CEB /* Pods_WTProto_WTProtocal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C723FF01F7ED4C004F6A04A9 /* Pods_WTProto_WTProtocal.framework */; };
 		CE628564239A2A4B005849A9 /* WTProtocal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE62855A239A2A4B005849A9 /* WTProtocal.framework */; };
 		CE628569239A2A4B005849A9 /* WTProtocalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628568239A2A4B005849A9 /* WTProtocalTests.m */; };
-		CE62856B239A2A4B005849A9 /* WTProtocal.h in Headers */ = {isa = PBXBuildFile; fileRef = CE62855D239A2A4B005849A9 /* WTProtocal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE6285DE239A2AEE005849A9 /* WTProtoVCardAvatarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628577239A2AEC005849A9 /* WTProtoVCardAvatarModule.m */; };
 		CE6285DF239A2AEE005849A9 /* WTProtoVCardCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628578239A2AEC005849A9 /* WTProtoVCardCoreDataStorage.m */; };
 		CE6285E0239A2AEE005849A9 /* WTProtoVCardTempModule.h in Headers */ = {isa = PBXBuildFile; fileRef = CE628579239A2AEC005849A9 /* WTProtoVCardTempModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -67,7 +66,6 @@
 		CE628613239A2AEE005849A9 /* WTProtoStreamManagementMemoryStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285B7239A2AED005849A9 /* WTProtoStreamManagementMemoryStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE628614239A2AEE005849A9 /* WTProtoStreamManagement.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285B8239A2AED005849A9 /* WTProtoStreamManagement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE628615239A2AEE005849A9 /* WTProtoStreamManager.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285B9239A2AED005849A9 /* WTProtoStreamManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CE628616239A2AEE005849A9 /* WTProto.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285BA239A2AED005849A9 /* WTProto.m */; };
 		CE628617239A2AEE005849A9 /* WTProtoPresence.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285BD239A2AED005849A9 /* WTProtoPresence.m */; };
 		CE628618239A2AEE005849A9 /* WTProtoGroupPresent.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285BE239A2AED005849A9 /* WTProtoGroupPresent.m */; };
 		CE628619239A2AEE005849A9 /* WTProtoPresence.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285BF239A2AED005849A9 /* WTProtoPresence.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -92,9 +90,13 @@
 		CE62862C239A2AEE005849A9 /* WTProtoLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285D5239A2AED005849A9 /* WTProtoLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE62862D239A2AEE005849A9 /* WTProtoIDTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285D7239A2AEE005849A9 /* WTProtoIDTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE62862E239A2AEE005849A9 /* WTProtoIDTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285D8239A2AEE005849A9 /* WTProtoIDTracker.m */; };
-		CE62862F239A2AEE005849A9 /* WTProto.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285D9239A2AEE005849A9 /* WTProto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE628630239A2AEE005849A9 /* XMLDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = CE6285DC239A2AEE005849A9 /* XMLDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE628631239A2AEE005849A9 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6285DD239A2AEE005849A9 /* XMLDictionary.m */; };
+		CEBBD1E723A9C72800A34AD5 /* WTProto.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBD1E423A9C72800A34AD5 /* WTProto.m */; };
+		CEBBD1E823A9C72800A34AD5 /* WTProto.h in Headers */ = {isa = PBXBuildFile; fileRef = CEBBD1E523A9C72800A34AD5 /* WTProto.h */; };
+		CEBBD1E923A9C72800A34AD5 /* WTProtocal.h in Headers */ = {isa = PBXBuildFile; fileRef = CEBBD1E623A9C72800A34AD5 /* WTProtocal.h */; };
+		CEBBD21A23AA13D500A34AD5 /* NSObject+JSONTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBD21823AA13D500A34AD5 /* NSObject+JSONTool.m */; };
+		CEBBD21B23AA13D500A34AD5 /* NSObject+JSONTool.h in Headers */ = {isa = PBXBuildFile; fileRef = CEBBD21923AA13D500A34AD5 /* NSObject+JSONTool.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,7 +113,6 @@
 		5C80F58B38CAEAB264C7F3E1 /* Pods-WTProto-WTProtocal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTProto-WTProtocal.debug.xcconfig"; path = "Target Support Files/Pods-WTProto-WTProtocal/Pods-WTProto-WTProtocal.debug.xcconfig"; sourceTree = "<group>"; };
 		C723FF01F7ED4C004F6A04A9 /* Pods_WTProto_WTProtocal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WTProto_WTProtocal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE62855A239A2A4B005849A9 /* WTProtocal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WTProtocal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE62855D239A2A4B005849A9 /* WTProtocal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTProtocal.h; sourceTree = "<group>"; };
 		CE62855E239A2A4B005849A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE628563239A2A4B005849A9 /* WTProtocalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WTProtocalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE628568239A2A4B005849A9 /* WTProtocalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTProtocalTests.m; sourceTree = "<group>"; };
@@ -172,7 +173,6 @@
 		CE6285B7239A2AED005849A9 /* WTProtoStreamManagementMemoryStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtoStreamManagementMemoryStorage.h; sourceTree = "<group>"; };
 		CE6285B8239A2AED005849A9 /* WTProtoStreamManagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtoStreamManagement.h; sourceTree = "<group>"; };
 		CE6285B9239A2AED005849A9 /* WTProtoStreamManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtoStreamManager.h; sourceTree = "<group>"; };
-		CE6285BA239A2AED005849A9 /* WTProto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTProto.m; sourceTree = "<group>"; };
 		CE6285BD239A2AED005849A9 /* WTProtoPresence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTProtoPresence.m; sourceTree = "<group>"; };
 		CE6285BE239A2AED005849A9 /* WTProtoGroupPresent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTProtoGroupPresent.m; sourceTree = "<group>"; };
 		CE6285BF239A2AED005849A9 /* WTProtoPresence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtoPresence.h; sourceTree = "<group>"; };
@@ -197,9 +197,13 @@
 		CE6285D5239A2AED005849A9 /* WTProtoLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtoLogging.h; sourceTree = "<group>"; };
 		CE6285D7239A2AEE005849A9 /* WTProtoIDTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtoIDTracker.h; sourceTree = "<group>"; };
 		CE6285D8239A2AEE005849A9 /* WTProtoIDTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTProtoIDTracker.m; sourceTree = "<group>"; };
-		CE6285D9239A2AEE005849A9 /* WTProto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProto.h; sourceTree = "<group>"; };
 		CE6285DC239A2AEE005849A9 /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
 		CE6285DD239A2AEE005849A9 /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
+		CEBBD1E423A9C72800A34AD5 /* WTProto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTProto.m; sourceTree = "<group>"; };
+		CEBBD1E523A9C72800A34AD5 /* WTProto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProto.h; sourceTree = "<group>"; };
+		CEBBD1E623A9C72800A34AD5 /* WTProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtocal.h; sourceTree = "<group>"; };
+		CEBBD21823AA13D500A34AD5 /* NSObject+JSONTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JSONTool.m"; sourceTree = "<group>"; };
+		CEBBD21923AA13D500A34AD5 /* NSObject+JSONTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JSONTool.h"; sourceTree = "<group>"; };
 		E03035C29B6E96F895FD6FB8 /* Pods-WTProto-WTProtocal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTProto-WTProtocal.release.xcconfig"; path = "Target Support Files/Pods-WTProto-WTProtocal/Pods-WTProto-WTProtocal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -281,7 +285,7 @@
 		CE628574239A2AEC005849A9 /* WTProto */ = {
 			isa = PBXGroup;
 			children = (
-				CE628BC9239B8080005849A9 /* Interface */,
+				CEBBD1E323A9C72800A34AD5 /* Interface */,
 				CE628575239A2AEC005849A9 /* DataCenter */,
 				CE628585239A2AED005849A9 /* MUC */,
 				CE62858C239A2AED005849A9 /* Connection */,
@@ -496,6 +500,8 @@
 		CE6285CB239A2AED005849A9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CEBBD21923AA13D500A34AD5 /* NSObject+JSONTool.h */,
+				CEBBD21823AA13D500A34AD5 /* NSObject+JSONTool.m */,
 				CE6285CD239A2AED005849A9 /* NSString+pyFirstLetter.h */,
 				CE6285D2239A2AED005849A9 /* NSString+pyFirstLetter.m */,
 				CE6285CC239A2AED005849A9 /* NSObject+PerformSelector.h */,
@@ -536,12 +542,12 @@
 			path = XMLDictionary;
 			sourceTree = "<group>";
 		};
-		CE628BC9239B8080005849A9 /* Interface */ = {
+		CEBBD1E323A9C72800A34AD5 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				CE6285D9239A2AEE005849A9 /* WTProto.h */,
-				CE6285BA239A2AED005849A9 /* WTProto.m */,
-				CE62855D239A2A4B005849A9 /* WTProtocal.h */,
+				CEBBD1E423A9C72800A34AD5 /* WTProto.m */,
+				CEBBD1E523A9C72800A34AD5 /* WTProto.h */,
+				CEBBD1E623A9C72800A34AD5 /* WTProtocal.h */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -553,15 +559,17 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE62862F239A2AEE005849A9 /* WTProto.h in Headers */,
+				CEBBD21B23AA13D500A34AD5 /* NSObject+JSONTool.h in Headers */,
 				CE6285F9239A2AEE005849A9 /* WTProtoPing.h in Headers */,
 				CE628630239A2AEE005849A9 /* XMLDictionary.h in Headers */,
 				CE6285EC239A2AEE005849A9 /* WTProtoMUC.h in Headers */,
 				CE6285EB239A2AEE005849A9 /* WTProtoGroup.h in Headers */,
 				CE628615239A2AEE005849A9 /* WTProtoStreamManager.h in Headers */,
+				CEBBD1E823A9C72800A34AD5 /* WTProto.h in Headers */,
 				CE628607239A2AEE005849A9 /* WTProtoReConnection.h in Headers */,
 				CE6285FD239A2AEE005849A9 /* WTProtoServerAddressSet.h in Headers */,
 				CE628606239A2AEE005849A9 /* WTProtoConnection.h in Headers */,
+				CEBBD1E923A9C72800A34AD5 /* WTProtocal.h in Headers */,
 				CE6285E2239A2AEE005849A9 /* WTProtoVCardAvatarModule.h in Headers */,
 				CE6285FB239A2AEE005849A9 /* WTProtoAuth.h in Headers */,
 				CE6285E5239A2AEE005849A9 /* WTProtoUser.h in Headers */,
@@ -576,7 +584,6 @@
 				CE62861B239A2AEE005849A9 /* WTProtoMessageCenter.h in Headers */,
 				CE6285E7239A2AEE005849A9 /* WTProtoBlock.h in Headers */,
 				CE62862C239A2AEE005849A9 /* WTProtoLogging.h in Headers */,
-				CE62856B239A2A4B005849A9 /* WTProtocal.h in Headers */,
 				CE62861F239A2AEE005849A9 /* WTProtoIQ.h in Headers */,
 				CE628621239A2AEE005849A9 /* WTProtoGroupIQ.h in Headers */,
 				CE6285E0239A2AEE005849A9 /* WTProtoVCardTempModule.h in Headers */,
@@ -754,7 +761,6 @@
 				CE6285E4239A2AEE005849A9 /* WTProtoUser.m in Sources */,
 				CE62862E239A2AEE005849A9 /* WTProtoIDTracker.m in Sources */,
 				CE6285EF239A2AEE005849A9 /* WTProtoGroup.m in Sources */,
-				CE628616239A2AEE005849A9 /* WTProto.m in Sources */,
 				CE6285FA239A2AEE005849A9 /* WTProtoAuth.m in Sources */,
 				CE628601239A2AEE005849A9 /* WTProtoRegister.m in Sources */,
 				CE62860B239A2AEE005849A9 /* WTProtoRosters.m in Sources */,
@@ -762,7 +768,9 @@
 				CE6285DF239A2AEE005849A9 /* WTProtoVCardCoreDataStorage.m in Sources */,
 				CE628622239A2AEE005849A9 /* WTProtoIQ.m in Sources */,
 				CE6285F8239A2AEE005849A9 /* WTProtoManualPing.m in Sources */,
+				CEBBD1E723A9C72800A34AD5 /* WTProto.m in Sources */,
 				CE62860D239A2AEE005849A9 /* WTProtoRosterCoreDataStorage.m in Sources */,
+				CEBBD21A23AA13D500A34AD5 /* NSObject+JSONTool.m in Sources */,
 				CE628611239A2AEE005849A9 /* WTProtoStreamManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
