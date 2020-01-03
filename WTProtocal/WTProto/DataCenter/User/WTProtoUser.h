@@ -13,7 +13,7 @@
  deviceModel = iPhone
  */
 
-#import <WTXMPPFramework/XMPPFramework.h>
+#import <XMPPFramework/XMPPFramework.h>
 
 
 
@@ -94,11 +94,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setNickName:(NSString * _Nonnull)nickName;
 - (void)setDeviceToken:(NSString * _Nonnull)deviceToken;
 
-
 - (void)setCurrentDeviceName:(NSString * _Nonnull)currentDeviceName;
 - (void)setCurrentAPPVersion:(NSString * _Nonnull)currentAPPVersion;
 - (void)setCurrentDeviceOS:(NSString * _Nonnull)currentDeviceOS;
-
 
 - (WTProtoUserLoginAuthType)getEnumLoginAuthTyp;
 - (WTProtoUserType)getEnumUserType;

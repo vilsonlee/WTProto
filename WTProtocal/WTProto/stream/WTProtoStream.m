@@ -40,6 +40,8 @@
                                   ServerAddress:serverAddress
                                  StartTLSPolicy:startTLSPolicy
                           StreamCompressionMode:streamCompressionMode];
+        
+        [self registerCustomElementNames:[NSSet setWithObjects:@"s", @"c", nil]];
     }
     
     return self;

@@ -6,15 +6,17 @@
 //  Copyright © 2019 Vilson. All rights reserved.
 //
 
-#import <WTXMPPFramework/XMPPFramework.h>
+#import <XMPPFramework/XMPPFramework.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WTProtoIQ : XMPPIQ
 
 + (WTProtoIQ *)iq;
++ (WTProtoIQ *)iqWithiq:(XMPPIQ*)iq;
 + (WTProtoIQ *)iqWithType:(nullable NSString *)type;
 + (WTProtoIQ *)iqWithType:(nullable NSString *)type to:(nullable XMPPJID *)jid;
++ (WTProtoIQ *)iqWithType:(nullable NSString *)type to:(nullable XMPPJID *)jid elementID:(nullable NSString *)eid;
 + (WTProtoIQ *)iqWithType:(nullable NSString *)type to:(nullable XMPPJID *)jid elementID:(nullable NSString *)eid child:(nullable NSXMLElement *)childElement;
 + (WTProtoIQ *)iqWithType:(nullable NSString *)type elementID:(nullable NSString *)eid;
 + (WTProtoIQ *)iqWithType:(nullable NSString *)type elementID:(nullable NSString *)eid child:(nullable NSXMLElement *)childElement;

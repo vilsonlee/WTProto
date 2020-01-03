@@ -9,9 +9,7 @@
 #import "NSObject+JSONTool.h"
 #import <objc/runtime.h>
 #import "NSString+AES.h"
-#import "EMTMacroDefinition.h"
 #import "NSString+Convert.h"
-#import "EMTEmojiManager.h"
 
 @implementation NSObject (JSONTool)
 
@@ -59,6 +57,11 @@
 }
 
 
+
+
+
+
+
 + (NSDictionary*)getObjectData:(id)obj{
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -85,6 +88,49 @@
 }
 
 
++ (NSDictionary*)getObjectData:(id)obj endOfSuperObject:(Class)superClass
+{
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    
+    Class cls = [obj class];
+    unsigned int count;
+    while (cls!=[NSObject class])
+    {
+        objc_property_t *properties = class_copyPropertyList(cls, &count);
+        for (int i = 0; i<count; i++)
+        {
+            objc_property_t property = properties[i];
+            
+            NSString *propertyName = [NSString stringWithUTF8String:property_getName(property)];
+               
+            id value = [obj valueForKey:propertyName];
+            if(value == nil)
+            {
+                value = @"";//[NSNull null];
+            }else{
+                value = [self getObjectInternal:value];
+            }
+            [dic setObject:value forKey:propertyName];
+        }
+       if (properties)
+       {
+           //要释放
+          free(properties);
+       }
+        
+        if (cls == superClass) {
+            return dic;
+        }
+            //得到父类的信息
+       cls = class_getSuperclass(cls);
+    }
+    return dic;
+}
+
+
+
+
 
 + (void)print:(id)obj{
     NSLog(@"%@", [self getObjectData:obj]);
@@ -98,6 +144,10 @@
     return [NSJSONSerialization dataWithJSONObject:[self getObjectData:obj] options:options error:error];
 }
 
+
++ (NSData*)getJSON:(id)obj superClass:(Class)superClass options:(NSJSONWritingOptions)options error:(NSError**)error{
+    return [NSJSONSerialization dataWithJSONObject:[self getObjectData:obj endOfSuperObject:superClass] options:options error:error];
+}
 
 
 + (id)getObjectInternal:(id)obj{

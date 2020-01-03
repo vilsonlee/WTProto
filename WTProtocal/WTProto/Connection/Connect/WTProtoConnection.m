@@ -251,16 +251,16 @@ static dispatch_once_t queueOnceToken;
     NSError* Error;
     
     if (error) {
-        
+
         NSString *const ErrorDomain = @"GCDAsyncSocketErrorDomain";
-        
+
         NSString* errorMessage = [[error elementForName:@"text" xmlns:@"urn:ietf:params:xml:ns:xmpp-streams"] stringValue];
-        
+
         NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
-        
+
         Error = [[NSError alloc]initWithDomain:ErrorDomain code:3 userInfo:userInfo];
     }
-    
+
     [protoConnectionMulticasDelegate WTProtoConnection:self
                                           connectState:WTProtoConnectStatusDisconnected
                                              withError:Error];

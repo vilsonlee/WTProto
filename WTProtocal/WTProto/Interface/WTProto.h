@@ -30,7 +30,11 @@
 @class WTProtoRosters;
 @class WTProtoGroup;
 @class WTProtoMessageCenter;
-
+@class WTProtoConversationMessage;
+@class WTProtoWebRTCMessage;
+@class WTProtoShakeMessage;
+@class WTProtoshakedResultMessage;
+@class XMPPMessage;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -88,7 +92,43 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
+#pragma mark - WTProto message Receive
+- (void)WTProto:(WTProto*)wtProto didReceiveConversationDecryptMessage:(WTProtoConversationMessage *)decryptMessage
+                                                       OriginalMessage:(XMPPMessage *)originalMessage;
+
+- (void)WTProto:(WTProto*)wtProto didReceiveWebRTCDecryptMessage:(WTProtoWebRTCMessage *)decryptMessage
+                                                 OriginalMessage:(XMPPMessage *)originalMessage;
+
+
+- (void)WTProto:(WTProto*)wtProto didReceiveShakeDecryptMessage:(WTProtoShakeMessage *)decryptMessage
+                                                OriginalMessage:(XMPPMessage *)originalMessage;
+
+
+- (void)WTProto:(WTProto*)wtProto didReceiveShakeResultDecryptMessage:(WTProtoshakedResultMessage *)decryptMessage
+                                                OriginalMessage:(XMPPMessage *)originalMessage;
+
 @end
+
+
+typedef NS_ENUM(NSUInteger, WTProtoMessageEncryptionType) {
+    WTProtoMessageEncryptionAES     = 0,      //AES
+    WTProtoMessageEncryptionOTR,              //OTR
+    WTProtoMessageEncryptionOMEMO,            //OMEMO
+};
+
+
+typedef NS_ENUM(NSUInteger, WTProtoOnlineStatus) {
+    WTProtoOnlineStatusAway                = 0,      //away   -- 实体或资源临时离开.
+    WTProtoOnlineStatusChat,                         //chat   -- 实体或资源在聊天中是激活的.
+    WTProtoOnlineStatusDoNotDisturb,                 //dnd    -- 实体或资源是忙(dnd = "不要打扰").
+    WTProtoOnlineStatusExtendedAway                  //xa     -- 实体或资源是长时间的离开(xa = "长时间离开").
+};
+
+typedef NS_ENUM(NSUInteger, WTProtoOnlinePriority) {
+    WTProtoOnlinePriorityLow                = 0,      //away   -- 实体或资源临时离开.
+    WTProtoOnlinePriorityMedium,                      //chat   -- 实体或资源在聊天中是激活的.
+    WTProtoOnlinePriorityHigh,                        //dnd    -- 实体或资源是忙(dnd = "不要打扰").
+};
 
 
 @interface WTProto : NSObject
@@ -109,6 +149,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 + (void)dellocSelf;
+
 
 + (WTProtoQueue *)ProtoQueue;
 
@@ -152,6 +193,36 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)ProtoGotoCheckVerifiCodeWithAuth:(WTProtoAuth *)protoAuth VerifiCode:(NSString*)verifiCode;
 
 - (void)ProtoDellocFuctionModule;
+
+- (void)ProtoOnlineState:(WTProtoOnlineStatus)onlineStatus
+                  status:(NSString *)status
+                priority:(WTProtoOnlinePriority)priority
+                  device:(NSString *)device;
+
+
+-(void)sendWTProtoConversationMessage:(WTProtoConversationMessage *)message
+                       encryptionType:(WTProtoMessageEncryptionType)encryptionType
+                           sendResult:(void (^)(BOOL succeed , WTProtoConversationMessage *sendmessage))sendResult;
+
+
+-(void)sendWTProtoWebRTCMessage:(WTProtoWebRTCMessage *)message
+                 encryptionType:(WTProtoMessageEncryptionType)encryptionType
+                     sendResult:(void (^)(BOOL succeed, WTProtoWebRTCMessage * sendmessage))sendResult;
+
+
+-(void)sendWTProtoShakeMessage:(WTProtoShakeMessage *)message
+                encryptionType:(WTProtoMessageEncryptionType)encryptionType
+                    sendResult:(void (^)(BOOL succeed, WTProtoShakeMessage * sendmessage))sendResult;
+
+
+-(void)sendWTProtoShakeResultMessage:(WTProtoshakedResultMessage *)message
+                      encryptionType:(WTProtoMessageEncryptionType)encryptionType
+                          sendResult:(void (^)(BOOL succeed, WTProtoshakedResultMessage * sendmessage))sendResult;
+
+- (void)Ack:(XMPPMessage*)message;
+
+- (void)ReadAckToID:(NSString *)toID IncrementID:(NSInteger)incrementID;
+
 @end
 
 NS_ASSUME_NONNULL_END

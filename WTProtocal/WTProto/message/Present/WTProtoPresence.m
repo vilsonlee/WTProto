@@ -18,7 +18,7 @@
 
 + (WTProtoPresence *)presence{
     
-    return [self presence];
+    return [[WTProtoPresence alloc] init];
 }
 + (WTProtoPresence *)presenceWithType:(nullable NSString *)type{
     

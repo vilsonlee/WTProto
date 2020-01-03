@@ -23,6 +23,7 @@
 #import "WTProtoRosters.h"
 #import "WTProtoGroup.h"
 #import "WTProtoMessageCenter.h"
+#import "WTProtoOnlinePresent.h"
 
 static WTProto *proto = nil;
 static dispatch_once_t onceToken;
@@ -387,19 +388,36 @@ static dispatch_once_t queueOnceToken;
 }
 
 
--(void)Start{
+#pragma mark - Using the protoConnection to Start the TCP/SSL Connection.
+-(void)Start
+{
     
-    #pragma mark - Using the protoConnection to Start the TCP/SSL Connection.
     [_protoConnection connectWithTimeout:30 error:nil];
 }
 
 
--(void)Stop{
+-(void)Stop
+{
 
     [_protoConnection disconnect];
 }
 
-
+#pragma mark - OnlineState
+- (void)ProtoOnlineState:(WTProtoOnlineStatus)onlineStatus
+                  status:(NSString *)status
+                priority:(WTProtoOnlinePriority)priority
+                  device:(NSString *)device
+{
+    NSUInteger presenceOnlineState      = onlineStatus;
+    NSUInteger presenceOnlinepriority   = priority;
+    
+    WTProtoPresence * presentOnline = [WTProtoOnlinePresent presenceOnlineState:presenceOnlineState
+                                                                         status:status
+                                                                       priority:presenceOnlinepriority
+                                                                         device:device];
+    
+    [_protoStream sendElement:(XMPPPresence *)presentOnline];
+}
 
 #pragma mark - WTProto User Check
 
@@ -589,6 +607,85 @@ static dispatch_once_t queueOnceToken;
 }
 
 
+#pragma mark WTProto Send Kinds of Message
+-(void)sendWTProtoConversationMessage:(WTProtoConversationMessage *)message
+                       encryptionType:(WTProtoMessageEncryptionType)encryptionType
+                           sendResult:(nonnull void (^)(BOOL, WTProtoConversationMessage * _Nonnull))sendResult
+{
+    
+    NSUInteger messageEncryptionType = encryptionType;
+    
+    [_protoMessageCenter sendConversationMessage:message
+                                  encryptionType:messageEncryptionType
+                                      sendResult:^(BOOL succeed, WTProtoConversationMessage * _Nonnull sendmessage)
+    {
+        sendResult(succeed,sendmessage);
+    }];
+}
+
+-(void)sendWTProtoWebRTCMessage:(WTProtoWebRTCMessage *)message
+                 encryptionType:(WTProtoMessageEncryptionType)encryptionType
+                     sendResult:(void (^)(BOOL succeed, WTProtoWebRTCMessage * _Nonnull))sendResult
+{
+    
+    NSUInteger messageEncryptionType = encryptionType;
+       
+    [_protoMessageCenter sendWebRTCMessage:message
+                            encryptionType:messageEncryptionType
+                                sendResult:^(BOOL succeed, WTProtoWebRTCMessage * _Nonnull sendmessage)
+    {
+        sendResult(succeed,sendmessage);
+    }];
+}
+
+
+-(void)sendWTProtoShakeMessage:(WTProtoShakeMessage *)message
+                 encryptionType:(WTProtoMessageEncryptionType)encryptionType
+                     sendResult:(void (^)(BOOL succeed, WTProtoShakeMessage * _Nonnull))sendResult
+{
+    
+    NSUInteger messageEncryptionType = encryptionType;
+           
+    [_protoMessageCenter sendShakeMessage:message
+                           encryptionType:messageEncryptionType
+                               sendResult:^(BOOL succeed, WTProtoShakeMessage * _Nonnull sendmessage)
+    {
+        sendResult(succeed,sendmessage);
+    }];
+    
+}
+
+
+-(void)sendWTProtoShakeResultMessage:(WTProtoshakedResultMessage *)message
+                      encryptionType:(WTProtoMessageEncryptionType)encryptionType
+                          sendResult:(void (^)(BOOL succeed, WTProtoshakedResultMessage * _Nonnull))sendResult
+{
+    
+    NSUInteger messageEncryptionType = encryptionType;
+           
+    [_protoMessageCenter sendShakeResultMessage:message
+                                 encryptionType:messageEncryptionType
+                                     sendResult:^(BOOL succeed, WTProtoshakedResultMessage * _Nonnull sendmessage)
+    {
+        sendResult(succeed,sendmessage);
+    }];
+    
+}
+
+
+
+#pragma mark Proto Ack/ReadAck Message
+
+- (void)Ack:(XMPPMessage*)message
+{
+    [_protoMessageCenter ack:message];
+}
+
+- (void)ReadAckToID:(NSString *)toID IncrementID:(NSInteger)incrementID
+{
+    [_protoMessageCenter readAckToID:toID incrementID:incrementID];
+}
+
 
 #pragma mark - WTProtoConnection delegate - Connection State
 
@@ -609,7 +706,6 @@ static dispatch_once_t queueOnceToken;
             NSLog(@"****** waterIM tcp connected ******");
             [protoMulticasDelegate WTProtoConnected:self];
             
-//            [self WTProtoCheckUser];
             break;
             
         case WTProtoConnectStatusDisconnected:
@@ -858,6 +954,38 @@ static dispatch_once_t queueOnceToken;
     
 }
 
+#pragma mark - WTProtoMessageCenter Delegate - Receive Message
+- (void)protoMessageCenter:(WTProtoMessageCenter *)messageCenter
+    didReceiveConversationDecryptMessage:(WTProtoConversationMessage *)decryptMessage
+                         OriginalMessage:(XMPPMessage *)originalMessage
+{
+    [protoMulticasDelegate WTProto:self didReceiveConversationDecryptMessage:decryptMessage
+                                                 OriginalMessage:originalMessage];
+}
 
+
+-(void)protoMessageCenter:(WTProtoMessageCenter *)messageCenter
+    didReceiveWebRTCDecryptMessage:(nonnull WTProtoWebRTCMessage *)decryptMessage
+                   OriginalMessage:(nonnull XMPPMessage *)originalMessage
+{
+    [protoMulticasDelegate WTProto:self didReceiveWebRTCDecryptMessage:decryptMessage
+                                                       OriginalMessage:originalMessage];
+}
+
+
+-(void)protoMessageCenter:(WTProtoMessageCenter *)messageCenter didReceiveShakeDecryptMessage:(WTProtoShakeMessage *)decryptMessage
+                  OriginalMessage:(XMPPMessage *)originalMessage
+{
+    [protoMulticasDelegate WTProto:self didReceiveShakeDecryptMessage:decryptMessage
+                                        OriginalMessage:originalMessage];
+}
+
+
+-(void)protoMessageCenter:(WTProtoMessageCenter *)messageCenter didReceiveShakeResultDecryptMessage:(WTProtoshakedResultMessage *)decryptMessage
+                        OriginalMessage:(XMPPMessage *)originalMessage
+{
+    
+     [protoMulticasDelegate WTProto:self didReceiveShakeResultDecryptMessage:decryptMessage OriginalMessage:originalMessage];
+}
 
 @end

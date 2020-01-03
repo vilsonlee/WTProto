@@ -6,7 +6,6 @@
 //  Copyright © 2019 Vilson. All rights reserved.
 //
 
-#import <WTXMPPFramework/XMPPFramework.h>
 #import "WTProtoUser.h"
 
 @interface WTProtoUser ()

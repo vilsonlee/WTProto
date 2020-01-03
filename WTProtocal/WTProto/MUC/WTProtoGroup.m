@@ -805,7 +805,7 @@ static dispatch_once_t queueOnceToken;
 
 - (void)xmppRoomDidCreateFail:(XMPPRoom *)sender code:(NSInteger)code
 {
-    [protoGroupMulticasDelegate WTProtoGroup:sender RoomDidCreateFail:sender info:create_room_failure];
+    [protoGroupMulticasDelegate WTProtoGroup:self RoomDidCreateFail:sender info:create_room_failure];
 }
 
 
