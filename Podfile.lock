@@ -30,9 +30,9 @@ PODS:
   - SignalProtocolC (2.3.2)
   - SignalProtocolObjC (1.1.0):
     - SignalProtocolC (~> 2.3.2)
-  - WTXMPPFramework (4.0.2):
-    - WTXMPPFramework/default (= 4.0.2)
-  - WTXMPPFramework/default (4.0.2):
+  - WTXMPPFramework (4.0.3):
+    - WTXMPPFramework/default (= 4.0.3)
+  - WTXMPPFramework/default (4.0.3):
     - CocoaAsyncSocket (~> 7.6)
     - CocoaLumberjack
     - KissXML (~> 5.2)
@@ -63,7 +63,7 @@ SPEC CHECKSUMS:
   libidn: e4576a956b797c584c77aaedfc6e3dd639b61bdc
   SignalProtocolC: 051512e9f3abfeb4120c5e9673af9ae0ee370070
   SignalProtocolObjC: b992ed29c3b7b453510ff0102ed16ef143f7efd2
-  WTXMPPFramework: c6e2c7a28c5211ed3716e0caeb1bad11bc519e29
+  WTXMPPFramework: a4a00443c7586473b292e572398a8b86a0afe4ac
 
 PODFILE CHECKSUM: 4a934ae4b9daedc27c20ba9f7dddcf54f397e430
 

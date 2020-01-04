@@ -58,7 +58,7 @@ Vilson: FIXE:
 @property (nonatomic, copy) NSString *userType;//登录类型(JID/phoneNumber）
 
 @property (nonatomic, copy) NSString *verifiCode;//验证码
-@property (nonatomic, copy) NSString *verifiMsgLanguage;//app显示语言(决定验证码短讯的语言)
+@property (nonatomic, copy) NSString *verifiMsgLanguage;//app显示语言(决定验证码短讯的语言)en/cn/vi
 
 @property (nonatomic, copy) NSString *deviceToken;//设备推送token
 
@@ -233,7 +233,7 @@ Vilson: FIXE:
     self.clientNonce = [XMPPStream generateUUID];
     
     self.clientFirstMessageBare = [NSString stringWithFormat:@"n=%@,r=%@",self.username,self.clientNonce];
-        
+    
     NSString * newClientFirstMessageBare = [NSString stringWithFormat:@"n=%@,r=%@,t=%@,l=%@,d=%@,m=%@,p=%@,dt=%@,v=%@,n=%@,t=%@,r=%@,l=%@",
                                             self.username,
                                             self.clientNonce,

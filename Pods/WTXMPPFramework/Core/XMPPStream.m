@@ -2067,17 +2067,17 @@ enum XMPPStreamConfig
 //			someAuth = [[XMPPSCRAMSHA1Authentication alloc] initWithStream:self password:password];
             
             someAuth = [[XMPPSCRAMSHA1Authentication alloc]initWithStream:self
-                                                                 password:self.password
-                                                                 deviceID:self.deviceID
-                                                              deviceToken:self.deviceToken
-                                                                 userType:self.userType
-                                                               authOpType:self.loginAuthType
-                                                               verifiCode:self.verifiCode
-                                                              loginSource:self.loginSource
-                                                        verifiMsgLanguage:self.verifiMsgLanguage
-                                                        currentDeviceName:self.currentDeviceName
-                                                        currentAPPVersion:self.currentAPPVersion
-                                                          currentDeviceOS:self.currentDeviceOS];
+																 password:self.password
+																 deviceID:self.deviceID
+															  deviceToken:self.deviceToken
+																 userType:self.userType
+															   authOpType:self.loginAuthType
+															   verifiCode:self.verifiCode
+															  loginSource:self.loginSource
+														verifiMsgLanguage:self.verifiMsgLanguage
+														currentDeviceName:self.currentDeviceName
+														currentAPPVersion:self.currentAPPVersion
+														  currentDeviceOS:self.currentDeviceOS];
             
 			result = [self authenticate:someAuth error:&err];
 		}
