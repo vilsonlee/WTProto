@@ -1430,6 +1430,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5C80F58B38CAEAB264C7F3E1 /* Pods-WTProto-WTProtocal.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1453,6 +1454,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E03035C29B6E96F895FD6FB8 /* Pods-WTProto-WTProtocal.release.xcconfig */;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;

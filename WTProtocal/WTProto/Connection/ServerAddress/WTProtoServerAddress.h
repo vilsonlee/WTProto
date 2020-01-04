@@ -11,7 +11,7 @@
 #import <netinet/in.h>
 
 #include <netdb.h>
-#include <resolv.h>
+//#include <resolv.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
