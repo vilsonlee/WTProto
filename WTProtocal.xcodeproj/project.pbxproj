@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1889837523C3254400E5F935 /* WTProtoContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 1889837323C3254400E5F935 /* WTProtoContact.m */; };
+		1889837623C3254400E5F935 /* WTProtoContact.h in Headers */ = {isa = PBXBuildFile; fileRef = 1889837423C3254400E5F935 /* WTProtoContact.h */; };
+		1889837923C3257400E5F935 /* WTProtoContactIQ.h in Headers */ = {isa = PBXBuildFile; fileRef = 1889837723C3257300E5F935 /* WTProtoContactIQ.h */; };
+		1889837A23C3257400E5F935 /* WTProtoContactIQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 1889837823C3257300E5F935 /* WTProtoContactIQ.m */; };
+		1889837D23C3259F00E5F935 /* WTProtoContactPresent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1889837B23C3259F00E5F935 /* WTProtoContactPresent.m */; };
+		1889837E23C3259F00E5F935 /* WTProtoContactPresent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1889837C23C3259F00E5F935 /* WTProtoContactPresent.h */; };
 		6D94795F0EE3E2D5B1C35CEB /* Pods_WTProto_WTProtocal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C723FF01F7ED4C004F6A04A9 /* Pods_WTProto_WTProtocal.framework */; };
 		CE628564239A2A4B005849A9 /* WTProtocal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE62855A239A2A4B005849A9 /* WTProtocal.framework */; };
 		CE628569239A2A4B005849A9 /* WTProtocalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE628568239A2A4B005849A9 /* WTProtocalTests.m */; };
@@ -187,6 +193,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1889837323C3254400E5F935 /* WTProtoContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTProtoContact.m; sourceTree = "<group>"; };
+		1889837423C3254400E5F935 /* WTProtoContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtoContact.h; sourceTree = "<group>"; };
+		1889837723C3257300E5F935 /* WTProtoContactIQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtoContactIQ.h; sourceTree = "<group>"; };
+		1889837823C3257300E5F935 /* WTProtoContactIQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTProtoContactIQ.m; sourceTree = "<group>"; };
+		1889837B23C3259F00E5F935 /* WTProtoContactPresent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTProtoContactPresent.m; sourceTree = "<group>"; };
+		1889837C23C3259F00E5F935 /* WTProtoContactPresent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtoContactPresent.h; sourceTree = "<group>"; };
 		5C80F58B38CAEAB264C7F3E1 /* Pods-WTProto-WTProtocal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTProto-WTProtocal.debug.xcconfig"; path = "Target Support Files/Pods-WTProto-WTProtocal/Pods-WTProto-WTProtocal.debug.xcconfig"; sourceTree = "<group>"; };
 		C723FF01F7ED4C004F6A04A9 /* Pods_WTProto_WTProtocal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WTProto_WTProtocal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE62855A239A2A4B005849A9 /* WTProtocal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WTProtocal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -589,6 +601,8 @@
 				CE6285AF239A2AED005849A9 /* WTProtoRoster.m */,
 				CE6285AC239A2AED005849A9 /* WTProtoRosterCoreDataStorage.h */,
 				CE6285B0239A2AED005849A9 /* WTProtoRosterCoreDataStorage.m */,
+				1889837423C3254400E5F935 /* WTProtoContact.h */,
+				1889837323C3254400E5F935 /* WTProtoContact.m */,
 			);
 			path = Roster;
 			sourceTree = "<group>";
@@ -627,6 +641,8 @@
 				CE6711C223BF701B00909224 /* WTProtoOnlinePresent.m */,
 				CE6285C0239A2AED005849A9 /* WTProtoGroupPresent.h */,
 				CE6285BE239A2AED005849A9 /* WTProtoGroupPresent.m */,
+				1889837C23C3259F00E5F935 /* WTProtoContactPresent.h */,
+				1889837B23C3259F00E5F935 /* WTProtoContactPresent.m */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -654,6 +670,8 @@
 				CE6285C8239A2AED005849A9 /* WTProtoGroupIQ.m */,
 				CE6711BF23BF6CF700909224 /* WTProtoOfflineMessageIQ.h */,
 				CE6711BE23BF6CF700909224 /* WTProtoOfflineMessageIQ.m */,
+				1889837723C3257300E5F935 /* WTProtoContactIQ.h */,
+				1889837823C3257300E5F935 /* WTProtoContactIQ.m */,
 			);
 			path = iq;
 			sourceTree = "<group>";
@@ -1019,6 +1037,7 @@
 				CE628606239A2AEE005849A9 /* WTProtoConnection.h in Headers */,
 				CE67118423BF6A4A00909224 /* WTProtoReadAckMessage.h in Headers */,
 				CEBBD1E923A9C72800A34AD5 /* WTProtocal.h in Headers */,
+				1889837623C3254400E5F935 /* WTProtoContact.h in Headers */,
 				CE67119223BF6A4A00909224 /* WTProtoConversationErrorMessage.h in Headers */,
 				CE6711A223BF6A4A00909224 /* WTProtoOffLineMessageManager.h in Headers */,
 				CE67112323BF69AA00909224 /* NSString+AES.h in Headers */,
@@ -1051,8 +1070,10 @@
 				CE67110E23BF696800909224 /* GTMBase64.h in Headers */,
 				CE67118D23BF6A4A00909224 /* WTProtoFileMessage.h in Headers */,
 				CE6711AE23BF6A4A00909224 /* WTProtoWebRTCSignalReOfferMessage.h in Headers */,
+				1889837923C3257400E5F935 /* WTProtoContactIQ.h in Headers */,
 				CE67118B23BF6A4A00909224 /* WTProtoMessageCenter.h in Headers */,
 				CE6285E7239A2AEE005849A9 /* WTProtoBlock.h in Headers */,
+				1889837E23C3259F00E5F935 /* WTProtoContactPresent.h in Headers */,
 				CE62862C239A2AEE005849A9 /* WTProtoLogging.h in Headers */,
 				CE62861F239A2AEE005849A9 /* WTProtoIQ.h in Headers */,
 				CE628621239A2AEE005849A9 /* WTProtoGroupIQ.h in Headers */,
@@ -1233,6 +1254,7 @@
 				CE62860E239A2AEE005849A9 /* WTProtoStreamManagement.m in Sources */,
 				CE6711A623BF6A4A00909224 /* WTProtoWebRTCInvitationMessage.m in Sources */,
 				CE6285F3239A2AEE005849A9 /* WTProtoPing.m in Sources */,
+				1889837D23C3259F00E5F935 /* WTProtoContactPresent.m in Sources */,
 				CE67117F23BF6A4A00909224 /* WTProtoShakeMessage.m in Sources */,
 				CE6711A723BF6A4A00909224 /* WTProtoWebRTCAcceptanceMessage.m in Sources */,
 				CE67118823BF6A4A00909224 /* WTProtoAckManager.m in Sources */,
@@ -1251,6 +1273,7 @@
 				CE6711A523BF6A4A00909224 /* WTProtoWebRTCPrepareMessage.m in Sources */,
 				CE6285F5239A2AEE005849A9 /* SimplePing.m in Sources */,
 				CE628603239A2AEE005849A9 /* WTProtoReConnection.m in Sources */,
+				1889837523C3254400E5F935 /* WTProtoContact.m in Sources */,
 				CE6711A423BF6A4A00909224 /* WTProtoWebRTCMessage.m in Sources */,
 				CE62862A239A2AEE005849A9 /* NSObject+PerformSelector.m in Sources */,
 				CE628628239A2AEE005849A9 /* WTProtoQueue.m in Sources */,
@@ -1261,6 +1284,7 @@
 				CE67119523BF6A4A00909224 /* WTProtoTextMessage.m in Sources */,
 				CE6285E4239A2AEE005849A9 /* WTProtoUser.m in Sources */,
 				CE67118E23BF6A4A00909224 /* WTProtoFileMessage.m in Sources */,
+				1889837A23C3257400E5F935 /* WTProtoContactIQ.m in Sources */,
 				CE6711C023BF6CF700909224 /* WTProtoOfflineMessageIQ.m in Sources */,
 				CE62862E239A2AEE005849A9 /* WTProtoIDTracker.m in Sources */,
 				CE67118623BF6A4A00909224 /* WTProtoReadAckMessage.m in Sources */,

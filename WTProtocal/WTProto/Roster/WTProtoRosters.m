@@ -83,13 +83,13 @@ static dispatch_once_t queueOnceToken;
         
 //        _ProtoRoster = [[WTProtoRoster alloc]initWithRosterStorage:_protoRosterCoreDataStorage];
         
-        _ProtoRoster = [[WTProtoRoster alloc]initWithRosterStorage:[[XMPPRosterCoreDataStorage alloc]init]];
-        
-        _ProtoRoster.autoAcceptKnownPresenceSubscriptionRequests = NO;
-        _ProtoRoster.autoFetchRoster = YES;
-        
-        [_ProtoRoster activate:_RostersStream];
-        [_ProtoRoster addDelegate:self delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
+//        _ProtoRoster = [[WTProtoRoster alloc]initWithRosterStorage:[[XMPPRosterCoreDataStorage alloc]init]];
+//
+//        _ProtoRoster.autoAcceptKnownPresenceSubscriptionRequests = NO;
+//        _ProtoRoster.autoFetchRoster = YES;
+//
+//        [_ProtoRoster activate:_RostersStream];
+//        [_ProtoRoster addDelegate:self delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
         
     }
 

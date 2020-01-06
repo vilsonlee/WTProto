@@ -24,6 +24,7 @@
 #import "WTProtoGroup.h"
 #import "WTProtoMessageCenter.h"
 #import "WTProtoOnlinePresent.h"
+#import "WTProtoContact.h"
 
 static WTProto *proto = nil;
 static dispatch_once_t onceToken;
@@ -41,7 +42,8 @@ static dispatch_once_t queueOnceToken;
                        WTProtoPingDelegate,
                        WTProtoRostersDelegate,
                        WTProtoGroupDelegate,
-                       WTProtoMessageCenterDelegate
+                       WTProtoMessageCenterDelegate,
+                       WTProtoContactDelegate
                       >
 
 
@@ -62,6 +64,7 @@ static dispatch_once_t queueOnceToken;
     WTProtoRosters          *_protoRosters;
     WTProtoGroup            *_protoGroup;
     WTProtoMessageCenter    *_protoMessageCenter;
+    WTProtoContact          *_protoContact;
 }
 
 @end
@@ -265,7 +268,9 @@ static dispatch_once_t queueOnceToken;
         #pragma mark - init WTProtoMessageCenter to manager the Message Send & Receive & handle
         _protoMessageCenter = [WTProtoMessageCenter shareMessagerCenterWithProtoStream:protoStream
                                                                              interface:@"messageCenter"];
-
+    
+        #pragma mark - init WTProtoContact to manager the Contact
+        _protoContact = [WTProtoContact shareContactWithProtoStream:protoStream interface:@"contact"];
 }
 
 
@@ -281,6 +286,7 @@ static dispatch_once_t queueOnceToken;
     [_protoRosters       addProtoRostersDelegate:self        delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
     [_protoGroup         addProtoGroupDelegate:self          delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
     [_protoMessageCenter addProtoMessageCenterDelegate:self  delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
+    [_protoContact       addProtoContactDelegate:self        delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
     
     protoMulticasDelegate = (GCDMulticastDelegate <WTProtoDelegate> *)[[GCDMulticastDelegate alloc] init];
     
@@ -341,6 +347,7 @@ static dispatch_once_t queueOnceToken;
     _protoRosters        = nil;
     _protoGroup          = nil;
     _protoMessageCenter  = nil;
+    _protoContact        = nil;
     
     [WTProtoStreamManager       dellocSelf];
     [WTProtoConnection          dellocSelf];
@@ -352,7 +359,7 @@ static dispatch_once_t queueOnceToken;
     [WTProtoRosters             dellocSelf];
     [WTProtoGroup               dellocSelf];
     [WTProtoMessageCenter       dellocSelf];
-
+    [WTProtoContact             dellocSelf];
 }
 
 
@@ -674,8 +681,33 @@ static dispatch_once_t queueOnceToken;
 
 
 
-#pragma mark Proto Ack/ReadAck Message
+#pragma mark - WTProtoContact Method
+- (void)getContactsWithMatchableContacts:(NSArray *)matchableContacts phoneCode:(NSString *)phoneCode type:(NSString *)emptyType nickName:(NSString *)nickName userPhone:(NSString *)userPhone{
+    
+    [_protoContact IQ_GetContactsByFromUser:_protoUser matchableContacts:matchableContacts phoneCode:phoneCode type:emptyType nickName:nickName userPhone:userPhone];
+}
 
+- (void)getUserDetailWithKeyWord:(NSString *)key keyType:(WTGetContactDetailsKeyType)type searchFromGroup:(BOOL)fromGroup source:(NSString *)source IPAddress:(NSString *)IPAddress{
+    [_protoContact IQ_GetUserDetailWithKeyWord:key keyType:(NSInteger)type searchFromGroup:fromGroup source:source IPAddress:IPAddress fromUser:_protoUser];
+}
+
+- (void)setFriend_MemoName:(NSString *)memoName jid:(NSString *)jidstr{
+    [_protoContact IQ_SetFriend_MemoName:memoName jid:jidstr fromUser:_protoUser];
+}
+
+- (void)setFriend_StarMarkWithJid:(NSString *)jidstr straState:(BOOL)state{
+    [_protoContact IQ_SetFriend_StarMarkWithJid:jidstr straState:YES fromUser:_protoUser];
+}
+
+-(void)deleteFriendWithJid:(NSString *)jidStr{
+    [_protoContact deleteFriendWithJid:jidStr];
+}
+
+-(void)addFriendWithJid:(NSString *)jidStr source:(NSString *)source verify:(NSString *)verify time:(NSString *)time statusInfo:(NSDictionary *)statusInfo{
+    [_protoContact addFriendWithJid:jidStr source:source verify:verify time:time statusInfo:statusInfo fromUser:_protoUser];
+}
+
+#pragma mark Proto Ack/ReadAck Message
 - (void)Ack:(XMPPMessage*)message
 {
     [_protoMessageCenter ack:message];
@@ -986,6 +1018,37 @@ static dispatch_once_t queueOnceToken;
 {
     
      [protoMulticasDelegate WTProto:self didReceiveShakeResultDecryptMessage:decryptMessage OriginalMessage:originalMessage];
+}
+
+#pragma mark - WTProtoContact Delegate
+- (void)WTProtoContact:(WTProtoContact *)protoContact getContacts_ResultWithSucceed:(BOOL)succeed matchcount:(NSUInteger)matchcount info:(id)info{
+   
+    [protoMulticasDelegate WTProto:self getContacts_ResultWithSucceed:succeed matchcount:matchcount info:info];
+}
+
+- (void)WTProtoContact:(WTProtoContact *)protoContact getContactDetails_ResultWithSucceed:(BOOL)succeed info:(id)info{
+    [protoMulticasDelegate WTProto:self getContactDetails_ResultWithSucceed:succeed info:info];
+}
+
+- (void)WTProtoContact:(WTProtoContact *)protoContact setFriend_MemoName_ResultWithSucceed:(BOOL)succeed info:(id)info{
+    
+    [protoMulticasDelegate WTProto:self setFriend_MemoName_ResultWithSucceed:succeed info:info];
+}
+
+- (void)WTProtoContact:(WTProtoContact *)protoContact setFriend_StarMark_ResultWithSucceed:(BOOL)succeed info:(id)info{
+    [protoMulticasDelegate WTProto:self setFriend_StarMark_ResultWithSucceed:succeed info:info];
+}
+
+- (BOOL)WTProtoContact:(WTProtoContact *)protoContact isExistFriendJid:(NSString *)jid{
+    return [protoMulticasDelegate WTProto:self isExistFriendJid:jid];
+}
+
+- (void)WTProtoContact:(WTProtoContact *)protoContact addFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid{
+    [protoMulticasDelegate WTProto:self addFriend_ResultWithSucceed:succeed jid:jid];
+}
+
+- (void)WTProtoContact:(WTProtoContact *)protoContact deleteFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid{
+    [protoMulticasDelegate WTProto:self deleteFriend_ResultWithSucceed:succeed jid:jid];
 }
 
 @end
