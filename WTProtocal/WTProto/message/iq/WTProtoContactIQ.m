@@ -9,8 +9,7 @@
 #import "WTProtoContactIQ.h"
 #import "WTProtoIQ.h"
 #import "WTProtoUser.h"
-#import <XMPPFramework/XMPPStream.h>
-
+#import <WTXMPPFramework/XMPPStream.h>
 
 @implementation WTProtoContactIQ
 
