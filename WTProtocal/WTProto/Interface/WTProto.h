@@ -28,6 +28,7 @@
 @class WTProtoBlock;
 @class WTProtoPing;
 @class WTProtoRosters;
+@class WTProtoContact;
 @class WTProtoGroup;
 @class WTProtoMessageCenter;
 @class WTProtoConversationMessage;
@@ -107,6 +108,23 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)WTProto:(WTProto*)wtProto didReceiveShakeResultDecryptMessage:(WTProtoshakedResultMessage *)decryptMessage
                                                 OriginalMessage:(XMPPMessage *)originalMessage;
 
+
+
+#pragma mark - WTProto Contact
+- (void)WTProto:(WTProto*)wtProto getContacts_ResultWithSucceed:(BOOL)succeed matchcount:(NSUInteger)matchcount info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto getContactDetails_ResultWithSucceed:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto setFriend_MemoName_ResultWithSucceed:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto setFriend_StarMark_ResultWithSucceed:(BOOL)succeed info:(id)info;
+
+- (BOOL)WTProto:(WTProto*)wtProto isExistFriendJid:(NSString *)jid;
+
+- (void)WTProto:(WTProto*)wtProto addFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
+
+- (void)WTProto:(WTProto*)wtProto deleteFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
+
 @end
 
 
@@ -131,6 +149,15 @@ typedef NS_ENUM(NSUInteger, WTProtoOnlinePriority) {
 };
 
 
+//获取联系人详情方式的类型
+typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
+    WTGetContactDetailsKeyType_SELF               = 0,      //查询自己的信息
+    WTGetContactDetailsKeyType_Phone,                       //联系人的 手机号 （带区号）
+    WTGetContactDetailsKeyType_ID,                          //联系人设置的 wChatid
+    WTGetContactDetailsKeyType_JID,                         //联系人的 jid
+    WTGetContactDetailsKeyType_QRcode                       //联系人的 个人二维码
+};
+
 @interface WTProto : NSObject
 
 @property (nonatomic, strong, readonly)WTProtoUser              *protoUser;
@@ -146,6 +173,7 @@ typedef NS_ENUM(NSUInteger, WTProtoOnlinePriority) {
 @property (nonatomic, strong, readonly)WTProtoRosters           *protoRosters;
 @property (nonatomic, strong, readonly)WTProtoGroup             *protoGroup;
 @property (nonatomic, strong, readonly)WTProtoMessageCenter     *protoMessageCenter;
+@property (nonatomic, strong, readonly)WTProtoContact           *protoContact;
 
 
 + (void)dellocSelf;
@@ -222,6 +250,19 @@ typedef NS_ENUM(NSUInteger, WTProtoOnlinePriority) {
 - (void)Ack:(XMPPMessage*)message;
 
 - (void)ReadAckToID:(NSString *)toID IncrementID:(NSInteger)incrementID;
+
+//通讯录联系人相关方法
+- (void)getContactsWithMatchableContacts:(NSArray *)matchableContacts phoneCode:(NSString *)phoneCode type:(NSString *)emptyType nickName:(NSString *)nickName userPhone:(NSString *)userPhone;
+
+- (void)getUserDetailWithKeyWord:(NSString *)key keyType:(WTGetContactDetailsKeyType)type searchFromGroup:(BOOL)fromGroup source:(NSString *)source IPAddress:(NSString *)IPAddress;
+
+- (void)setFriend_MemoName:(NSString *)memoName jid:(NSString *)jidstr;
+
+- (void)setFriend_StarMarkWithJid:(NSString *)jidstr straState:(BOOL)state;
+
+-(void)deleteFriendWithJid:(NSString *)jidStr;
+
+-(void)addFriendWithJid:(NSString *)jidStr source:(NSString *)source verify:(NSString *)verify time:(NSString *)time statusInfo:(NSDictionary *)statusInfo;
 
 @end
 
