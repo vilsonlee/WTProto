@@ -47,6 +47,8 @@
     if (self = [super initWithFromID:[PropertyDictionary  valueForKey:@"fromID"]
                                 toID:[PropertyDictionary  valueForKey:@"toID"]])
     {
+        
+        self.fromName           = [PropertyDictionary  valueForKey:@"fromName"];
         self.toID               = [PropertyDictionary  valueForKey:@"toID"];
         self.toName             = [PropertyDictionary  valueForKey:@"toName"];
         self.createTime         = [PropertyDictionary  valueForKey:@"createTime"];
