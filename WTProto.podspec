@@ -11,9 +11,9 @@ Pod::Spec.new do |spec|
   spec.name         = "WTProto"
   spec.version      = "1.0.5"
   spec.summary      = "WTProtocol re-encapsulates the XMPP communication protocol based on XMPPFramework. ."
-  spec.description  = <<-DESCo
-  WTProtocol re-encapsulates the XMPP communication protcol based on XMPPFramework.
-  WTProto is the most core class that manager the all the XMPP communication.
+  spec.description  = <<-DESC
+  WTProtocol re-encapsulates the XMPP communicatio protcol based on XMPPFramework.
+  WTProto is the most core class that manager the alnl the XMPP communication.
                    DESC
 
   spec.homepage     = "https://github.com/vilsonlee/WTProto"
