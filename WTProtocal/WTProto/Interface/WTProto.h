@@ -35,7 +35,9 @@
 @class WTProtoWebRTCMessage;
 @class WTProtoShakeMessage;
 @class WTProtoshakedResultMessage;
+@class WTProtoUserInfoService;
 @class XMPPMessage;
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -78,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 #pragma mark - WTProto Authenticat Check Verifi Code
-- (void)WTProtoUserAuthenticatCheckVerifiCodeSuccess:(WTProto* )wtProto;
+- (void)WTProtoUserAuthenticatCheckVerifiCodeSuccess:(WTProto* )wtProto VerifiUser:(WTProtoUser *)user;
 - (void)WTProtoUserAuthenticatCheckVerifiCodeExpire:(WTProto* )wtProto;
 - (void)WTProtoUserAuthenticatCheckVerifiCodeFail:(WTProto* )wtProto Error:(NSError *)error;;
 - (void)WTProtoUserAuthenticatCheckVerifiCodeNotFound:(WTProto* )wtProto;
@@ -124,6 +126,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)WTProto:(WTProto*)wtProto addFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
 
 - (void)WTProto:(WTProto*)wtProto deleteFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
+
+
+
+#pragma mark - WTProto UserInfo
+- (void)WTProto:(WTProto*)wtProto SearchUserInfoWithResult:(BOOL)result UserInfo:(NSDictionary *)userInfo;
+
 
 @end
 
@@ -174,6 +182,7 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
 @property (nonatomic, strong, readonly)WTProtoGroup             *protoGroup;
 @property (nonatomic, strong, readonly)WTProtoMessageCenter     *protoMessageCenter;
 @property (nonatomic, strong, readonly)WTProtoContact           *protoContact;
+@property (nonatomic, strong, readonly)WTProtoUserInfoService   *protoUserInfoService;
 
 
 + (void)dellocSelf;
@@ -226,6 +235,12 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
                   status:(NSString *)status
                 priority:(WTProtoOnlinePriority)priority
                   device:(NSString *)device;
+
+
+-(void)ProtoSearchUserInfoWithLocalUser:(WTProtoUser*)localUser
+                                KeyWord:(NSString *)key
+                                keyType:(NSString *)type
+                        searchFromGroup:(BOOL)fromGroup;
 
 
 -(void)sendWTProtoConversationMessage:(WTProtoConversationMessage *)message

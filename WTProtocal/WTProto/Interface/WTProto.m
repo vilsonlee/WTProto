@@ -25,6 +25,7 @@
 #import "WTProtoMessageCenter.h"
 #import "WTProtoOnlinePresent.h"
 #import "WTProtoContact.h"
+#import "WTProtoUserInfoService.h"
 
 static WTProto *proto = nil;
 static dispatch_once_t onceToken;
@@ -43,7 +44,8 @@ static dispatch_once_t queueOnceToken;
                        WTProtoRostersDelegate,
                        WTProtoGroupDelegate,
                        WTProtoMessageCenterDelegate,
-                       WTProtoContactDelegate
+                       WTProtoContactDelegate,
+                       WTProtoUserInfoServiceDelegate
                       >
 
 
@@ -271,6 +273,9 @@ static dispatch_once_t queueOnceToken;
     
         #pragma mark - init WTProtoContact to manager the Contact
         _protoContact = [WTProtoContact shareContactWithProtoStream:protoStream interface:@"contact"];
+    
+        #pragma mark - init WTProtoContact to manager the Contact
+        _protoUserInfoService = [WTProtoUserInfoService shareUserInfoServiceWithProtoStream:protoStream                                                                                       interface:@"UserInfoService"];
 }
 
 
@@ -287,6 +292,7 @@ static dispatch_once_t queueOnceToken;
     [_protoGroup         addProtoGroupDelegate:self          delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
     [_protoMessageCenter addProtoMessageCenterDelegate:self  delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
     [_protoContact       addProtoContactDelegate:self        delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
+    [_protoUserInfoService  addProtoUserInfoServiceDelegate:self delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
     
     protoMulticasDelegate = (GCDMulticastDelegate <WTProtoDelegate> *)[[GCDMulticastDelegate alloc] init];
     
@@ -337,17 +343,18 @@ static dispatch_once_t queueOnceToken;
 
 -(void)ProtoDellocFuctionModule{
     
-    _proStreamManager    = nil;
-    _protoConnection     = nil;
-    _protoRegister       = nil;
-    _protoAuth           = nil;
-    _protoReConnection   = nil;
-    _protoBlock          = nil;
-    _protoPing           = nil;
-    _protoRosters        = nil;
-    _protoGroup          = nil;
-    _protoMessageCenter  = nil;
-    _protoContact        = nil;
+    _proStreamManager      = nil;
+    _protoConnection       = nil;
+    _protoRegister         = nil;
+    _protoAuth             = nil;
+    _protoReConnection     = nil;
+    _protoBlock            = nil;
+    _protoPing             = nil;
+    _protoRosters          = nil;
+    _protoGroup            = nil;
+    _protoMessageCenter    = nil;
+    _protoContact          = nil;
+    _protoUserInfoService  = nil;
     
     [WTProtoStreamManager       dellocSelf];
     [WTProtoConnection          dellocSelf];
@@ -360,6 +367,7 @@ static dispatch_once_t queueOnceToken;
     [WTProtoGroup               dellocSelf];
     [WTProtoMessageCenter       dellocSelf];
     [WTProtoContact             dellocSelf];
+    [WTProtoUserInfoService     dellocSelf];
 }
 
 
@@ -425,6 +433,7 @@ static dispatch_once_t queueOnceToken;
     
     [_protoStream sendElement:(XMPPPresence *)presentOnline];
 }
+
 
 #pragma mark - WTProto User Check
 
@@ -610,8 +619,22 @@ static dispatch_once_t queueOnceToken;
                                       currentAPPVersion:protoAuth.authUser.currentAPPVersion
                                         currentDeviceOS:protoAuth.authUser.currentDeviceOS
      ];
+}
+
+#pragma mark WTProto User Search UserInfo
+-(void)ProtoSearchUserInfoWithLocalUser:(WTProtoUser*)localUser
+                                KeyWord:(NSString *)key
+                                keyType:(NSString *)type
+                        searchFromGroup:(BOOL)fromGroup
+{
+    [_protoUserInfoService request_IQ_SearchUserInfoWithLocalUser:localUser
+                                                          KeyWord:key
+                                                          keyType:type
+                                                  searchFromGroup:fromGroup];
     
 }
+
+
 
 
 #pragma mark WTProto Send Kinds of Message
@@ -910,9 +933,9 @@ static dispatch_once_t queueOnceToken;
             //验证验证码成功后拿取返回的最终UserID及password 登录
             
             [self ProtoGotoAuthWithSuccessCheckVerifiCod:protoAuth
-                                        UserInfoMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey]];
+                                         UserInfoMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey]];
             
-            [protoMulticasDelegate WTProtoUserAuthenticatCheckVerifiCodeSuccess:self];
+            [protoMulticasDelegate WTProtoUserAuthenticatCheckVerifiCodeSuccess:self VerifiUser:_protoUser];
             
             break;
             
@@ -985,6 +1008,15 @@ static dispatch_once_t queueOnceToken;
     
     
 }
+
+#pragma mark - WTProtoUserInfoService Delegate - Search UserInfo
+-(void)WTProtoUserInfoService:(WTProtoUserInfoService *)UserInfoService SearchUserResult:(BOOL)result
+                                                                                    info:(id)info
+{
+    NSDictionary* userInfo = (NSDictionary*)info;
+    [protoMulticasDelegate WTProto:self SearchUserInfoWithResult:result UserInfo:userInfo];
+}
+
 
 #pragma mark - WTProtoMessageCenter Delegate - Receive Message
 - (void)protoMessageCenter:(WTProtoMessageCenter *)messageCenter

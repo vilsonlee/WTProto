@@ -21,6 +21,17 @@ NS_ASSUME_NONNULL_BEGIN
 // 转化HTML特殊符号
 + (NSString *)convertHTMLCharactorWithString:(NSString *)string;
 
+//获取JID字符串中的user值
+-(NSString*)JID_user;
+
+//获取JID字符串中的bare值
+-(NSString*)JID_bare;
+
+//获取JID字符串中的domain值
+-(NSString*)JID_domain;
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

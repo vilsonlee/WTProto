@@ -43,5 +43,27 @@
     return string;
 }
 
+//获取JID字符串中的user值
+-(NSString*)JID_user{
+    //JID格式： user@domain/resource
+    NSString * jid_user = [self componentsSeparatedByString:@"@"].firstObject;
+    return jid_user;
+}
+//获取JID字符串中的bare值
+-(NSString*)JID_bare{
+    //JID格式： user@domain/resource
+    //bare格式： user@domain
+    NSString * jid_user = [self componentsSeparatedByString:@"/"].firstObject;
+    return jid_user;
+}
+//获取JID字符串中的domain值
+-(NSString*)JID_domain{
+    //JID格式： user@domain/resource
+    NSString * jid_domain_resource = [[self JID_bare] componentsSeparatedByString:@"@"].lastObject;
+    NSString * jid_domain = [jid_domain_resource componentsSeparatedByString:@"/"].firstObject;
+    return jid_domain;
+}
+
+
 
 @end

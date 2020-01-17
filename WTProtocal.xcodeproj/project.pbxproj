@@ -180,6 +180,10 @@
 		CEBBD1E923A9C72800A34AD5 /* WTProtocal.h in Headers */ = {isa = PBXBuildFile; fileRef = CEBBD1E623A9C72800A34AD5 /* WTProtocal.h */; };
 		CEBBD21A23AA13D500A34AD5 /* NSObject+JSONTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBD21823AA13D500A34AD5 /* NSObject+JSONTool.m */; };
 		CEBBD21B23AA13D500A34AD5 /* NSObject+JSONTool.h in Headers */ = {isa = PBXBuildFile; fileRef = CEBBD21923AA13D500A34AD5 /* NSObject+JSONTool.h */; };
+		CEC44D8F23D19E88008D1D60 /* WTProtoUserInfoIQ.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC44D8D23D19E88008D1D60 /* WTProtoUserInfoIQ.h */; };
+		CEC44D9023D19E88008D1D60 /* WTProtoUserInfoIQ.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC44D8E23D19E88008D1D60 /* WTProtoUserInfoIQ.m */; };
+		CEC44D9323D19EB2008D1D60 /* WTProtoUserInfoService.h in Headers */ = {isa = PBXBuildFile; fileRef = CEC44D9123D19EB2008D1D60 /* WTProtoUserInfoService.h */; };
+		CEC44D9423D19EB2008D1D60 /* WTProtoUserInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC44D9223D19EB2008D1D60 /* WTProtoUserInfoService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,6 +374,10 @@
 		CEBBD1E623A9C72800A34AD5 /* WTProtocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtocal.h; sourceTree = "<group>"; };
 		CEBBD21823AA13D500A34AD5 /* NSObject+JSONTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JSONTool.m"; sourceTree = "<group>"; };
 		CEBBD21923AA13D500A34AD5 /* NSObject+JSONTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JSONTool.h"; sourceTree = "<group>"; };
+		CEC44D8D23D19E88008D1D60 /* WTProtoUserInfoIQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtoUserInfoIQ.h; sourceTree = "<group>"; };
+		CEC44D8E23D19E88008D1D60 /* WTProtoUserInfoIQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTProtoUserInfoIQ.m; sourceTree = "<group>"; };
+		CEC44D9123D19EB2008D1D60 /* WTProtoUserInfoService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTProtoUserInfoService.h; sourceTree = "<group>"; };
+		CEC44D9223D19EB2008D1D60 /* WTProtoUserInfoService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTProtoUserInfoService.m; sourceTree = "<group>"; };
 		E03035C29B6E96F895FD6FB8 /* Pods-WTProto-WTProtocal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WTProto-WTProtocal.release.xcconfig"; path = "Target Support Files/Pods-WTProto-WTProtocal/Pods-WTProto-WTProtocal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -493,6 +501,8 @@
 			children = (
 				CE62857F239A2AEC005849A9 /* WTProtoUser.h */,
 				CE62857E239A2AEC005849A9 /* WTProtoUser.m */,
+				CEC44D9123D19EB2008D1D60 /* WTProtoUserInfoService.h */,
+				CEC44D9223D19EB2008D1D60 /* WTProtoUserInfoService.m */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -672,6 +682,8 @@
 				CE6711BE23BF6CF700909224 /* WTProtoOfflineMessageIQ.m */,
 				1889837F23C328F300E5F935 /* WTProtoContactIQ.h */,
 				1889838023C328F300E5F935 /* WTProtoContactIQ.m */,
+				CEC44D8D23D19E88008D1D60 /* WTProtoUserInfoIQ.h */,
+				CEC44D8E23D19E88008D1D60 /* WTProtoUserInfoIQ.m */,
 			);
 			path = iq;
 			sourceTree = "<group>";
@@ -1017,11 +1029,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEBBD21B23AA13D500A34AD5 /* NSObject+JSONTool.h in Headers */,
+				CEC44D9323D19EB2008D1D60 /* WTProtoUserInfoService.h in Headers */,
 				CE67118523BF6A4A00909224 /* WTProtoAckManager.h in Headers */,
 				CE6711BC23BF6A4A00909224 /* WTProtoWebRTCSignalHangUpMessage.h in Headers */,
 				CE6285F9239A2AEE005849A9 /* WTProtoPing.h in Headers */,
 				CE628630239A2AEE005849A9 /* XMLDictionary.h in Headers */,
 				CE6285EC239A2AEE005849A9 /* WTProtoMUC.h in Headers */,
+				CEC44D8F23D19E88008D1D60 /* WTProtoUserInfoIQ.h in Headers */,
 				CE67110F23BF696800909224 /* GTMDefines.h in Headers */,
 				CE67119923BF6A4A00909224 /* WTProtoMediaAudioMessage.h in Headers */,
 				CE67112423BF69AA00909224 /* NSString+DateFormat.h in Headers */,
@@ -1229,6 +1243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE67118F23BF6A4A00909224 /* WTProtoVCardMessage.m in Sources */,
+				CEC44D9023D19E88008D1D60 /* WTProtoUserInfoIQ.m in Sources */,
 				CE6285ED239A2AEE005849A9 /* WTProtoRoom.m in Sources */,
 				CE6711B723BF6A4A00909224 /* WTProtoWebRTCSignalAudioAcceptMessage.m in Sources */,
 				CE6711BB23BF6A4A00909224 /* WTProtoWebRTCSignalHangUpMessage.m in Sources */,
@@ -1293,6 +1308,7 @@
 				CE62860B239A2AEE005849A9 /* WTProtoRosters.m in Sources */,
 				CE67111B23BF69AA00909224 /* NSData+WTData.m in Sources */,
 				CE67111023BF696800909224 /* GTMBase64.m in Sources */,
+				CEC44D9423D19EB2008D1D60 /* WTProtoUserInfoService.m in Sources */,
 				CE6285FC239A2AEE005849A9 /* WTProtoServerAddress.m in Sources */,
 				CE6285DF239A2AEE005849A9 /* WTProtoVCardCoreDataStorage.m in Sources */,
 				CE628622239A2AEE005849A9 /* WTProtoIQ.m in Sources */,
