@@ -412,6 +412,10 @@ static dispatch_once_t queueOnceToken;
 {
     NSLog(@"%@",[iq compactXMLString]);
     
+    NSString * userJidstr = [[[iq elementForName:@"query"] elementForName:@"item"] attributeStringValueForName:@"jid"];
+//    XMPPJID * userJID = [XMPPJID jidWithString:userJidstr];
+//        NSString * userJID_user = [userJidstr JID_user];
+    
     NSXMLElement *query = [iq elementsForName:@"query"][0];
     NSXMLElement *item = [query elementsForName:@"item"][0];
     NSString *subscription = [[item attributeForName:@"subscription"] stringValue];
@@ -419,7 +423,7 @@ static dispatch_once_t queueOnceToken;
     if ([subscription isEqualToString:@"remove"]) {
         // 删除好友
         NSLog(@"已移除好友");
-        [self handeleResult_deleteFriendWithSucceed:YES jid:nil];
+        [self handeleResult_deleteFriendWithSucceed:YES jid:userJidstr];
 
     }
 }
