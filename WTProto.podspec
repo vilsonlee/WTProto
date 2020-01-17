@@ -9,16 +9,16 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "WTProto"
-  spec.version      = "1.0.4"
+  spec.version      = "1.0.5"
   spec.summary      = "WTProtocol re-encapsulates the XMPP communication protocol based on XMPPFramework. ."
-  spec.description  = <<-DESC
-  WTProtocol re-encapsulates the XMPP communication protocol based on XMPPFramework.
+  spec.description  = <<-DESCo
+  WTProtocol re-encapsulates the XMPP communication protcol based on XMPPFramework.
   WTProto is the most core class that manager the all the XMPP communication.
                    DESC
 
   spec.homepage     = "https://github.com/vilsonlee/WTProto"
-  spec.license      = { :type => "MIT", :file => "LICENSE" }
   spec.author       = { "vilson" => "vilson.li@gzemt.com" }
+  spec.license      = { :type => "MIT", :file => "LICENSE" }
   # spec.platform     = :ios
   # spec.platform     = :ios, "5.0"
 
