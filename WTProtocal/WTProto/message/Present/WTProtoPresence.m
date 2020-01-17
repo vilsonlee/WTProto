@@ -22,11 +22,11 @@
 }
 + (WTProtoPresence *)presenceWithType:(nullable NSString *)type{
     
-    return [self presenceWithType:type];
+    return [[WTProtoPresence alloc] initWithType:type];
 }
 + (WTProtoPresence *)presenceWithType:(nullable NSString *)type to:(nullable XMPPJID *)to{
     
-    return [self presenceWithType:type to:to];
+    return [[WTProtoPresence alloc] initWithType:type to:to];
 }
 
 @end
