@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 
--(void)WTProtoGroup:(WTProtoGroup* )protoGroup RoomDidCreat:(XMPPRoom *)room;
+-(void)WTProtoGroup:(WTProtoGroup* )protoGroup RoomDidCreate:(XMPPRoom *)room;
 -(void)WTProtoGroup:(WTProtoGroup* )protoGroup RoomDidCreateFail:(XMPPRoom *)room info:(id)info;
 
 -(void)WTProtoGroup:(WTProtoGroup* )protoGroup RoomDidConfigure:(XMPPRoom *)room iqResult:(WTProtoIQ *)iqResult;

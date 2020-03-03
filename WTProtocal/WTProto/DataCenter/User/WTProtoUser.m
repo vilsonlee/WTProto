@@ -60,6 +60,17 @@
     return self;
 }
 
+- (instancetype)initProtoUserWithUserID:(NSString *)userID
+                                 domain:(NSString *)domain
+                               resource:(NSString *)resource{
+    
+    if (self = [super initJidwithUser:userID
+                                 domain:domain
+                             resource:resource]) {
+    }
+    
+    return self;
+}
 
 -(NSString* )getUserType:(WTProtoUserType)userType
 {

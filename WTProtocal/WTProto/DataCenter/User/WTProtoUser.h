@@ -74,7 +74,9 @@ NS_ASSUME_NONNULL_BEGIN
                       currentAPPVersion:(NSString *)currentAPPVersion
                         currentDeviceOS:(NSString *)currentDeviceOS;
 
-
+- (instancetype)initProtoUserWithUserID:(NSString *)userID
+                                 domain:(NSString *)domain
+                               resource:(NSString *)resource;
 
 - (void)setUserID:(NSString * _Nonnull)userID;
 - (void)setPhoneNumber:(NSString * _Nonnull)phoneNumber;

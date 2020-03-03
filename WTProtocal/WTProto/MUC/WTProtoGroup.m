@@ -595,7 +595,7 @@ static dispatch_once_t queueOnceToken;
     
     WEAKSELF
     [WTProtoGroupIQ parse_IQ_GetGroupList:iq parseResult:^(BOOL succeed, id  _Nonnull Info) {
-        [self->protoGroupMulticasDelegate WTProtoGroup:weakSelf InviteUserSubscribes_Result:succeed info:Info];
+        [self->protoGroupMulticasDelegate WTProtoGroup:weakSelf GetGroupList_Result:succeed info:Info];
     }];
     
 }
@@ -800,6 +800,8 @@ static dispatch_once_t queueOnceToken;
     
     [sender fetchConfigurationForm];
 
+    [protoGroupMulticasDelegate WTProtoGroup:self RoomDidCreate:sender];
+    
 }
 
 

@@ -127,6 +127,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)WTProto:(WTProto*)wtProto deleteFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
 
+#pragma mark - WTProto Group
+- (void)WTProto:(WTProto*)wtProto getGroups_ResultWithSucceed:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto getGroupInfo_ResultWithSucceed:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto RoomDidCreate_ResultWithSucceed:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto inviteUserSubscribes_Result:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto getGroupMembersList_Result:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto exitUserSubscribes_Result:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto removeMemberUnscribesChatRoom_Result:(BOOL)succeed info:(id)info;
 
 
 #pragma mark - WTProto UserInfo
@@ -278,6 +292,23 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
 -(void)deleteFriendWithJid:(NSString *)jidStr;
 
 -(void)addFriendWithJid:(NSString *)jidStr source:(NSString *)source verify:(NSString *)verify time:(NSString *)time statusInfo:(NSDictionary *)statusInfo;
+
+//群相关方法
+- (void)getGroupList;
+
+- (void)getGroupInfoWithGroupJid:(WTProtoUser *)groupJId;
+
+//创建群
+- (void)createGroupWithGroupJid:(WTProtoUser *)groupJid groupName:(NSString *)groupName ownerNickName:(NSString *)ownerNickName inviteUsers:(NSArray *)inviteUsers;
+
+//邀请进群
+- (void)invitaFriendsSubscribesGroupWithGroupid:(WTProtoUser *)groupJId groupName:(NSString *)groupName joinType:(NSString *)jointype andFriends:(NSArray *)friends inviterNickName:(NSString *)inviterNickName inviterJID:(NSString *)inviterJid reason:(NSString *)reason;
+
+- (void)getMemberListWithRoomJid:(WTProtoUser *)groupJId bringMemoName:(BOOL)bringMemoName;
+
+- (void)exitGroupWithRoomJid:(WTProtoUser *)groupJId roomName:(NSString *)roomName roomOwnerJid:(WTProtoUser *)roomOwnerJid memberGroupNickName:(NSString *)nickName;
+
+- (void)removeMemberUnscribesChatRoomWithRoomJid:(WTProtoUser *)groupJId roomName:(NSString *)roomName roomOwnerJid:(WTProtoUser *)roomOwnerJid memberGroupNickName:(NSString *)nickName andFriends:(NSArray *)friends;
 
 @end
 

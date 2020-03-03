@@ -730,6 +730,41 @@ static dispatch_once_t queueOnceToken;
     [_protoContact addFriendWithJid:jidStr source:source verify:verify time:time statusInfo:statusInfo fromUser:_protoUser];
 }
 
+#pragma mark - WTProtoGroup Method
+- (void)getGroupList{
+    [_protoGroup request_IQ_GetGroupListByFromUser:_protoUser];
+}
+
+- (void)getGroupInfoWithGroupJid:(WTProtoUser *)groupJId{
+        
+    [_protoGroup request_IQ_GetRoomInfoWithRoomID:groupJId];
+}
+
+- (void)createGroupWithGroupJid:(WTProtoUser *)groupJid groupName:(NSString *)groupName ownerNickName:(NSString *)ownerNickName inviteUsers:(NSArray *)inviteUsers{
+    
+    [_protoGroup joinRoomWithJid:groupJid Nickname:ownerNickName roomName:groupName inviteUsers:inviteUsers];
+}
+
+- (void)invitaFriendsSubscribesGroupWithGroupid:(WTProtoUser *)groupJId groupName:(NSString *)groupName joinType:(NSString *)jointype andFriends:(NSArray *)friends inviterNickName:(NSString *)inviterNickName inviterJID:(NSString *)inviterJid reason:(NSString *)reason{
+    
+    [_protoGroup request_IQ_InviteUserSubscribesWithFromUser:_protoUser RoomID:groupJId roomName:groupName joinType:jointype Friends:friends inviterNickName:inviterNickName inviterID:inviterJid reason:reason];
+}
+
+- (void)getMemberListWithRoomJid:(WTProtoUser *)groupJId bringMemoName:(BOOL)bringMemoName{
+    
+    [_protoGroup request_IQ_GetGroupMembersListWithFromUser:_protoUser RoomID:groupJId];
+}
+
+- (void)exitGroupWithRoomJid:(WTProtoUser *)groupJId roomName:(NSString *)roomName roomOwnerJid:(WTProtoUser *)roomOwnerJid memberGroupNickName:(NSString *)nickName{
+    
+    [_protoGroup request_IQ_ExitUserSubscribesWithFromUser:_protoUser RoomID:groupJId roomName:roomName roomOwnerID:roomOwnerJid memberGroupNickName:nickName];
+}
+
+- (void)removeMemberUnscribesChatRoomWithRoomJid:(WTProtoUser *)groupJId roomName:(NSString *)roomName roomOwnerJid:(WTProtoUser *)roomOwnerJid memberGroupNickName:(NSString *)nickName andFriends:(NSArray *)friends{
+    
+    [_protoGroup request_IQ_RemoveMemberUnscribesChatRoomWithFromUser:_protoUser RoomID:groupJId roomName:roomName roomOwnerID:roomOwnerJid memberGroupNickName:nickName Friends:friends];
+}
+
 #pragma mark Proto Ack/ReadAck Message
 - (void)Ack:(XMPPMessage*)message
 {
@@ -1081,6 +1116,42 @@ static dispatch_once_t queueOnceToken;
 
 - (void)WTProtoContact:(WTProtoContact *)protoContact deleteFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid{
     [protoMulticasDelegate WTProto:self deleteFriend_ResultWithSucceed:succeed jid:jid];
+}
+
+#pragma mark - WTProtoGroup Delegate
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup GetGroupList_Result:(BOOL)resalut info:(id)info{
+    
+    [protoMulticasDelegate WTProto:self getGroups_ResultWithSucceed:resalut info:info];
+    
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup GetRoomInfo_Result:(BOOL)resalut info:(id)info{
+    
+    [protoMulticasDelegate WTProto:self getGroupInfo_ResultWithSucceed:resalut info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup RoomDidCreat:(XMPPRoom *)room{
+    [protoMulticasDelegate WTProto:self RoomDidCreate_ResultWithSucceed:YES info:@""];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup RoomDidCreateFail:(XMPPRoom *)room info:(id)info{
+    [protoMulticasDelegate WTProto:self RoomDidCreate_ResultWithSucceed:NO info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup InviteUserSubscribes_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self inviteUserSubscribes_Result:resalut info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup GetGroupMembersList_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self getGroupMembersList_Result:resalut info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup ExitUserSubscribes_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self exitUserSubscribes_Result:resalut info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup RemoveMemberUnscribesChatRoom_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self removeMemberUnscribesChatRoom_Result:resalut info:info];
 }
 
 @end
