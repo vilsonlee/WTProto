@@ -1110,6 +1110,10 @@ static dispatch_once_t queueOnceToken;
     return [protoMulticasDelegate WTProto:self isExistFriendJid:jid];
 }
 
+- (BOOL)WTProtoContact:(WTProtoContact *)protoContact newContact:(NSDictionary *)contactInfo isWaitPass:(BOOL)isWaitPass{
+    [protoMulticasDelegate WTProto:self newContact:contactInfo isWaitPass:isWaitPass];
+}
+
 - (void)WTProtoContact:(WTProtoContact *)protoContact addFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid{
     [protoMulticasDelegate WTProto:self addFriend_ResultWithSucceed:succeed jid:jid];
 }

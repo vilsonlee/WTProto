@@ -123,6 +123,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)WTProto:(WTProto*)wtProto isExistFriendJid:(NSString *)jid;
 
+- (void)WTProto:(WTProto* )wtProto newContact:(NSDictionary *)contactInfo isWaitPass:(BOOL)isWaitPass;
+
 - (void)WTProto:(WTProto*)wtProto addFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
 
 - (void)WTProto:(WTProto*)wtProto deleteFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
