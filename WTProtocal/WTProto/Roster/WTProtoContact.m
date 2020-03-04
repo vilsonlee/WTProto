@@ -475,17 +475,19 @@ static dispatch_once_t queueOnceToken;
         NSXMLElement *subNode = [presence elementForName:@"ext" xmlns:@"jabber:iq:roster"];
         NSString * source = [subNode attributeStringValueForName:@"src"];
         NSString * verify = [subNode attributeStringValueForName:@"verify"];
-        NSString * agree = [subNode attributeStringValueForName:@"agree"];
+//        NSString * agree = [subNode attributeStringValueForName:@"agree"];
         NSString * time = [subNode attributeStringValueForName:@"time"];
         //将time（2018-10-26T08:40:59.761468Z）转换为时间戳...yyyy-MM-dd'T'HH:mm:ss.SSS Z/yyyy-MM-dd'T'HH:mm:ssX
         NSString * cStamp = [self getTimestampFromTime:time format:@"yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"];
         
         //区分正常添加或是验证请求, verify=1: 需要验证接受 verify=0不需要验证
-        if ([verify isEqualToString:@"1"]) {
+        BOOL isWaitPassStatus = [verify isEqualToString:@"1"];
+        
+        if (isWaitPassStatus) {
             
             WTProtoPresence * replyAddFriendPresent = [WTProtoContactPresent replyAddFriendRequestReceivedWithContactJid:presence.from.bare];
             [_contactStream sendElement:(XMPPPresence*)replyAddFriendPresent];
-            
+                        
         }else{
             
             //同意好友请求,带上来源
@@ -496,6 +498,13 @@ static dispatch_once_t queueOnceToken;
             [_ProtoRoster addUser:presence.from withNickname:nil];
         }
         
+        NSMutableDictionary * contactInfoDict = [[NSMutableDictionary alloc] initWithDictionary:statusDict];
+        [contactInfoDict setValue:presence.from.full forKey:@"jid"];
+        [contactInfoDict setValue:source forKey:@"source"];
+        [contactInfoDict setValue:cStamp forKey:@"time"];//请求发送的时间
+        
+        [self->protoContactMulticasDelegate WTProtoContact:self newContact:contactInfoDict isWaitPass:isWaitPassStatus];
+
         
     }else{
         //收到对方同意/自动同意发出的添加好友的请求

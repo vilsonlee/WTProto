@@ -43,6 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)WTProtoContact:(WTProtoContact* )protoContact isExistFriendJid:(NSString *)jid;
 
+- (BOOL)WTProtoContact:(WTProtoContact* )protoContact newContact:(NSDictionary *)contactInfo isWaitPass:(BOOL)isWaitPass;
+
+
 @end
 
 @interface WTProtoContact : NSObject
