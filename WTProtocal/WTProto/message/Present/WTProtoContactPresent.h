@@ -26,13 +26,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (WTProtoPresence *)addFriendWithJid:(NSString *)jidStr source:(NSString *)source verify:(NSString *)verify time:(NSString *)time statusInfo:(NSDictionary *)statusInfo fromUser:(WTProtoUser *)fromUser;
 
 /**
- * 回复已收到好友添加我的请求
- */
+ * 回复好友同意添加我的请求
+*/
 + (WTProtoPresence *)agreeAddFriendRequestWithContactJid:(NSString *)jidStr source:(NSString *)source fromUserJid:(NSString *)fromUserJid;
 
+
 /**
- * 回复好友同意添加我的请求
- */
+ * 回复已收到好友添加我的请求
+*/
 + (WTProtoPresence *)replyAddFriendRequestReceivedWithContactJid:(NSString *)jidStr;
 
 @end

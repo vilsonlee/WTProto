@@ -40,10 +40,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)WTProtoContact:(WTProtoContact* )protoContact deleteFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
 
+- (void)WTProtoContact:(WTProtoContact* )protoContact agreeAddFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
+
 
 - (BOOL)WTProtoContact:(WTProtoContact* )protoContact isExistFriendJid:(NSString *)jid;
 
-- (BOOL)WTProtoContact:(WTProtoContact* )protoContact newContact:(NSDictionary *)contactInfo isWaitPass:(BOOL)isWaitPass;
+- (void)WTProtoContact:(WTProtoContact* )protoContact newContact:(NSDictionary *)contactInfo isWaitPass:(BOOL)isWaitPass;
 
 
 @end
@@ -104,6 +106,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param   jidStr       用户的JID
 */
 -(void)deleteFriendWithJid:(NSString *)jidStr;
+
+/**
+ *  同意添加联系人
+ *  @param   jidStr       用户的JID
+ *  @param   source       对方发来请求时通过的来源途径, 添加联系人的来源途径, 0 手机号匹配 1 手机号搜索 2 wchatid搜索 3 扫一扫 4 群聊 5 名片 6......
+*/
+- (void)agreeAddFriendWithJid:(NSString *)jidStr source:(NSString *)source;
 
 /**
  *  将联系人添加到黑名单

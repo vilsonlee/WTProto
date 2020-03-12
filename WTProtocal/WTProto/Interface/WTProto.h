@@ -129,6 +129,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)WTProto:(WTProto*)wtProto deleteFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
 
+- (void)WTProto:(WTProto*)wtProto agreeAddFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
+
 #pragma mark - WTProto Group
 - (void)WTProto:(WTProto*)wtProto getGroups_ResultWithSucceed:(BOOL)succeed info:(id)info;
 
@@ -291,9 +293,11 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
 
 - (void)setFriend_StarMarkWithJid:(NSString *)jidstr straState:(BOOL)state;
 
--(void)deleteFriendWithJid:(NSString *)jidStr;
+- (void)deleteFriendWithJid:(NSString *)jidStr;
 
--(void)addFriendWithJid:(NSString *)jidStr source:(NSString *)source verify:(NSString *)verify time:(NSString *)time statusInfo:(NSDictionary *)statusInfo;
+- (void)agreeAddFriendWithJid:(NSString *)jidStr source:(NSString *)source;
+
+- (void)addFriendWithJid:(NSString *)jidStr source:(NSString *)source verify:(NSString *)verify time:(NSString *)time statusInfo:(NSDictionary *)statusInfo;
 
 //群相关方法
 - (void)getGroupList;

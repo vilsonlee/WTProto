@@ -293,6 +293,21 @@ static dispatch_once_t queueOnceToken;
     [self->protoContactMulticasDelegate WTProtoContact:self deleteFriend_ResultWithSucceed:succeed jid:jid];
 }
 
+#pragma mark -   同意添加联系人
+- (void)agreeAddFriendWithJid:(NSString *)jidStr source:(NSString *)source{
+    
+    XMPPJID * userJid = [XMPPJID jidWithString:jidStr];
+    
+    WTProtoPresence * agreePresent = [WTProtoContactPresent agreeAddFriendRequestWithContactJid:jidStr source:source fromUserJid:_contactStream.myJID.full];
+           [_contactStream sendElement:(XMPPPresence*)agreePresent];
+
+    [_ProtoRoster addUser:userJid withNickname:nil];
+}
+
+//同意添加的回调
+-(void)handeleResult_agreeAddFriendWithSucceed:(BOOL)succeed jid:(id)jid{
+    [self->protoContactMulticasDelegate WTProtoContact:self agreeAddFriend_ResultWithSucceed:succeed jid:jid];
+}
 
 
 
@@ -393,6 +408,9 @@ static dispatch_once_t queueOnceToken;
     if ([presence.type isEqualToString:@"subscribe"]) {
         [self handeleResult_addFriendWithSucceed:YES jid:presence.to.bare];
     }
+    if ([presence.type isEqualToString:@"subscribed"]) {
+        [self handeleResult_agreeAddFriendWithSucceed:YES jid:presence.to.bare];
+    }
 }
 
 - (void)xmppStream:(XMPPStream *)sender didFailToSendPresence:(XMPPPresence *)presence error:(NSError *)error
@@ -404,6 +422,9 @@ static dispatch_once_t queueOnceToken;
     }else if ([presence.type isEqualToString:@"subscribe"]){
         //添加好友
         [self handeleResult_addFriendWithSucceed:NO jid:presence.to.bare];
+    }else if ([presence.type isEqualToString:@"subscribed"]){
+        //同意添加好友
+        [self handeleResult_agreeAddFriendWithSucceed:NO jid:presence.to.bare];
     }
 }
 
@@ -501,7 +522,7 @@ static dispatch_once_t queueOnceToken;
         NSMutableDictionary * contactInfoDict = [[NSMutableDictionary alloc] initWithDictionary:statusDict];
         [contactInfoDict setValue:presence.from.full forKey:@"jid"];
         [contactInfoDict setValue:source forKey:@"source"];
-        [contactInfoDict setValue:cStamp forKey:@"time"];//请求发送的时间
+        [contactInfoDict setValue:cStamp forKey:@"time"];//请求发送的时间,插入提示消息时使用此时间值
         
         [self->protoContactMulticasDelegate WTProtoContact:self newContact:contactInfoDict isWaitPass:isWaitPassStatus];
 

@@ -726,6 +726,10 @@ static dispatch_once_t queueOnceToken;
     [_protoContact deleteFriendWithJid:jidStr];
 }
 
+- (void)agreeAddFriendWithJid:(NSString *)jidStr source:(NSString *)source{
+    [_protoContact agreeAddFriendWithJid:jidStr source:source];
+}
+
 -(void)addFriendWithJid:(NSString *)jidStr source:(NSString *)source verify:(NSString *)verify time:(NSString *)time statusInfo:(NSDictionary *)statusInfo{
     [_protoContact addFriendWithJid:jidStr source:source verify:verify time:time statusInfo:statusInfo fromUser:_protoUser];
 }
@@ -1110,7 +1114,7 @@ static dispatch_once_t queueOnceToken;
     return [protoMulticasDelegate WTProto:self isExistFriendJid:jid];
 }
 
-- (BOOL)WTProtoContact:(WTProtoContact *)protoContact newContact:(NSDictionary *)contactInfo isWaitPass:(BOOL)isWaitPass{
+- (void)WTProtoContact:(WTProtoContact *)protoContact newContact:(NSDictionary *)contactInfo isWaitPass:(BOOL)isWaitPass{
     [protoMulticasDelegate WTProto:self newContact:contactInfo isWaitPass:isWaitPass];
 }
 
@@ -1120,6 +1124,10 @@ static dispatch_once_t queueOnceToken;
 
 - (void)WTProtoContact:(WTProtoContact *)protoContact deleteFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid{
     [protoMulticasDelegate WTProto:self deleteFriend_ResultWithSucceed:succeed jid:jid];
+}
+
+- (void)WTProtoContact:(WTProtoContact *)protoContact agreeAddFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid{
+    [protoMulticasDelegate WTProto:self agreeAddFriend_ResultWithSucceed:succeed jid:jid];
 }
 
 #pragma mark - WTProtoGroup Delegate
