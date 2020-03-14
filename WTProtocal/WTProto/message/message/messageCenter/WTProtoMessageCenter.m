@@ -338,6 +338,7 @@ static dispatch_once_t Concurrent_queueOnceToken;
     if ([msgSendComfirmateValue isKindOfClass:[WTProtoConversationMessage class]])
     {
         WTProtoConversationMessage* conversationMessage = (WTProtoConversationMessage *)SendComfirmateMessage;
+        [conversationMessage setIncrementID:[incrementID longLongValue]];
         [self callBackConversationMessage:conversationMessage sendResult:YES];
     }
     else if ([msgSendComfirmateValue isKindOfClass:[WTProtoShakeMessage class]])
@@ -549,6 +550,21 @@ static dispatch_once_t Concurrent_queueOnceToken;
         {
             parsingMessageDic = [self parsingAESMessage:message];
         }
+        
+        ///解密后添加自增ID标签
+        if (parsingMessageDic) {
+            
+            NSString* increment_id = [[message elementForName:@"increment_id"] stringValue];
+            
+            NSMutableDictionary* KDic = [NSMutableDictionary
+                                         dictionaryWithDictionary:parsingMessageDic];
+            
+            [KDic setValue:increment_id forKey:@"increment_id"];
+            
+            parsingMessageDic = [NSDictionary dictionaryWithDictionary:KDic];
+            
+        }
+        
     }
     
     return parsingMessageDic;
