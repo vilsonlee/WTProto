@@ -30,6 +30,7 @@
 @class WTProtoRosters;
 @class WTProtoContact;
 @class WTProtoGroup;
+@class WTProtoUserConfigService;
 @class WTProtoMessageCenter;
 @class WTProtoConversationMessage;
 @class WTProtoWebRTCMessage;
@@ -37,7 +38,6 @@
 @class WTProtoshakedResultMessage;
 @class WTProtoUserInfoService;
 @class XMPPMessage;
-
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 #pragma mark - WTProto Authenticat Check Verifi Code
-- (void)WTProtoUserAuthenticatCheckVerifiCodeSuccess:(WTProto* )wtProto VerifiUser:(WTProtoUser *)user;
+- (void)WTProtoUserAuthenticatCheckVerifiCodeSuccess:(WTProto* )wtProto VerifiUser:(WTProtoUser*)user;
 - (void)WTProtoUserAuthenticatCheckVerifiCodeExpire:(WTProto* )wtProto;
 - (void)WTProtoUserAuthenticatCheckVerifiCodeFail:(WTProto* )wtProto Error:(NSError *)error;;
 - (void)WTProtoUserAuthenticatCheckVerifiCodeNotFound:(WTProto* )wtProto;
@@ -108,12 +108,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)WTProto:(WTProto*)wtProto didReceiveShakeResultDecryptMessage:(WTProtoshakedResultMessage *)decryptMessage
-                                                OriginalMessage:(XMPPMessage *)originalMessage;
+                                                      OriginalMessage:(XMPPMessage *)originalMessage;
 
 
 
 #pragma mark - WTProto Contact
-- (void)WTProto:(WTProto*)wtProto getContacts_ResultWithSucceed:(BOOL)succeed matchcount:(NSUInteger)matchcount info:(id)info;
+- (void)WTProto:(WTProto*)wtProto getContacts_ResultWithSucceed:(BOOL)succeed
+                                                     matchcount:(NSUInteger)matchcount
+                                                           info:(id)info;
 
 - (void)WTProto:(WTProto*)wtProto getContactDetails_ResultWithSucceed:(BOOL)succeed info:(id)info;
 
@@ -127,9 +129,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)WTProto:(WTProto*)wtProto addFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
 
+- (void)WTProto:(WTProto*)wtProto agreeAddFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
+
 - (void)WTProto:(WTProto*)wtProto deleteFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
 
-- (void)WTProto:(WTProto*)wtProto agreeAddFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
 
 #pragma mark - WTProto Group
 - (void)WTProto:(WTProto*)wtProto getGroups_ResultWithSucceed:(BOOL)succeed info:(id)info;
@@ -146,10 +149,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)WTProto:(WTProto*)wtProto removeMemberUnscribesChatRoom_Result:(BOOL)succeed info:(id)info;
 
-
 #pragma mark - WTProto UserInfo
 - (void)WTProto:(WTProto*)wtProto SearchUserInfoWithResult:(BOOL)result UserInfo:(NSDictionary *)userInfo;
 
+
+#pragma mark - WTProto UserConfig Service
+-(void)WTProto:(WTProto*)wtProto getUserPerferenceResult:(BOOL)result info:(id)info;
+
+-(void)WTProto:(WTProto*)wtProto getUserChatSettingResult:(BOOL)result info:(id)info;
+    
+-(void)WTProto:(WTProto*)wtProto updateUserConfigResult:(BOOL)result info:(id)info;
+
+-(void)WTProto:(WTProto*)wtProto updateUserChatSettingResult:(BOOL)result info:(id)info;
+
+-(void)WTProto:(WTProto*)wtProto removeUserChatSettingResult:(BOOL)result info:(id)info;
 
 @end
 
@@ -186,21 +199,23 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
 
 @interface WTProto : NSObject
 
-@property (nonatomic, strong, readonly)WTProtoUser              *protoUser;
-@property (nonatomic, strong, readonly)WTProtoStream            *protoStream;
-@property (nonatomic, strong, readonly)WTProtoServerAddress     *serverAddress;
-@property (nonatomic, strong, readonly)WTProtoStreamManager     *proStreamManager;
-@property (nonatomic, strong, readonly)WTProtoConnection        *protoConnection;
-@property (nonatomic, strong, readonly)WTProtoRegister          *protoRegister;
-@property (nonatomic, strong, readonly)WTProtoAuth              *protoAuth;
-@property (nonatomic, strong, readonly)WTProtoReConnection      *protoReConnection;
-@property (nonatomic, strong, readonly)WTProtoBlock             *protoBlock;
-@property (nonatomic, strong, readonly)WTProtoPing              *protoPing;
-@property (nonatomic, strong, readonly)WTProtoRosters           *protoRosters;
-@property (nonatomic, strong, readonly)WTProtoGroup             *protoGroup;
-@property (nonatomic, strong, readonly)WTProtoMessageCenter     *protoMessageCenter;
-@property (nonatomic, strong, readonly)WTProtoContact           *protoContact;
-@property (nonatomic, strong, readonly)WTProtoUserInfoService   *protoUserInfoService;
+@property (nonatomic, strong, readonly)WTProtoUser                  *protoUser;
+@property (nonatomic, strong, readonly)WTProtoStream                *protoStream;
+@property (nonatomic, strong, readonly)WTProtoServerAddress         *serverAddress;
+@property (nonatomic, strong, readonly)WTProtoStreamManager         *proStreamManager;
+@property (nonatomic, strong, readonly)WTProtoConnection            *protoConnection;
+@property (nonatomic, strong, readonly)WTProtoRegister              *protoRegister;
+@property (nonatomic, strong, readonly)WTProtoAuth                  *protoAuth;
+@property (nonatomic, strong, readonly)WTProtoReConnection          *protoReConnection;
+@property (nonatomic, strong, readonly)WTProtoBlock                 *protoBlock;
+@property (nonatomic, strong, readonly)WTProtoPing                  *protoPing;
+@property (nonatomic, strong, readonly)WTProtoRosters               *protoRosters;
+@property (nonatomic, strong, readonly)WTProtoGroup                 *protoGroup;
+@property (nonatomic, strong, readonly)WTProtoMessageCenter         *protoMessageCenter;
+@property (nonatomic, strong, readonly)WTProtoContact               *protoContact;
+@property (nonatomic, strong, readonly)WTProtoUserInfoService       *protoUserInfoService;
+@property (nonatomic, strong, readonly)WTProtoUserConfigService     *protoUserConfigService;
+
 
 
 + (void)dellocSelf;
@@ -254,7 +269,6 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
                 priority:(WTProtoOnlinePriority)priority
                   device:(NSString *)device;
 
-
 -(void)ProtoSearchUserInfoWithLocalUser:(WTProtoUser*)localUser
                                 KeyWord:(NSString *)key
                                 keyType:(NSString *)type
@@ -299,7 +313,7 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
 
 - (void)addFriendWithJid:(NSString *)jidStr source:(NSString *)source verify:(NSString *)verify time:(NSString *)time statusInfo:(NSDictionary *)statusInfo;
 
-//群相关方法
+//群聊列表相关方法
 - (void)getGroupList;
 
 - (void)getGroupInfoWithGroupJid:(WTProtoUser *)groupJId;
@@ -315,6 +329,32 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
 - (void)exitGroupWithRoomJid:(WTProtoUser *)groupJId roomName:(NSString *)roomName roomOwnerJid:(WTProtoUser *)roomOwnerJid memberGroupNickName:(NSString *)nickName;
 
 - (void)removeMemberUnscribesChatRoomWithRoomJid:(WTProtoUser *)groupJId roomName:(NSString *)roomName roomOwnerJid:(WTProtoUser *)roomOwnerJid memberGroupNickName:(NSString *)nickName andFriends:(NSArray *)friends;
+
+//用户配置相关方法
+/**
+ *  获取用户偏好设置
+*/
+- (void)getUserPerferenceInfo;
+
+/**
+ *  获取用户聊天设置
+*/
+- (void)getUserChatSettingInfo;
+
+/**
+ *  更新用户偏好设置
+*/
+- (void)updateUserConfigWithDict:(NSDictionary *)data;
+
+/**
+ *  更新用户聊天配置
+*/
+- (void)updateUserChatSettingWithDict:(NSDictionary *)data;
+
+/**
+ *  移除用户聊天配置
+*/
+- (void)removeUserChatSettingWithDict:(NSDictionary *)data;
 
 @end
 

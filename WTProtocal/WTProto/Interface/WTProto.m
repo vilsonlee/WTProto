@@ -26,6 +26,7 @@
 #import "WTProtoOnlinePresent.h"
 #import "WTProtoContact.h"
 #import "WTProtoUserInfoService.h"
+#import "WTProtoUserConfigService.h"
 
 static WTProto *proto = nil;
 static dispatch_once_t onceToken;
@@ -45,7 +46,8 @@ static dispatch_once_t queueOnceToken;
                        WTProtoGroupDelegate,
                        WTProtoMessageCenterDelegate,
                        WTProtoContactDelegate,
-                       WTProtoUserInfoServiceDelegate
+                       WTProtoUserInfoServiceDelegate,
+                       WTProtoUserConfigServiceDelegate
                       >
 
 
@@ -53,20 +55,21 @@ static dispatch_once_t queueOnceToken;
     WTProtoQueue *_protoQueue;
     GCDMulticastDelegate <WTProtoDelegate> *protoMulticasDelegate;
     
-    WTProtoUser             *_protoUser;
-    WTProtoServerAddress    *_serverAddress;
-    WTProtoStream           *_protoStream;
-    WTProtoStreamManager    *_proStreamManager;
-    WTProtoConnection       *_protoConnection;
-    WTProtoRegister         *_protoRegister;
-    WTProtoAuth             *_protoAuth;
-    WTProtoReConnection     *_protoReConnection;
-    WTProtoBlock            *_protoBlock;
-    WTProtoPing             *_protoPing;
-    WTProtoRosters          *_protoRosters;
-    WTProtoGroup            *_protoGroup;
-    WTProtoMessageCenter    *_protoMessageCenter;
-    WTProtoContact          *_protoContact;
+    WTProtoUser                      *_protoUser;
+    WTProtoServerAddress             *_serverAddress;
+    WTProtoStream                    *_protoStream;
+    WTProtoStreamManager             *_proStreamManager;
+    WTProtoConnection                *_protoConnection;
+    WTProtoRegister                  *_protoRegister;
+    WTProtoAuth                      *_protoAuth;
+    WTProtoReConnection              *_protoReConnection;
+    WTProtoBlock                     *_protoBlock;
+    WTProtoPing                      *_protoPing;
+    WTProtoRosters                   *_protoRosters;
+    WTProtoGroup                     *_protoGroup;
+    WTProtoMessageCenter             *_protoMessageCenter;
+    WTProtoContact                   *_protoContact;
+    WTProtoUserConfigService         *_protoUserConfigService;
 }
 
 @end
@@ -229,53 +232,56 @@ static dispatch_once_t queueOnceToken;
 -(void)ProtoFuctionModuleInitializationWithProtoStream:(WTProtoStream*)protoStream
 {
     #pragma mark - init WTProtoStreamManager to manager stream.
-        _proStreamManager = [WTProtoStreamManager shareStreamManagerWithProtoStream:protoStream
-                                                                          interface:@"StreamManager"];
-        
-        #pragma mark - init WTProtoConnection to connection.
-        _protoConnection = [WTProtoConnection shareConnecionWithProtoStream:protoStream
-                                                                  interface:@"Connection"];
+    _proStreamManager = [WTProtoStreamManager shareStreamManagerWithProtoStream:protoStream
+                                                                      interface:@"StreamManager"];
     
-        #pragma mark - init WTProtoAuth to auth.
-        _protoAuth = [WTProtoAuth shareAuthWithProtoStream:protoStream
-                                                 interface:@"Auth"];
+    #pragma mark - init WTProtoConnection to connection.
+    _protoConnection = [WTProtoConnection shareConnecionWithProtoStream:protoStream
+                                                              interface:@"Connection"];
+
+    #pragma mark - init WTProtoAuth to auth.
+    _protoAuth = [WTProtoAuth shareAuthWithProtoStream:protoStream
+                                             interface:@"Auth"];
+
     
-        
-        #pragma mark - init WTProtoRegister to register.
-        _protoRegister = [WTProtoRegister shareRegisterWithProtoStream:protoStream
-                                                             interface:@"Register"];
-        
-        #pragma mark - init WTProtoReConnection to reconnection.
-        _protoReConnection = [WTProtoReConnection shareReConnecionWithProtoStream:protoStream
-                                                                   ReconnectDelay:0.f
-                                                           ReconnectTimerInterval:2.0f
-                                                                        interface:@"ReConnection"];
-        
-        #pragma mark - init WTProtoBlock to block user.
-        _protoBlock = [WTProtoBlock shareBlockWithProtoStream:protoStream
-                                                    interface:@"Block"];
-                
-        #pragma mark - init WTProtoPing to ping user or server auto/manual.
-        _protoPing  = [WTProtoPing sharePingWithProtoStream:protoStream
-                                                  interface:@"ping"];
+    #pragma mark - init WTProtoRegister to register.
+    _protoRegister = [WTProtoRegister shareRegisterWithProtoStream:protoStream
+                                                         interface:@"Register"];
     
-        #pragma mark - init WTProtoRosters to manager the proto's roster control.
-        _protoRosters = [WTProtoRosters shareRostersWithProtoStream:protoStream
-                                                          interface:@"roster"];
-        
-        #pragma mark - init WTProtoGroup to manager the Group
-        _protoGroup   = [WTProtoGroup shareGroupWithProtoStream:protoStream
-                                                      interface:@"group"];
-        
-        #pragma mark - init WTProtoMessageCenter to manager the Message Send & Receive & handle
-        _protoMessageCenter = [WTProtoMessageCenter shareMessagerCenterWithProtoStream:protoStream
-                                                                             interface:@"messageCenter"];
+    #pragma mark - init WTProtoReConnection to reconnection.
+    _protoReConnection = [WTProtoReConnection shareReConnecionWithProtoStream:protoStream
+                                                               ReconnectDelay:0.f
+                                                       ReconnectTimerInterval:2.0f
+                                                                    interface:@"ReConnection"];
     
-        #pragma mark - init WTProtoContact to manager the Contact
-        _protoContact = [WTProtoContact shareContactWithProtoStream:protoStream interface:@"contact"];
+    #pragma mark - init WTProtoBlock to block user.
+    _protoBlock = [WTProtoBlock shareBlockWithProtoStream:protoStream
+                                                interface:@"Block"];
+            
+    #pragma mark - init WTProtoPing to ping user or server auto/manual.
+    _protoPing  = [WTProtoPing sharePingWithProtoStream:protoStream
+                                              interface:@"ping"];
+
+    #pragma mark - init WTProtoRosters to manager the proto's roster control.
+    _protoRosters = [WTProtoRosters shareRostersWithProtoStream:protoStream
+                                                      interface:@"roster"];
     
-        #pragma mark - init WTProtoContact to manager the Contact
-        _protoUserInfoService = [WTProtoUserInfoService shareUserInfoServiceWithProtoStream:protoStream                                                                                       interface:@"UserInfoService"];
+    #pragma mark - init WTProtoGroup to manager the Group
+    _protoGroup   = [WTProtoGroup shareGroupWithProtoStream:protoStream
+                                                  interface:@"group"];
+    
+    #pragma mark - init WTProtoMessageCenter to manager the Message Send & Receive & handle
+    _protoMessageCenter = [WTProtoMessageCenter shareMessagerCenterWithProtoStream:protoStream
+                                                                         interface:@"messageCenter"];
+
+    #pragma mark - init WTProtoContact to manager the Contact
+    _protoContact = [WTProtoContact shareContactWithProtoStream:protoStream interface:@"contact"];
+
+    #pragma mark - init WTProtoContact to manager the UserInfoService
+    _protoUserInfoService = [WTProtoUserInfoService shareUserInfoServiceWithProtoStream:protoStream                                                                                       interface:@"UserInfoService"];
+    
+     #pragma mark - init WTProtoContact to manager the UserInfoService
+    _protoUserConfigService = [WTProtoUserConfigService shareUserConfigServiceWithProtoStream:protoStream interface:@"userConfig"];
 }
 
 
@@ -293,6 +299,7 @@ static dispatch_once_t queueOnceToken;
     [_protoMessageCenter addProtoMessageCenterDelegate:self  delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
     [_protoContact       addProtoContactDelegate:self        delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
     [_protoUserInfoService  addProtoUserInfoServiceDelegate:self delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
+    [_protoUserConfigService  addProtoUserConfigServiceDelegate:self delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
     
     protoMulticasDelegate = (GCDMulticastDelegate <WTProtoDelegate> *)[[GCDMulticastDelegate alloc] init];
     
@@ -355,6 +362,7 @@ static dispatch_once_t queueOnceToken;
     _protoMessageCenter    = nil;
     _protoContact          = nil;
     _protoUserInfoService  = nil;
+    _protoUserConfigService  = nil;
     
     [WTProtoStreamManager       dellocSelf];
     [WTProtoConnection          dellocSelf];
@@ -368,6 +376,7 @@ static dispatch_once_t queueOnceToken;
     [WTProtoMessageCenter       dellocSelf];
     [WTProtoContact             dellocSelf];
     [WTProtoUserInfoService     dellocSelf];
+    [WTProtoUserConfigService   dellocSelf];
 }
 
 
@@ -730,6 +739,7 @@ static dispatch_once_t queueOnceToken;
     [_protoContact agreeAddFriendWithJid:jidStr source:source];
 }
 
+
 -(void)addFriendWithJid:(NSString *)jidStr source:(NSString *)source verify:(NSString *)verify time:(NSString *)time statusInfo:(NSDictionary *)statusInfo{
     [_protoContact addFriendWithJid:jidStr source:source verify:verify time:time statusInfo:statusInfo fromUser:_protoUser];
 }
@@ -768,6 +778,43 @@ static dispatch_once_t queueOnceToken;
     
     [_protoGroup request_IQ_RemoveMemberUnscribesChatRoomWithFromUser:_protoUser RoomID:groupJId roomName:roomName roomOwnerID:roomOwnerJid memberGroupNickName:nickName Friends:friends];
 }
+
+#pragma mark - 用户配置相关方法
+/**
+ *  获取用户偏好设置
+*/
+- (void)getUserPerferenceInfo{
+    [_protoUserConfigService IQ_getUserPerferenceInfo:_protoUser];
+}
+
+/**
+ *  获取用户聊天设置
+*/
+- (void)getUserChatSettingInfo{
+    [_protoUserConfigService IQ_getUserChatSettingInfo:_protoUser];
+}
+
+/**
+ *  更新用户偏好设置
+*/
+- (void)updateUserConfigWithDict:(NSDictionary *)data{
+    [_protoUserConfigService IQ_updateUserConfigWithDict:data fromUser:_protoUser];
+}
+
+/**
+ *  更新用户聊天配置
+*/
+- (void)updateUserChatSettingWithDict:(NSDictionary *)data{
+    [_protoUserConfigService IQ_updateUserChatSettingWithDict:data fromUser:_protoUser];
+}
+
+/**
+ *  移除用户聊天配置
+*/
+- (void)removeUserChatSettingWithDict:(NSDictionary *)data{
+    [_protoUserConfigService IQ_removeUserChatSettingWithDict:data fromUser:_protoUser];
+}
+
 
 #pragma mark Proto Ack/ReadAck Message
 - (void)Ack:(XMPPMessage*)message
@@ -1114,16 +1161,16 @@ static dispatch_once_t queueOnceToken;
     return [protoMulticasDelegate WTProto:self isExistFriendJid:jid];
 }
 
-- (void)WTProtoContact:(WTProtoContact *)protoContact newContact:(NSDictionary *)contactInfo isWaitPass:(BOOL)isWaitPass{
-    [protoMulticasDelegate WTProto:self newContact:contactInfo isWaitPass:isWaitPass];
-}
-
 - (void)WTProtoContact:(WTProtoContact *)protoContact addFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid{
     [protoMulticasDelegate WTProto:self addFriend_ResultWithSucceed:succeed jid:jid];
 }
 
 - (void)WTProtoContact:(WTProtoContact *)protoContact deleteFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid{
     [protoMulticasDelegate WTProto:self deleteFriend_ResultWithSucceed:succeed jid:jid];
+}
+
+- (void)WTProtoContact:(WTProtoContact *)protoContact newContact:(NSDictionary *)contactInfo isWaitPass:(BOOL)isWaitPass{
+    [protoMulticasDelegate WTProto:self newContact:contactInfo isWaitPass:isWaitPass];
 }
 
 - (void)WTProtoContact:(WTProtoContact *)protoContact agreeAddFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid{
@@ -1165,5 +1212,38 @@ static dispatch_once_t queueOnceToken;
 - (void)WTProtoGroup:(WTProtoGroup *)protoGroup RemoveMemberUnscribesChatRoom_Result:(BOOL)resalut info:(id)info{
     [protoMulticasDelegate WTProto:self removeMemberUnscribesChatRoom_Result:resalut info:info];
 }
+
+
+#pragma mark - WTProtoUserConfigService Delegate
+- (void)WTProtoUserConfigService:(WTProtoUserConfigService *)UserConfigService getUserPerferenceResult:(BOOL)result info:(id)info{
+    
+    [protoMulticasDelegate WTProto:self getUserPerferenceResult:result info:info];
+    
+}
+
+-(void)WTProtoUserConfigService:(WTProtoUserConfigService* )UserConfigService
+       getUserChatSettingResult:(BOOL)result
+                           info:(id)info{
+    [protoMulticasDelegate WTProto:self getUserChatSettingResult:result info:info];
+}
+    
+-(void)WTProtoUserConfigService:(WTProtoUserConfigService* )UserConfigService
+         updateUserConfigResult:(BOOL)result
+                           info:(id)info{
+    [protoMulticasDelegate WTProto:self updateUserConfigResult:result info:info];
+}
+
+-(void)WTProtoUserConfigService:(WTProtoUserConfigService* )UserConfigService
+    updateUserChatSettingResult:(BOOL)result
+                           info:(id)info{
+    [protoMulticasDelegate WTProto:self updateUserChatSettingResult:result info:info];
+}
+
+-(void)WTProtoUserConfigService:(WTProtoUserConfigService* )UserConfigService
+    removeUserChatSettingResult:(BOOL)result
+                           info:(id)info{
+    [protoMulticasDelegate WTProto:self removeUserChatSettingResult:result info:info];
+}
+
 
 @end

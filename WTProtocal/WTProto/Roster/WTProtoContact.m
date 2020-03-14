@@ -316,7 +316,7 @@ static dispatch_once_t queueOnceToken;
 -(void)protoTrackerManager:(WTProtoTrackerManager *)trackerManager trackTimeOutIQ:(WTProtoIQ *)iq
 {
     //iq请求发送超时 FIXIME:调整error
-    NSError* error = [[NSError alloc]init];
+    NSError *error = [NSError errorWithDomain:@"发送超时" code:0 userInfo:nil];
     [self xmppStream:_contactStream didFailToSendIQ:iq error:error];
 }
 

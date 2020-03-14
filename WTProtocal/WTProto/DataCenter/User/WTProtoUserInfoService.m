@@ -241,7 +241,7 @@ static dispatch_once_t queueOnceToken;
             [trackerInfo.element isKindOfClass:[WTProtoIQ class]])
         {
             //iq请求发送超时 FIXIME:调整error
-            NSError* error = [[NSError alloc]init];
+            NSError *error = [NSError errorWithDomain:@"发送超时" code:0 userInfo:nil];
             [self xmppStream:_UserInfoServiceStream didFailToSendIQ:(WTProtoIQ *)trackerInfo.element error:error];
         }
     }
