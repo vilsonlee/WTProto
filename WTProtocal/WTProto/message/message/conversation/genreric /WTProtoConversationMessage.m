@@ -56,7 +56,8 @@
         self.msgType            = [[PropertyDictionary valueForKey:@"msgType"] longLongValue];
         self.destructionTime    = [[PropertyDictionary valueForKey:@"destructionTime"] longLongValue];
         self.device             = [[PropertyDictionary valueForKey:@"device"] longLongValue];
-                
+        self.incrementID        = [[PropertyDictionary valueForKey:@"increment_id"] longLongValue];
+        
         [self reSetAttribute];
         [self setBody];
     }
@@ -128,6 +129,15 @@
     _device = device;
     [self reSetBody];
 }
+
+
+-(void)setIncrementID:(int64_t)incrementID{
+    
+    _incrementID = incrementID;
+    
+    [self reSetBody];
+}
+
 
 
 -(NSString *)getBodyString:(WTProtoConversationMessage*)protoMessage

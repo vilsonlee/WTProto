@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)WTProtoConversationMessageType msgType;
 @property(nonatomic,assign)int64_t destructionTime;
 @property(nonatomic,assign)int64_t device;
-
+@property(nonatomic,assign)int64_t incrementID;
 
 - (instancetype)initWithFromID:(NSString *)fromID
                       fromName:(NSString *)fromName
@@ -71,6 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)setMsgType:(WTProtoConversationMessageType)msgTyp;
 -(void)setDestructionTime:(int64_t)destructionTime;
 -(void)setDevice:(int64_t)device;
+-(void)setIncrementID:(int64_t)incrementID;
 
 @end
 
