@@ -1189,7 +1189,7 @@ static dispatch_once_t queueOnceToken;
     [protoMulticasDelegate WTProto:self getGroupInfo_ResultWithSucceed:resalut info:info];
 }
 
-- (void)WTProtoGroup:(WTProtoGroup *)protoGroup RoomDidCreat:(XMPPRoom *)room{
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup RoomDidCreate:(XMPPRoom *)room{
     [protoMulticasDelegate WTProto:self RoomDidCreate_ResultWithSucceed:YES info:@""];
 }
 

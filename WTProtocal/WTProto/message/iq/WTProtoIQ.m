@@ -18,7 +18,7 @@
 
 + (WTProtoIQ *)iqWithiq:(XMPPIQ*)iq
 {
-    return [[WTProtoIQ alloc] initWithType:iq.type to:iq.to elementID:iq.elementID child:iq.childElement];
+    return [[WTProtoIQ alloc] initWithType:iq.type to:iq.to elementID:iq.elementID child:[iq.childElement copy]];
 }
 
 + (WTProtoIQ *)iqWithType:(NSString *)type

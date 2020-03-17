@@ -256,7 +256,7 @@ static dispatch_once_t queueOnceToken;
 
         NSString* errorMessage = [[error elementForName:@"text" xmlns:@"urn:ietf:params:xml:ns:xmpp-streams"] stringValue];
 
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errorMessage forKey:NSLocalizedDescriptionKey];
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errorMessage?:@"" forKey:NSLocalizedDescriptionKey];
 
         Error = [[NSError alloc]initWithDomain:ErrorDomain code:3 userInfo:userInfo];
     }

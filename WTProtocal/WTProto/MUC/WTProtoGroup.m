@@ -192,7 +192,7 @@ static dispatch_once_t queueOnceToken;
                                         inviteUsers:(NSArray *)inviteUsers
 {
     /* 初始化房间 */
-    _protoRoom = [[WTProtoRoom alloc]initWithRoomStorage:[XMPPRoomCoreDataStorage sharedInstance] jid:jid dispatchQueue:[[WTProtoQueue mainQueue] nativeQueue]];
+    self.protoRoom = [[WTProtoRoom alloc]initWithRoomStorage:[XMPPRoomCoreDataStorage sharedInstance] jid:jid dispatchQueue:[[WTProtoQueue mainQueue] nativeQueue]];
     
     /* 如果加入的房间在服务器中不存在,则创建,如果存在,就直接加入 */
     NSXMLElement *xml = [[NSXMLElement alloc] initWithXMLString:@"<history maxstanzas='0'/>"error:nil];
@@ -737,7 +737,7 @@ static dispatch_once_t queueOnceToken;
 - (void)setGroupConfigInviteConfirmWithFlag:(NSString *)flag roomID:(WTProtoUser *)roomID
 {
     
-    _protoRoom = [self creatRoomWithRoomID:roomID];
+    self.protoRoom = [self creatRoomWithRoomID:roomID];
     
     [_protoRoom setGroupConfigInviteConfirmWithFlag:flag];
     
@@ -747,7 +747,7 @@ static dispatch_once_t queueOnceToken;
 - (void)setGroupConfigdestoryWithTime:(NSInteger)time roomID:(WTProtoUser *)roomID
 {
 
-    _protoRoom = [self creatRoomWithRoomID:roomID];
+    self.protoRoom = [self creatRoomWithRoomID:roomID];
     
     [_protoRoom setGroupConfigdestoryWithTime:time];
     
@@ -756,35 +756,35 @@ static dispatch_once_t queueOnceToken;
 //群截屏通知 muc#roomconfig_screenshotsnotify flag: @"0"：关闭， @"1"：开启
 - (void)setGroupConfigScreenshotsnotify:(NSString *)flag roomID:(WTProtoUser *)roomID
 {
-    _protoRoom = [self creatRoomWithRoomID:roomID];
+    self.protoRoom = [self creatRoomWithRoomID:roomID];
     [_protoRoom setGroupConfigScreenshotsnotify:flag];
 }
 
 ///禁止私聊 muc#roomconfig_no_private_chat flag: @"0"：关闭， @"1"：开启
 - (void)setGroupConfigPrivateChatFlag:(NSString *)flag roomID:(WTProtoUser *)roomID
 {
-    _protoRoom = [self creatRoomWithRoomID:roomID];
+    self.protoRoom = [self creatRoomWithRoomID:roomID];
     [_protoRoom setGroupConfigPrivateChatFlag:flag];
 }
 
 ///群名称修改
 - (void)setGroupConfigGroupName:(NSString *)title roomID:(WTProtoUser *)roomID
 {
-    _protoRoom = [self creatRoomWithRoomID:roomID];
+    self.protoRoom = [self creatRoomWithRoomID:roomID];
     [_protoRoom setGroupConfigGroupName:title];
 }
 
 ///群头像更新, updateTime: 更新的时间戳
 - (void)setGroupConfigGroupIcon:(NSString *)updateTime roomID:(WTProtoUser *)roomID
 {
-    _protoRoom = [self creatRoomWithRoomID:roomID];
+    self.protoRoom = [self creatRoomWithRoomID:roomID];
     [_protoRoom setGroupConfigGroupIcon:updateTime];
 }
 
 ///群公告修改
 - (void)setGroupConfigGroupDescription:(NSString *)desc roomID:(WTProtoUser *)roomID
 {
-    _protoRoom = [self creatRoomWithRoomID:roomID];
+    self.protoRoom = [self creatRoomWithRoomID:roomID];
     [_protoRoom setGroupConfigGroupDescription:desc];
 }
     

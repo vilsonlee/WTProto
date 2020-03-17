@@ -55,7 +55,7 @@
                    StreamCompressionMode:(WTProtoStreamCompressionMode)streamCompressionMode{
     
     
-    protoSteamQueue = [[WTProtoQueue alloc]initWithName:@"org.wtproto.Queue:stram"];
+    protoSteamQueue = [[WTProtoQueue alloc]initWithName:[@"org.wtproto.Queue:stram" UTF8String]];
     
     protoStreamMulticasDelegate = (GCDMulticastDelegate <WTProtoStreamDelegate> *)[[GCDMulticastDelegate alloc] init];
     
