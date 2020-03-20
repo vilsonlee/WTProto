@@ -221,7 +221,7 @@
     //群jid
     [unSubscribelistNode addAttributeWithName:@"groupjid" stringValue:roomID.full];
     //群的拥有者
-    //    [unSubscribelistNode addAttributeWithName:@"groupownerjid" stringValue:roomOwnerJid.full];
+    //    [unSubscribelistNode addAttributeWithName:@"groupownerjid" stringValue:roomOwnerID.full];
     //操作者的昵称
     [unSubscribelistNode addAttributeWithName:@"ownernick" stringValue:nickName];
     //操作者的jid

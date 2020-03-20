@@ -614,7 +614,7 @@ static dispatch_once_t queueOnceToken;
     
     WEAKSELF
     [WTProtoGroupIQ parse_IQ_ExitUserSubscribes:iq parseResult:^(BOOL succeed, id  _Nonnull Info) {
-        [self->protoGroupMulticasDelegate WTProtoGroup:weakSelf GetGroupMembersList_Result:succeed info:Info];
+        [self->protoGroupMulticasDelegate WTProtoGroup:weakSelf ExitUserSubscribes_Result:succeed info:Info];
     }];
     
 }
