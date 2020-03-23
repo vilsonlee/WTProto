@@ -1177,6 +1177,14 @@ static dispatch_once_t queueOnceToken;
     [protoMulticasDelegate WTProto:self agreeAddFriend_ResultWithSucceed:succeed jid:jid];
 }
 
+- (void)WTProtoContact:(WTProtoContact *)protoContact updateType:(NSString *)type value:(NSString *)value jid:(NSString *)jid{
+    [protoMulticasDelegate WTProto:self updateType:type value:value jid:jid];
+}
+
+- (void)WTProtoContact:(WTProtoContact *)protoContact didReceiveAgreeMyAddFriendReqWithContact:(NSDictionary *)info{
+    [protoMulticasDelegate WTProto:self didReceiveAgreeMyAddFriendReqWithContact:info];
+}
+
 #pragma mark - WTProtoGroup Delegate
 - (void)WTProtoGroup:(WTProtoGroup *)protoGroup GetGroupList_Result:(BOOL)resalut info:(id)info{
     

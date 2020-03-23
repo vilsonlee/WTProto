@@ -133,6 +133,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)WTProto:(WTProto*)wtProto deleteFriend_ResultWithSucceed:(BOOL)succeed jid:(NSString *)jid;
 
+- (void)WTProto:(WTProto* )wtProto updateType:(NSString *)type value:(NSString *)value jid:(NSString *)jid;
+
+- (void)WTProto:(WTProto* )wtProto didReceiveAgreeMyAddFriendReqWithContact:(NSDictionary *)info;
+
+
 
 #pragma mark - WTProto Group
 - (void)WTProto:(WTProto*)wtProto getGroups_ResultWithSucceed:(BOOL)succeed info:(id)info;

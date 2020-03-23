@@ -383,11 +383,32 @@ static dispatch_once_t queueOnceToken;
        NSLog(@"presence = %@",presence);
         if ([presence elementForName:@"update"] && ![presence.from.bare isEqual:sender.myJID.bare]) {
     #pragma mark  联系人好友信息更新
+            NSString * changeType = [[presence elementForName:@"update"] attributeStringValueForName:@"type"];
+            NSString * changeValue = [[presence elementForName:@"status"] stringValue];
+            
+            [self->protoContactMulticasDelegate WTProtoContact:self updateType:changeType value:changeValue jid:presence.from.full];
+
         }
         else if ([presence elementForName:@"ext"] && [presence.type isEqualToString:@"subscribed"]) {
     //        NSLog(@"有联系人同意了我的好友请求");
             
+            NSXMLElement *subNode = [presence elementForName:@"ext" xmlns:@"jabber:iq:roster"];
+            NSString * source = [subNode attributeStringValueForName:@"src"];
+//            NSString * verify = [subNode attributeStringValueForName:@"verify"];
+            NSString * agree = [subNode attributeStringValueForName:@"agree"];
             
+            //agree == 1时才是同意加为好友
+            if ([agree integerValue] == 2) {
+                return;
+            }
+            
+            //通过代理询问是否已添加为好友
+            BOOL isMyFriend = [self->protoContactMulticasDelegate WTProtoContact:self isExistFriendJid:presence.from.bare];
+            if (isMyFriend) {
+                return;
+            }
+            
+            [self->protoContactMulticasDelegate WTProtoContact:self didReceiveAgreeMyAddFriendReqWithContact:@{@"jid":presence.from.bare, @"source":source}];
             
             
         }else if ([presence elementForName:@"status"]){

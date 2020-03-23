@@ -45,7 +45,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)WTProtoContact:(WTProtoContact* )protoContact isExistFriendJid:(NSString *)jid;
 
+- (void)WTProtoContact:(WTProtoContact* )protoContact updateType:(NSString *)type value:(NSString *)value jid:(NSString *)jid;
+
 - (void)WTProtoContact:(WTProtoContact* )protoContact newContact:(NSDictionary *)contactInfo isWaitPass:(BOOL)isWaitPass;
+
+- (void)WTProtoContact:(WTProtoContact* )protoContact didReceiveAgreeMyAddFriendReqWithContact:(NSDictionary *)info;
 
 
 @end
