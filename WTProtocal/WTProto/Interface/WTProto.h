@@ -138,6 +138,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)WTProto:(WTProto* )wtProto didReceiveAgreeMyAddFriendReqWithContact:(NSDictionary *)info;
 
 
+#pragma mark - WTProto BlockList
+- (void)WTProto:(WTProto*)wtProto getBlockList_ResultWithSucceed:(BOOL)succeed info:(id)info;
+
 
 #pragma mark - WTProto Group
 - (void)WTProto:(WTProto*)wtProto getGroups_ResultWithSucceed:(BOOL)succeed info:(id)info;
@@ -317,6 +320,9 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
 - (void)agreeAddFriendWithJid:(NSString *)jidStr source:(NSString *)source;
 
 - (void)addFriendWithJid:(NSString *)jidStr source:(NSString *)source verify:(NSString *)verify time:(NSString *)time statusInfo:(NSDictionary *)statusInfo;
+
+//黑名单
+- (void)getBlockList;
 
 //群聊列表相关方法
 - (void)getGroupList;

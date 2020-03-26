@@ -132,6 +132,7 @@ static dispatch_once_t queueOnceToken;
 }
 
 
+#pragma mark - XMPPBlockingDelegate
 - (void)xmppBlocking:(XMPPBlocking *)sender didReceivedBlockingList:(NSArray*)blockingList
 {
     
@@ -149,24 +150,25 @@ static dispatch_once_t queueOnceToken;
     
 }
 
-
+//------------------------------------------------------------------------------------------------------------
 - (void)xmppBlocking:(XMPPBlocking *)sender didBlockJID:(XMPPJID*)xmppJID
 {
     
 }
 
-
+//------------------------------------------------------------------------------------------------------------
 - (void)xmppBlocking:(XMPPBlocking *)sender didNotBlockJID:(XMPPJID*)xmppJID error:(id)error
 {
     
 }
 
-
+//------------------------------------------------------------------------------------------------------------
 - (void)xmppBlocking:(XMPPBlocking *)sender didUnblockJID:(XMPPJID*)xmppJID
 {
     
 }
 
+//------------------------------------------------------------------------------------------------------------
 - (void)xmppBlocking:(XMPPBlocking *)sender didNotUnblockJID:(XMPPJID*)xmppJID error:(id)error
 {
     
@@ -184,6 +186,42 @@ static dispatch_once_t queueOnceToken;
     
 }
 
+
+
+#pragma mark - Main Method
+
+- (void)retrieveBlockingListItems{
+    [_protoBlocking retrieveBlockingListItems];
+}
+
+- (void)clearBlockingListInfo{
+    [_protoBlocking clearBlockingListInfo];
+}
+
+
+- (NSArray*)blockingList{
+    return [_protoBlocking blockingList];
+}
+
+
+- (void)blockWUser:(WTProtoUser*)WUser{
+    [_protoBlocking blockJID:(XMPPJID *)WUser];
+}
+
+
+- (void)unblockWUser:(WTProtoUser*)WUser{
+    [_protoBlocking unblockJID:(XMPPJID *)WUser];
+}
+
+
+- (BOOL)containsWUser:(WTProtoUser*)WUser{
+    return [_protoBlocking containsJID:(XMPPJID *)WUser];
+}
+
+
+- (void)unblockAll{
+    [_protoBlocking unblockAll];
+}
 
 
 

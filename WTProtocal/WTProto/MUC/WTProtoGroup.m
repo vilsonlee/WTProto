@@ -227,6 +227,17 @@ static dispatch_once_t queueOnceToken;
     [self addtracker:getRoomInfo_IQ timeout:WT_IQ_TIME_OUT_INTERVAL];
 }
 
+//群(房间)信息请求IQ结果处理
+-(void)handeleResult_IQ_GetRoomInfo:(XMPPIQ *)iq{
+    
+    WEAKSELF
+    [WTProtoGroupIQ parse_IQ_GetRoomInfo:iq parseResult:^(BOOL succeed, id  _Nonnull Info) {
+        
+        [self->protoGroupMulticasDelegate WTProtoGroup:weakSelf GetRoomInfo_Result:succeed info:Info];
+    }];
+    
+}
+
 
 #pragma mark 邀请User订阅加入群
 - (void)request_IQ_InviteUserSubscribesWithFromUser:(WTProtoUser*)fromUser
@@ -259,6 +270,16 @@ static dispatch_once_t queueOnceToken;
     [self addtracker:inviteUser_IQ timeout:WT_IQ_TIME_OUT_INTERVAL];
     
 }
+//邀请User订阅加入群 请求IQ结果处理
+-(void)handeleResult_IQ_InviteUserSubscribes:(XMPPIQ *)iq{
+    
+    WEAKSELF
+    [WTProtoGroupIQ parse_IQ_InviteUserSubscribes:iq parseResult:^(BOOL succeed, id  _Nonnull Info) {
+        
+        [self->protoGroupMulticasDelegate WTProtoGroup:weakSelf InviteUserSubscribes_Result:succeed info:Info];
+    }];
+    
+}
 
 
 #pragma mark 获取群列表
@@ -273,6 +294,16 @@ static dispatch_once_t queueOnceToken;
     [_groupStream sendElement:(XMPPIQ*)getGroupList_IQ];
     
     [self addtracker:getGroupList_IQ timeout:WT_IQ_TIME_OUT_INTERVAL];
+}
+
+//获取群列表 请求IQ结果处理
+-(void)handeleResult_IQ_GetGroupList:(XMPPIQ *)iq{
+    
+    WEAKSELF
+    [WTProtoGroupIQ parse_IQ_GetGroupList:iq parseResult:^(BOOL succeed, id  _Nonnull Info) {
+        [self->protoGroupMulticasDelegate WTProtoGroup:weakSelf GetGroupList_Result:succeed info:Info];
+    }];
+    
 }
 
 
@@ -571,34 +602,10 @@ static dispatch_once_t queueOnceToken;
 
 
 #pragma mark - 群操作请求IQ结果处理
--(void)handeleResult_IQ_GetRoomInfo:(XMPPIQ *)iq{
-    
-    WEAKSELF
-    [WTProtoGroupIQ parse_IQ_GetRoomInfo:iq parseResult:^(BOOL succeed, id  _Nonnull Info) {
-        
-        [self->protoGroupMulticasDelegate WTProtoGroup:weakSelf GetRoomInfo_Result:succeed info:Info];
-    }];
-    
-}
 
--(void)handeleResult_IQ_InviteUserSubscribes:(XMPPIQ *)iq{
-    
-    WEAKSELF
-    [WTProtoGroupIQ parse_IQ_InviteUserSubscribes:iq parseResult:^(BOOL succeed, id  _Nonnull Info) {
-        
-        [self->protoGroupMulticasDelegate WTProtoGroup:weakSelf InviteUserSubscribes_Result:succeed info:Info];
-    }];
-    
-}
 
--(void)handeleResult_IQ_GetGroupList:(XMPPIQ *)iq{
-    
-    WEAKSELF
-    [WTProtoGroupIQ parse_IQ_GetGroupList:iq parseResult:^(BOOL succeed, id  _Nonnull Info) {
-        [self->protoGroupMulticasDelegate WTProtoGroup:weakSelf GetGroupList_Result:succeed info:Info];
-    }];
-    
-}
+
+
 
 -(void)handeleResult_IQ_GetGroupMembersList:(XMPPIQ *)iq{
     

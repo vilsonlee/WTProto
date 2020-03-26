@@ -66,7 +66,7 @@
     
     if (self = [super initJidwithUser:userID
                                  domain:domain
-                             resource:resource]) {
+                             resource:resource.length==0?nil:resource]) {
     }
     
     return self;

@@ -744,6 +744,14 @@ static dispatch_once_t queueOnceToken;
     [_protoContact addFriendWithJid:jidStr source:source verify:verify time:time statusInfo:statusInfo fromUser:_protoUser];
 }
 
+#pragma mark - WTProtoBlock Method
+- (void)getBlockList{
+    
+    NSArray * blocklist = [_protoBlock blockingList];
+    [protoMulticasDelegate WTProto:self getBlockList_ResultWithSucceed:YES info:blocklist];
+    
+}
+
 #pragma mark - WTProtoGroup Method
 - (void)getGroupList{
     [_protoGroup request_IQ_GetGroupListByFromUser:_protoUser];

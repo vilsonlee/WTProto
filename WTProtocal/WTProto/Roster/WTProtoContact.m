@@ -408,7 +408,7 @@ static dispatch_once_t queueOnceToken;
                 return;
             }
             
-            [self->protoContactMulticasDelegate WTProtoContact:self didReceiveAgreeMyAddFriendReqWithContact:@{@"jid":presence.from.bare, @"source":source}];
+            [self->protoContactMulticasDelegate WTProtoContact:self didReceiveAgreeMyAddFriendReqWithContact:@{@"jid":presence.from.bare, @"source":source?:@""}];
             
             
         }else if ([presence elementForName:@"status"]){

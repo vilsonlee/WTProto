@@ -520,10 +520,10 @@
 		CE628580239A2AED005849A9 /* Block */ = {
 			isa = PBXGroup;
 			children = (
-				CE628583239A2AED005849A9 /* WTProtoBlocking.h */,
-				CE628581239A2AED005849A9 /* WTProtoBlocking.m */,
 				CE628582239A2AED005849A9 /* WTProtoBlock.h */,
 				CE628584239A2AED005849A9 /* WTProtoBlock.m */,
+				CE628583239A2AED005849A9 /* WTProtoBlocking.h */,
+				CE628581239A2AED005849A9 /* WTProtoBlocking.m */,
 			);
 			path = Block;
 			sourceTree = "<group>";
