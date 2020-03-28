@@ -153,25 +153,25 @@ static dispatch_once_t queueOnceToken;
 //------------------------------------------------------------------------------------------------------------
 - (void)xmppBlocking:(XMPPBlocking *)sender didBlockJID:(XMPPJID*)xmppJID
 {
-    
+    [self->protoBlockMulticasDelegate WTProtoBlock:self changeBlockStatus_ResultWithSucceed:YES info:@{@"jid":xmppJID.bare, @"block":@"1"}];
 }
 
 //------------------------------------------------------------------------------------------------------------
 - (void)xmppBlocking:(XMPPBlocking *)sender didNotBlockJID:(XMPPJID*)xmppJID error:(id)error
 {
-    
+    [self->protoBlockMulticasDelegate WTProtoBlock:self changeBlockStatus_ResultWithSucceed:NO info:@{@"jid":xmppJID.bare, @"error":error, @"block":@"1"}];
 }
 
 //------------------------------------------------------------------------------------------------------------
 - (void)xmppBlocking:(XMPPBlocking *)sender didUnblockJID:(XMPPJID*)xmppJID
 {
-    
+    [self->protoBlockMulticasDelegate WTProtoBlock:self changeBlockStatus_ResultWithSucceed:YES info:@{@"jid":xmppJID.bare, @"block":@"0"}];
 }
 
 //------------------------------------------------------------------------------------------------------------
 - (void)xmppBlocking:(XMPPBlocking *)sender didNotUnblockJID:(XMPPJID*)xmppJID error:(id)error
 {
-    
+    [self->protoBlockMulticasDelegate WTProtoBlock:self changeBlockStatus_ResultWithSucceed:NO info:@{@"jid":xmppJID.bare, @"error":error, @"block":@"0"}];
 }
 
 

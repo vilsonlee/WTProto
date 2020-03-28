@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol WTProtoBlockDelegate
 
 @optional
+- (void)WTProtoBlock:(WTProtoBlock* )protoBlock changeBlockStatus_ResultWithSucceed:(BOOL)succeed info:(id)info;
 
 @end
 

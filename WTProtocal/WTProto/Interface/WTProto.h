@@ -140,7 +140,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - WTProto BlockList
 - (void)WTProto:(WTProto*)wtProto getBlockList_ResultWithSucceed:(BOOL)succeed info:(id)info;
-
+- (void)WTProto:(WTProto*)wtProto changeBlockStatus_ResultWithSucceed:(BOOL)succeed info:(id)info;
 
 #pragma mark - WTProto Group
 - (void)WTProto:(WTProto*)wtProto getGroups_ResultWithSucceed:(BOOL)succeed info:(id)info;
@@ -323,6 +323,7 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
 
 //黑名单
 - (void)getBlockList;
+- (void)changeBlockStatus:(WTProtoUser *)user block:(BOOL)block;
 
 //群聊列表相关方法
 - (void)getGroupList;

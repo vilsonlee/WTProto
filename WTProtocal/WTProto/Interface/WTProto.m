@@ -752,6 +752,15 @@ static dispatch_once_t queueOnceToken;
     
 }
 
+- (void)changeBlockStatus:(WTProtoUser *)user block:(BOOL)block{
+    
+    if (block) {
+        [_protoBlock blockWUser:user];
+    }else{
+        [_protoBlock unblockWUser:user];
+    }
+}
+
 #pragma mark - WTProtoGroup Method
 - (void)getGroupList{
     [_protoGroup request_IQ_GetGroupListByFromUser:_protoUser];
@@ -1191,6 +1200,11 @@ static dispatch_once_t queueOnceToken;
 
 - (void)WTProtoContact:(WTProtoContact *)protoContact didReceiveAgreeMyAddFriendReqWithContact:(NSDictionary *)info{
     [protoMulticasDelegate WTProto:self didReceiveAgreeMyAddFriendReqWithContact:info];
+}
+
+#pragma mark - WTProtoBlock Delegate
+- (void)WTProtoBlock:(WTProtoBlock *)protoBlock changeBlockStatus_ResultWithSucceed:(BOOL)succeed info:(id)info{
+    [protoMulticasDelegate WTProto:self changeBlockStatus_ResultWithSucceed:succeed info:info];
 }
 
 #pragma mark - WTProtoGroup Delegate
