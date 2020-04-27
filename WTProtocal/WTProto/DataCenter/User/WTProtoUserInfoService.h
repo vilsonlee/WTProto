@@ -26,6 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
              SearchUserResult:(BOOL)result
                          info:(id)info;
 
+-(void)WTProtoUserInfoService:(WTProtoUserInfoService* )UserInfoService
+                     methodID:(NSString *)methodID
+         updateUserInfoResult:(BOOL)result
+                         info:(id)info;
+
 
 @end
 
@@ -62,6 +67,12 @@ NS_ASSUME_NONNULL_BEGIN
                                        KeyWord:(NSString *)key
                                        keyType:(NSString *)type
                                searchFromGroup:(BOOL)fromGroup;
+
+//修改个人资料
+-(void)request_IQ_UpdateUserInfoWithLocalUser:(WTProtoUser *)localUser
+                                   updateInfo:(NSDictionary *)infoDict
+                                     methodID:(NSString *)methodID;
+
 
 
 @end

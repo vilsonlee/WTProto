@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)WTProtoGroup:(WTProtoGroup* )protoGroup SetGroupBannedMemberList_Result:(BOOL)resalut info:(id)info;
 -(void)WTProtoGroup:(WTProtoGroup* )protoGroup SetGroupBannedAll_Result:(BOOL)resalut inf:(id)info;
 -(void)WTProtoGroup:(WTProtoGroup* )protoGroup GetGroupBannedMemberList_Result:(BOOL)resalut info:(id)info;
--(void)WTProtoGroup:(WTProtoGroup* )protoGroup GetGroupActivityMember_oResult:(BOOL)resalut info:(id)info;
+-(void)WTProtoGroup:(WTProtoGroup* )protoGroup GetGroupActivityMember_Result:(BOOL)resalut info:(id)info;
 -(void)WTProtoGroup:(WTProtoGroup* )protoGroup SetGroupMemberRemarkName_Result:(BOOL)resalut info:(id)info;
 
 @end
@@ -172,7 +172,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (void)request_IQ_SetGroupAdminWithFromUser:(WTProtoUser *)fromUser
                                     Memebers:(NSArray *)member
-                                     roomJid:(NSString *)roomJid
+                                     roomJid:(WTProtoUser *)roomJid
                                        style:(NSString *)style;
 
 

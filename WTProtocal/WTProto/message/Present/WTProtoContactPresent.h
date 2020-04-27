@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 */
 + (WTProtoPresence *)replyAddFriendRequestReceivedWithContactJid:(NSString *)jidStr;
 
++ (WTProtoPresence *)userInfoChangedWithUpdateType:(NSString *)type value:(NSString *)value fromUser:(WTProtoUser *)fromUser;
+
 @end
 
 NS_ASSUME_NONNULL_END

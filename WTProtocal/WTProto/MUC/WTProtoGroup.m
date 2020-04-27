@@ -456,7 +456,7 @@ static dispatch_once_t queueOnceToken;
 #pragma mark 群管理员设置
 - (void)request_IQ_SetGroupAdminWithFromUser:(WTProtoUser *)fromUser
                                     Memebers:(NSArray *)member
-                                     roomJid:(NSString *)roomJid
+                                     roomJid:(WTProtoUser *)roomJid
                                        style:(NSString *)style
 {
     WTProtoIQ* setGroupAdmin_IQ = [WTProtoGroupIQ IQ_SetGroupAdminWithFromUser:fromUser
@@ -723,7 +723,7 @@ static dispatch_once_t queueOnceToken;
     
     WEAKSELF
     [WTProtoGroupIQ parse_IQ_GetGroupActivityMember:iq parseResult:^(BOOL succeed, id  _Nonnull Info) {
-        [self->protoGroupMulticasDelegate WTProtoGroup:weakSelf InviteUserSubscribes_Result:succeed info:Info];
+        [self->protoGroupMulticasDelegate WTProtoGroup:weakSelf GetGroupActivityMember_Result:succeed info:Info];
     }];
     
 }
@@ -827,15 +827,17 @@ static dispatch_once_t queueOnceToken;
 
 
 #pragma mark -  邀请好友入群
+//........
+
 - (void)xmppRoom:(XMPPRoom *)sender didConfigure:(nonnull XMPPIQ *)iqResult
 {
-    
+    [protoGroupMulticasDelegate WTProtoGroup:self RoomDidConfigure:sender iqResult:iqResult];
 }
 
 
 - (void)xmppRoom:(XMPPRoom *)sender didNotConfigure:(nonnull XMPPIQ *)iqResult
 {
-    
+    [protoGroupMulticasDelegate WTProtoGroup:self RoomDidNotConfigure:sender iqResult:iqResult];
 }
 
 

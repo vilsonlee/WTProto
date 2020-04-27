@@ -197,7 +197,24 @@
         DDXMLElement * singleChatListElement = [iq elementForName:@"single_chat_list"];
         NSArray * chatList = [singleChatListElement elementsForName:@"single_chat"];
         NSLog(@"(新方式)单聊动态拉取 单聊离线列表 chatList.count = %ld, chatList = %@", chatList.count, chatList);
-        parseResult(YES, chatList);
+//        parseResult(YES, chatList);
+                
+        //转换下
+        NSMutableArray * formatSingleChatList = [[NSMutableArray alloc] init];
+        
+        for (NSXMLElement * subElem in chatList) {
+            NSMutableDictionary * itemDict = [[NSMutableDictionary alloc] init];
+            for (NSXMLElement * attelement in subElem.attributes) {
+                [itemDict setObject:[attelement stringValue] forKey:[attelement name]];
+            }
+//                for (NSXMLElement * element in subElem.children) {
+//                    [itemDict setObject:[element stringValue] forKey:[element name]];
+//                }
+            [formatSingleChatList addObject:itemDict];
+        }
+
+        parseResult(YES, formatSingleChatList);
+
     }
     
 }
@@ -275,7 +292,36 @@
         NSArray * queryList = [iq elementsForName:@"set"];
         NSLog(@"groupElemsList = %@", queryList);
         
-        parseResult(YES, queryList);
+//        parseResult(YES, queryList);
+       //转换下
+        NSMutableArray * formatGroupChatList = [[NSMutableArray alloc] init];
+        
+        for (NSXMLElement * subElem in queryList) {
+            NSMutableDictionary * itemDict = [[NSMutableDictionary alloc] init];
+            for (NSXMLElement * attelement in subElem.attributes) {
+                [itemDict setObject:[attelement stringValue] forKey:[attelement name]];
+            }
+            for (NSXMLElement * element in subElem.children) {
+                if ([[element name] isEqualToString:@"block_interval"]) {
+                    NSMutableArray *childArr = [[NSMutableArray alloc] init];
+                    for (NSXMLElement *childElement in element.children) {
+//                        [childArr addObject:[childElement stringValue]];
+                        NSMutableDictionary * c_itemDict = [[NSMutableDictionary alloc] init];
+                        for (NSXMLElement * c_attelement in childElement.attributes) {
+                             [c_itemDict setObject:[c_attelement stringValue] forKey:[c_attelement name]];
+                         }
+                        [childArr addObject:c_itemDict];
+                    }
+                    [itemDict setObject:childArr forKey:[element name]];
+                }else{
+                    [itemDict setObject:[element stringValue] forKey:[element name]];
+                }
+            }
+            [formatGroupChatList addObject:itemDict];
+        }
+        
+        parseResult(YES, formatGroupChatList);
+
     }
     
 }

@@ -412,6 +412,353 @@ static dispatch_once_t Concurrent_queueOnceToken;
 }
 
 
+//转换 1420
+- (NSDictionary *)decryptGroupDataUpDateMessage:(XMPPMessage*)message{
+    
+    NSMutableDictionary * updateInfoDict = [[NSMutableDictionary alloc] init];
+    
+    //公共部分信息
+    NSString * increment_id = [[message elementForName:@"increment_id"] stringValue];
+    if (increment_id) {
+        [updateInfoDict setObject:increment_id forKey:@"increment_id"];
+    }
+    
+    NSString * first_index = [[message elementForName:@"first_index"] stringValue];
+    if (first_index) {
+        [updateInfoDict setObject:first_index forKey:@"first_index"];
+    }
+
+    //消息的产生时间
+    NSXMLElement * delayElement = [message elementForName:@"delay" xmlns:@"urn:xmpp:delay"];
+    NSString * stamp = [delayElement attributeStringValueForName:@"stamp"];//取出stamp的值，以便转换
+    //将stamp（2018-10-26T08:40:59.761468Z）转换为时间戳...yyyy-MM-dd'T'HH:mm:ss.SSS Z/yyyy-MM-dd'T'HH:mm:ssX
+    //@"yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"/@"yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+    NSString * createTime = [NSString getTimestampFromTime:stamp format:@"yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"];
+    [updateInfoDict setObject:createTime forKey:@"createTime"];
+    
+    //config 群信息变更
+    DDXMLElement * configElement = [message elementForName:@"config" xmlns:XMPPMUCUserNamespace];
+    if (configElement) {
+        
+        [updateInfoDict setObject:@"config" forKey:@"updateElementType"];
+        
+        NSString * groupJid = message.from.bare;
+        [updateInfoDict setObject:groupJid forKey:@"groupjid"];
+        
+        NSString * type = [[configElement attributeForName:@"type"] stringValue];
+        NSString * value = [[configElement attributeForName:@"value"] stringValue];
+
+        [updateInfoDict setObject:type forKey:@"changeType"];
+        [updateInfoDict setObject:value forKey:@"changeValue"];
+
+        //修改群信息的人的信息
+        DDXMLElement * changeirnfoElement = [message elementForName:@"changeinfo"];
+        if (changeirnfoElement) {
+            NSString * changerNick = [changeirnfoElement attributeStringValueForName:@"nick"];
+            if (changerNick) {
+                [updateInfoDict setObject:changerNick forKey:@"changerName"];
+            }
+            
+            NSString *changerjid = [changeirnfoElement  attributeStringValueForName:@"jid"];
+            if (changerjid) {
+                [updateInfoDict setObject:changerjid forKey:@"changerJid"];
+            }
+        }
+        
+        return updateInfoDict;
+    }
+    
+    //过滤外壳， 取出item层对应的element
+    if ([[[message elementForName:@"event"] elementForName:@"items"] elementForName:@"item"] != nil)
+    {
+        NSXMLElement * nextMessage = [[[message elementForName:@"event"] elementForName:@"items"] elementForName:@"item"];
+        message = [XMPPMessage messageFromElement:nextMessage];
+    }
+    
+    
+    //subscribelist 群成员订阅（新增群成员）
+    DDXMLElement * subscribelistElement = [message elementForName:@"subscribelist"];
+    if (subscribelistElement) {
+        NSLog(@"subscribelistElement = %@", [subscribelistElement compactXMLString]);
+        
+        [updateInfoDict setObject:@"subscribelist" forKey:@"updateElementType"];
+        
+        //joinstyle 0:普通邀请加入  1：通过扫二维码加入  2：其他成员邀请加入，但邀请要群主或管理员确认
+        //群jid
+        NSString *groupjid = [subscribelistElement attributeStringValueForName:@"groupjid"];
+        //群名
+        NSString *groupname = [subscribelistElement attributeStringValueForName:@"groupname"];
+        //入群方式
+        NSString *joinstyle = [subscribelistElement attributeStringValueForName:@"joinstyle"];
+        
+        [updateInfoDict setObject:groupjid forKey:@"groupjid"];
+        [updateInfoDict setObject:groupname forKey:@"groupname"];
+        [updateInfoDict setObject:joinstyle forKey:@"joinstyle"];
+        
+        //当joinstyle等于2时的不同，reason : 邀请理由、 adminjid : 此群的管理员JIDS、 invite_icon : 邀请者的头像
+        NSString * reason = [subscribelistElement attributeStringValueForName:@"reason"];
+        if ([message elementsForName:@"adminjid"]) {
+            
+            NSArray * adminjidElementArr = [message elementsForName:@"adminjid"];
+            
+            NSLog(@"adminjidElementArr = %@", adminjidElementArr);
+            NSMutableArray * adminjids = [[NSMutableArray alloc] init];
+            for (NSXMLElement * adminJidEle in adminjidElementArr) {
+                NSString * adminJID = [adminJidEle stringValue];
+                [adminjids addObject:adminJID];
+            }
+            if (adminjids.count) {
+                [updateInfoDict setObject:adminjids forKey:@"adminjid"];
+            }
+        }
+        NSString * ownerjid = [[message elementForName:@"gownerjid"] stringValue];
+        NSString * inviterIcon = [[message elementForName:@"invite_icon"] stringValue];
+        NSString * room_image = [[message elementForName:@"room_image"] stringValue];
+        if (room_image) {
+            [updateInfoDict setObject:room_image forKey:@"groupIconUrl"];
+        }
+        if (inviterIcon) {
+            [updateInfoDict setObject:inviterIcon forKey:@"inviterIcon"];
+        }
+        if (ownerjid) {
+            [updateInfoDict setObject:ownerjid forKey:@"ownerjid"];
+        }
+        if (reason) {
+            [updateInfoDict setObject:reason forKey:@"reason"];
+        }
+        
+        //邀请者的jid,
+        NSString *inviterjid = [subscribelistElement attributeStringValueForName:@"ownerjid"];
+        //邀请者的昵称
+        NSString *inviterNick = [subscribelistElement attributeStringValueForName:@"ownernick"];
+        [updateInfoDict setObject:inviterjid forKey:@"inviterJid"];
+        [updateInfoDict setObject:inviterNick forKey:@"inviterNick"];
+        
+        //邀请的成员
+        NSMutableArray * members = [[NSMutableArray alloc] init];
+        NSArray *subscribelistItems = [subscribelistElement elementsForName:@"subscribe"];
+        for (NSXMLElement *subscribeItem in subscribelistItems)
+        {
+            //群成员的jid
+            NSString *jid = [subscribeItem attributeStringValueForName:@"jid"];
+            //群成员昵称
+            NSString *nick = [subscribeItem attributeStringValueForName:@"nick"];
+            //群成员头像icon
+            NSString * memberIcon = [[subscribeItem elementForName:@"event"] attributeStringValueForName:@"node"];
+
+            [members addObject:@{@"jid":jid,@"nickname":nick,@"identity":@"member",@"iconurl":memberIcon?:@""}];
+        }
+        [updateInfoDict setObject:members forKey:@"members"];
+
+        return updateInfoDict;
+    }
+    
+    //FIXME: 44
+    //unsubscribelist 群成员退出或被移出群聊
+    DDXMLElement * unsubscribelistElement = [message elementForName:@"unsubscribelist"];
+    if (unsubscribelistElement) {
+        NSLog(@"unsubscribelistElement = %@", [unsubscribelistElement compactXMLString]);
+        
+        [updateInfoDict setObject:@"unsubscribelist" forKey:@"updateElementType"];
+        
+        //操作者的jid
+        NSString *removeUserjid = [unsubscribelistElement attributeStringValueForName:@"ownerjid"];
+        //操作者的昵称
+        NSString *removeUserNick = [unsubscribelistElement attributeStringValueForName:@"ownernick"];
+        
+        [updateInfoDict setObject:removeUserjid forKey:@"operatorJid"];
+        [updateInfoDict setObject:removeUserNick forKey:@"operatorNick"];
+        
+        //群jid
+        NSString *groupjid = [unsubscribelistElement attributeStringValueForName:@"groupjid"];
+        //群名
+        NSString *groupname = [unsubscribelistElement attributeStringValueForName:@"groupname"];
+        
+        [updateInfoDict setObject:groupjid forKey:@"groupjid"];
+        [updateInfoDict setObject:groupname forKey:@"groupname"];
+
+        //移除的成员
+        NSMutableArray * members = [[NSMutableArray alloc] init];
+        //unsubscribelistItems == nil || unsubscribelistItems.count == 0 表示是成员自动退群
+        NSArray *unsubscribelistItems = [unsubscribelistElement elementsForName:@"unsubscribe"];
+        for (NSXMLElement *unsubscribeItem in unsubscribelistItems)
+        {
+            //群成员的jid
+            NSString *jid = [unsubscribeItem attributeStringValueForName:@"jid"];
+            //群成员昵称
+            NSString *nick = [unsubscribeItem attributeStringValueForName:@"nick"];
+
+            [members addObject:@{@"jid":jid,@"nickname":nick}];
+        }
+        [updateInfoDict setObject:members forKey:@"members"];
+        
+        return updateInfoDict;
+    }
+    
+    //changeinfo 群成员信息变更,(群成员的群昵称发生变化)
+    DDXMLElement * changeinfoElement = [message elementForName:@"changeinfo"];
+    if (changeinfoElement) {
+        NSLog(@"changeinfoElement = %@", [changeinfoElement compactXMLString]);
+        
+        [updateInfoDict setObject:@"changeinfo" forKey:@"updateElementType"];
+        
+        //群jid
+        NSString *groupjid = [changeinfoElement attributeStringValueForName:@"groupjid"];
+        [updateInfoDict setObject:groupjid forKey:@"groupjid"];
+        
+        //操作者的jid,
+        NSString *memberjid = [changeinfoElement attributeStringValueForName:@"jid"];
+        //操作者的新昵称
+        NSString *memberNewNickName = [changeinfoElement attributeStringValueForName:@"nick"];
+
+        [updateInfoDict setObject:memberjid forKey:@"memberJid"];
+        [updateInfoDict setObject:memberNewNickName forKey:@"memberName"];
+
+        return updateInfoDict;
+    }
+    
+    //query 群成员权限转变、管理员、禁言、全员禁言
+    DDXMLElement * queryElement = [message elementForName:@"query" xmlns:@"http://jabber.org/protocol/muc#admin"];
+    if (queryElement) {
+        NSLog(@"queryElement = %@", [queryElement compactXMLString]);
+        
+        [updateInfoDict setObject:@"query" forKey:@"updateElementType"];
+        
+        //群jid
+        NSString *groupjid = [queryElement attributeStringValueForName:@"groupjid"];
+        //群名
+        NSString *groupname = [queryElement attributeStringValueForName:@"groupname"];
+        
+        [updateInfoDict setObject:groupjid forKey:@"groupjid"];
+        [updateInfoDict setObject:groupname forKey:@"groupname"];
+        
+        NSString * opType = @"changGroupOwner";//更换群主
+        NSMutableArray * memberList = [NSMutableArray array];
+        
+        NSArray *items = [queryElement elementsForName:@"item"];
+        for (NSXMLElement *item in items)
+        {
+            //群主权限转让
+            if ([[[item attributeForName:@"affiliation"] stringValue] isEqualToString:@"owner"]) {
+                //变更后的群主
+                NSString * newOwnerJid = [[item attributeForName:@"jid"] stringValue];
+                NSString * newOwnerNick = [[item attributeForName:@"nick"] stringValue];
+                
+                [updateInfoDict setObject:newOwnerJid forKey:@"newOwnerJid"];
+                [updateInfoDict setObject:newOwnerNick forKey:@"newOwnerNick"];
+            }
+            
+            if ([[[item attributeForName:@"affiliation"] stringValue] isEqualToString:@"member"]) {
+                //原群主
+                NSString * oldOwnerJid = [[item attributeForName:@"jid"] stringValue];
+                
+                [updateInfoDict setObject:oldOwnerJid forKey:@"oldOwnerJid"];
+            }
+            
+            
+            //管理员设置
+            if ([item elementForName:@"reason"] && [[[item elementForName:@"reason"] stringValue] isEqualToString:@"admin"]) {
+            
+                opType = @"changGroupAdmin";
+
+                //多个admin管理员
+                NSString * jid = [[item attributeForName:@"jid"] stringValue];
+                NSString * nick = [[item attributeForName:@"nick"] stringValue];
+                NSString * memberAffiliation = [[item attributeForName:@"affiliation"] stringValue];
+                
+                NSMutableDictionary * infoDict = [NSMutableDictionary dictionary];
+                [infoDict setObject:memberAffiliation forKey:@"affiliation"];
+                [infoDict setObject:jid forKey:@"jid"];
+                [infoDict setObject:nick forKey:@"nick"];
+                [memberList addObject:infoDict];
+            }
+            
+            //群成员禁言设置
+            if ([item elementForName:@"reason"] && [[[item elementForName:@"reason"] stringValue] isEqualToString:@"block"]) {
+
+              opType = @"changGroupblockAdd";
+              
+              //多个block被禁言设置的成员
+              NSString * jid = [[item attributeForName:@"jid"] stringValue];
+              NSString * nick = [[item attributeForName:@"nick"] stringValue];
+              
+              NSMutableDictionary * infoDict = [NSMutableDictionary dictionary];
+              [infoDict setObject:jid forKey:@"jid"];
+              [infoDict setObject:nick forKey:@"nick"];
+              [memberList addObject:infoDict];
+            }
+
+            if ([item elementForName:@"reason"] && [[[item elementForName:@"reason"] stringValue] isEqualToString:@"cancel_block"]) {
+
+              opType = @"changGroupblockCancel";
+              
+              //多个cancel_block被禁言设置的成员
+              NSString * jid = [[item attributeForName:@"jid"] stringValue];
+              NSString * nick = [[item attributeForName:@"nick"] stringValue];
+              
+              NSMutableDictionary * infoDict = [NSMutableDictionary dictionary];
+              [infoDict setObject:jid forKey:@"jid"];
+              [infoDict setObject:nick forKey:@"nick"];
+              [memberList addObject:infoDict];
+
+            }
+
+            if ([item elementForName:@"reason"] && [[[item elementForName:@"reason"] stringValue] isEqualToString:@"from"]) {
+              
+              /*
+               //禁言设置通知的From,其他的没有from
+            <query xmlns="http://jabber.org/protocol/muc#admin" groupname="&quot;13335&quot;发起的群聊" groupjid="gc_44242809852228_20190225135506@conference.dev-im.gzemt.cn"><item nick="13311TX" jid="43764177118661@dev-im.gzemt.cn"><reason>cancel_block</reason></item><item nick="13335" jid="44242809852228@dev-im.gzemt.cn/wchat" affiliation="owner"><reason>from</reason></item></query>
+               */
+              
+              //操作禁言设置的成员
+              NSString * jid = [[item attributeForName:@"jid"] stringValue];
+              NSString * nick = [[item attributeForName:@"nick"] stringValue];
+              NSString * memberAffiliation = [[item attributeForName:@"affiliation"] stringValue];
+              
+              [updateInfoDict setObject:jid forKey:@"operatorJID"];
+              [updateInfoDict setObject:nick forKey:@"operatorNick"];
+              [updateInfoDict setObject:memberAffiliation forKey:@"operatorAffiliation"];
+            }
+
+            if ([item elementForName:@"reason"] && [[[item elementForName:@"reason"] stringValue] isEqualToString:@"block_all"]) {
+              
+              opType = @"changGroupblockAll";
+              
+              //管理员
+              NSString * jid = [[item attributeForName:@"jid"] stringValue];
+              NSString * nick = [[item attributeForName:@"nick"] stringValue];
+              NSString * memberAffiliation = [[item attributeForName:@"affiliation"] stringValue];
+              
+              [updateInfoDict setObject:jid forKey:@"operatorJID"];
+              [updateInfoDict setObject:nick forKey:@"operatorNick"];
+              [updateInfoDict setObject:memberAffiliation forKey:@"operatorAffiliation"];
+              
+            }
+
+            if ([item elementForName:@"reason"] && [[[item elementForName:@"reason"] stringValue] isEqualToString:@"block_all_cancel"]) {
+              
+              opType = @"changGroupblockAllCancel";
+              
+              //管理员
+              NSString * jid = [[item attributeForName:@"jid"] stringValue];
+              NSString * nick = [[item attributeForName:@"nick"] stringValue];
+              NSString * memberAffiliation = [[item attributeForName:@"affiliation"] stringValue];
+
+              [updateInfoDict setObject:jid forKey:@"operatorJID"];
+              [updateInfoDict setObject:nick forKey:@"operatorNick"];
+              [updateInfoDict setObject:memberAffiliation forKey:@"operatorAffiliation"];
+            }
+            
+        }
+        [updateInfoDict setObject:memberList forKey:@"members"];
+        [updateInfoDict setObject:opType forKey:@"opType"];
+        
+        return updateInfoDict;
+    }
+        
+    return updateInfoDict;
+}
+
 
 -(WTProtoConversationMessage *)decryptConversationMessage:(XMPPMessage*)message
 {
@@ -1019,6 +1366,31 @@ static dispatch_once_t Concurrent_queueOnceToken;
         
         if ([message elementForName:@"match_friend"])
         {
+            //被其他联系人通过匹配好友添加我为好友，我接收到的添加好友消息
+            NSMutableDictionary * contactInfoDict = [[NSMutableDictionary alloc] init];
+            
+            NSString* nickname = [[[message elementForName:@"match_friend"] attributeForName:@"nickname"] stringValue];
+            NSString* phone = [[[message elementForName:@"match_friend"] attributeForName:@"phone"] stringValue];
+            NSString* signature = [[[message elementForName:@"match_friend"] attributeForName:@"signature"] stringValue];
+            
+            //接收到好友同意我的添加好友的时间，要x以对方接受的时间为准
+            NSXMLElement * delayElement = [message elementForName:@"delay" xmlns:@"urn:xmpp:delay"];
+            NSString * stamp = [delayElement attributeStringValueForName:@"stamp"];//取出stamp的值，以便转换
+            NSString * createTime = [NSString getTimestampFromTime:stamp format:@"yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"];
+            
+            NSString * increment_id = [[message elementForName:@"increment_id"] stringValue];
+            if (increment_id) {
+                [contactInfoDict setObject:increment_id forKey:@"increment_id"];
+            }
+            
+            [contactInfoDict setObject:nickname forKey:@"nickName"];
+            [contactInfoDict setObject:phone forKey:@"phone"];
+            [contactInfoDict setObject:signature forKey:@"signature"];
+            [contactInfoDict setObject:createTime forKey:@"createTime"];
+            [contactInfoDict setObject:Message.from.bare forKey:@"jid"];
+            
+            [self->protoMessageCenterMulticasDelegate protoMessageCenter:weakSelf didReceiveMatchFriendWithMessage:contactInfoDict originalMessage:Message];
+            
             [weakSelf ack:message];
             return;
         }
@@ -1026,6 +1398,37 @@ static dispatch_once_t Concurrent_queueOnceToken;
         
         if ([message elementForName:@"ext" xmlns:@"jabber:iq:roster"])
         {
+            //好友同意了我的添加请求
+            NSMutableDictionary * contactInfoDict = [[NSMutableDictionary alloc] init];
+            
+            NSXMLElement *subNode = [Message elementForName:@"ext" xmlns:@"jabber:iq:roster"];
+            NSString * source = [subNode attributeStringValueForName:@"src"];
+            NSString * verify = [subNode attributeStringValueForName:@"verify"];
+            NSString * agree = [subNode attributeStringValueForName:@"agree"];
+            
+            //接收到好友同意我的添加好友的时间，要x以对方接受的时间为准
+            NSXMLElement * delayElement = [message elementForName:@"delay" xmlns:@"urn:xmpp:delay"];
+            NSString * stamp = [delayElement attributeStringValueForName:@"stamp"];//取出stamp的值，以便转换
+            NSString * createTime = [NSString getTimestampFromTime:stamp format:@"yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"];
+            
+            NSString * increment_id = [[message elementForName:@"increment_id"] stringValue];
+            if (increment_id) {
+                [contactInfoDict setObject:increment_id forKey:@"increment_id"];
+            }
+            
+            //agree == 1时才是同意加为好友
+            if ([agree integerValue] == 2) {
+                return;
+            }
+            
+            [contactInfoDict setObject:source forKey:@"source"];
+            [contactInfoDict setObject:verify forKey:@"verify"];
+            [contactInfoDict setObject:agree forKey:@"agree"];
+            [contactInfoDict setObject:createTime forKey:@"createTime"];
+            [contactInfoDict setObject:Message.from.bare forKey:@"jid"];
+
+            //回调出去
+            [self->protoMessageCenterMulticasDelegate protoMessageCenter:weakSelf didReceiveAcceptPresenceMessage:contactInfoDict originalMessage:Message];
             
             [weakSelf ack:message];
             return;
@@ -1059,6 +1462,31 @@ static dispatch_once_t Concurrent_queueOnceToken;
             return;
         }
         
+        if (message.isErrorMessage) {
+            
+            [weakSelf ack:message];
+            return;
+        }
+        if ([message elementForName:@"addresses"] && [message elementForName:@"event"]) {
+            
+            [weakSelf ack:message];
+            return;
+        }
+        
+        if (!Message.body || [Message.body isEqualToString:@""]) {
+         
+            NSLog(@"Message = %@", [Message compactXMLString]);
+            
+            //处理不同类型的群更新消息
+            NSDictionary * groupDataUpdateInfo = [self decryptGroupDataUpDateMessage:Message];
+            
+            [self->protoMessageCenterMulticasDelegate  protoMessageCenter:weakSelf
+                                            didReceiveGroupDataUpDateInfo:groupDataUpdateInfo
+                                                          originalMessage:message];
+            
+            [weakSelf ack:message];
+            return;
+        }
         
         WTProtoConversationMessage* decrypt_Conversation_Message = [weakSelf decryptConversationMessage:Message];
     

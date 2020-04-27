@@ -349,11 +349,11 @@
 
 + (WTProtoIQ *)IQ_SetGroupAdminWithFromUser:(WTProtoUser *)fromUser
                                    Memebers:(NSArray *)member
-                                    roomJid:(NSString *)roomJid
+                                    roomJid:(WTProtoUser *)roomJid
                                       style:(NSString *)style
 {
     
-    WTProtoIQ *iq = [WTProtoIQ iqWithType:@"set" to:[XMPPJID jidWithString:roomJid]];
+    WTProtoIQ *iq = [WTProtoIQ iqWithType:@"set" to:roomJid];
     [iq addAttributeWithName:@"from" stringValue:fromUser.full];
     [iq addAttributeWithName:@"id" stringValue:[XMPPStream generateUUID]];
         
@@ -1034,12 +1034,12 @@
                 [itemDictionary setObject:@"" forKey:@"iconurl"];
             }
             [itemDictionary setObject:[subElement attributeStringValueForName:@"jid"] forKey:@"jid"];
-            [itemDictionary setObject:[subElement attributeStringValueForName:@"identity"] forKey:@"identity"];
-            [itemDictionary setObject:[subElement attributeStringValueForName:@"ispush"] forKey:@"ispush"];
-            [itemDictionary setObject:[subElement attributeStringValueForName:@"save"] forKey:@"save"];
-            [itemDictionary setObject:[subElement attributeStringValueForName:@"time"] forKey:@"time"];
+//            [itemDictionary setObject:[subElement attributeStringValueForName:@"identity"] forKey:@"identity"];
+//            [itemDictionary setObject:[subElement attributeStringValueForName:@"ispush"] forKey:@"ispush"];
+//            [itemDictionary setObject:[subElement attributeStringValueForName:@"save"] forKey:@"save"];
+//            [itemDictionary setObject:[subElement attributeStringValueForName:@"time"] forKey:@"time"];
             [itemDictionary setObject:[subElement attributeStringValueForName:@"nick"] forKey:@"nickname"];
-            [itemDictionary setObject:[subElement attributeStringValueForName:@"changeflag"] ?: @"0" forKey:@"changeflag"];
+//            [itemDictionary setObject:[subElement attributeStringValueForName:@"changeflag"] ?: @"0" forKey:@"changeflag"];
             [itemDictionary setObject:[NSString pyFirstLetter:[subElement attributeStringValueForName:@"nick"]] forKey:@"nameIndex"];
             
             [membersArr addObject:itemDictionary];

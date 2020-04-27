@@ -167,6 +167,75 @@
 }
 
 
+//更新用户个人信息
++ (WTProtoIQ *)IQ_updateUserInfoWithDict:(NSDictionary *)updateDict localUser:(WTProtoUser *)fromUser{
+    
+    NSString * keyStr = [updateDict objectForKey:@"key"];
+    NSString * valueStr = [updateDict objectForKey:@"value"];
+    NSString * msgCodeStr = [updateDict objectForKey:@"code"];
+    
+    WTProtoIQ *iq = [WTProtoIQ iqWithType:@"set" elementID:[XMPPStream generateUUID]];
+    [iq addAttributeWithName:@"from" stringValue:fromUser.bare];
+    [iq addAttributeWithName:@"to" stringValue:fromUser.domain];
+
+    NSXMLElement *xNode = [NSXMLElement elementWithName:@"x"];
+    [xNode addAttributeWithName:@"xmlns" stringValue:@"jabber:x:data"];
+    [xNode addAttributeWithName:@"type" stringValue:@"submit"];
+    
+    NSXMLElement *fieldsingleNode = [NSXMLElement elementWithName:@"field"];
+    [fieldsingleNode addAttributeWithName:@"type" stringValue:@"list-single"];
+    [fieldsingleNode addAttributeWithName:@"var" stringValue:@"bussiness"];
+    [fieldsingleNode addChild:[NSXMLElement elementWithName:@"value" stringValue:@"userinfo"]];
+    
+    NSXMLElement *fieldNode1 = [NSXMLElement elementWithName:@"field"];
+    [fieldNode1 addAttributeWithName:@"type" stringValue:@"list-single"];
+    [fieldNode1 addAttributeWithName:@"var" stringValue:@"fieldkey"];
+    [fieldNode1 addChild:[NSXMLElement elementWithName:@"value" stringValue:keyStr]];
+    
+    NSXMLElement *fieldNode2 = [NSXMLElement elementWithName:@"field"];
+    [fieldNode2 addAttributeWithName:@"type" stringValue:@"list-single"];
+    [fieldNode2 addAttributeWithName:@"var" stringValue:@"fieldvalue"];
+    [fieldNode2 addChild:[NSXMLElement elementWithName:@"value" stringValue:valueStr]];
+    
+    if (msgCodeStr && msgCodeStr.length > 0) {
+        //更换手机号
+        NSXMLElement *fieldNode3 = [NSXMLElement elementWithName:@"field"];
+        [fieldNode3 addAttributeWithName:@"type" stringValue:@"list-single"];
+        [fieldNode3 addAttributeWithName:@"var" stringValue:@"msgcode"];
+        [fieldNode3 addChild:[NSXMLElement elementWithName:@"value" stringValue:msgCodeStr]];
+
+//        NSXMLElement *fieldNode4 = [NSXMLElement elementWithName:@"field"];
+//        [fieldNode4 addAttributeWithName:@"type" stringValue:@"list-single"];
+//        [fieldNode4 addAttributeWithName:@"var" stringValue:@"fieldvalue"];
+//        [fieldNode4 addChild:[NSXMLElement elementWithName:@"value" stringValue:msgCode]];
+
+        [xNode addChild:fieldNode3];
+    }
+    
+    [xNode addChild:fieldNode2];
+    [xNode addChild:fieldNode1];
+    [xNode addChild:fieldsingleNode];
+    [iq addChild:xNode];
+    
+    return iq;
+    
+}
+
++ (void)parse_IQ_updateUserInfo:(XMPPIQ *)iq parseResult:(void (^)(BOOL succeed, id info))parseResult{
+    
+    NSXMLElement *errorElement = [iq elementForName:@"error"];
+    if (errorElement != nil) {
+        //登录失败
+        NSLog(@"elementForName = %@",[errorElement stringValue]);
+        parseResult(NO, [errorElement stringValue]);
+    }
+    else{
+        NSXMLElement *itemElement = [iq elementForName:@"item"];
+        parseResult(YES, [itemElement stringValue]);
+    }
+    
+}
+
 
 
 @end

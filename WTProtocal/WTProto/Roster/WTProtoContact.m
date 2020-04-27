@@ -293,15 +293,36 @@ static dispatch_once_t queueOnceToken;
     [self->protoContactMulticasDelegate WTProtoContact:self deleteFriend_ResultWithSucceed:succeed jid:jid];
 }
 
+#pragma mark - 个人信息修改通知
+- (void)sendUserInfoChangedPresenceWithUpeageType:(NSString *)type value:(NSString *)value fromUser:(WTProtoUser *)fromUser{
+    
+    WTProtoPresence * agreePresent = [WTProtoContactPresent userInfoChangedWithUpdateType:type value:value fromUser:fromUser];
+    [_contactStream sendElement:(XMPPPresence*)agreePresent];
+    
+}
+
 #pragma mark -   同意添加联系人
 - (void)agreeAddFriendWithJid:(NSString *)jidStr source:(NSString *)source{
     
     XMPPJID * userJid = [XMPPJID jidWithString:jidStr];
     
     WTProtoPresence * agreePresent = [WTProtoContactPresent agreeAddFriendRequestWithContactJid:jidStr source:source fromUserJid:_contactStream.myJID.full];
-           [_contactStream sendElement:(XMPPPresence*)agreePresent];
+    [_contactStream sendElement:(XMPPPresence*)agreePresent];
 
     [_ProtoRoster addUser:userJid withNickname:nil];
+    
+    //临时更改，未知原因subscribed的XMPPPresence消息，对方接收不到，改用message发送 ******************
+    XMPPMessage * subscribedElement = [XMPPMessage message];
+    //消息类型
+    [subscribedElement addAttributeWithName:@"type" stringValue:@"chat"];
+    //由谁发送
+    [subscribedElement addAttributeWithName:@"from" stringValue:_contactStream.myJID.full];
+    //发送给谁
+    [subscribedElement addAttributeWithName:@"to" stringValue:jidStr];
+    //组合
+    NSXMLElement *subNode = [agreePresent elementForName:@"ext"  xmlns:@"jabber:iq:roster"];
+    [subscribedElement addChild:[subNode copy]];//subNode将请求带来的信息带回去（添加来源）
+    [_contactStream sendElement:subscribedElement];
 }
 
 //同意添加的回调

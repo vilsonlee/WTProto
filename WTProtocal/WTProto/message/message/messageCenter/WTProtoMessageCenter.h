@@ -52,6 +52,11 @@ NS_ASSUME_NONNULL_BEGIN
                           didReceiveShakeResultDecryptMessage:(nonnull WTProtoshakedResultMessage *)decryptMessage
                           OriginalMessage:(nonnull XMPPMessage *)originalMessage;
 
+-(void)protoMessageCenter:(WTProtoMessageCenter *)messageCenter didReceiveGroupDataUpDateInfo:(nonnull NSDictionary *)updateInfo originalMessage:(nonnull XMPPMessage *)originalMessage;
+
+-(void)protoMessageCenter:(WTProtoMessageCenter *)messageCenter didReceiveAcceptPresenceMessage:(nonnull NSDictionary *)acceptInfo originalMessage:(nonnull XMPPMessage *)originalMessage;
+
+-(void)protoMessageCenter:(WTProtoMessageCenter *)messageCenter didReceiveMatchFriendWithMessage:(nonnull NSDictionary *)contactInfo originalMessage:(nonnull XMPPMessage *)originalMessage;
 
 @end
 
@@ -97,6 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
                encryptionType:(WTProtoMessageCenterEncryptionType)encryptionType
                    sendResult:(void (^)(BOOL succeed , WTProtoshakedResultMessage *sendmessage))sendResult;
 
+-(WTProtoConversationMessage *)decryptConversationMessage:(XMPPMessage*)message;
 
 - (void)ack:(XMPPMessage*)message;
 

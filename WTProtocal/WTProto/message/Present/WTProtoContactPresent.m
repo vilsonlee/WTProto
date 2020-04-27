@@ -81,4 +81,24 @@
     return replyPresence; 
 }
 
+
+
+
+//个人信息修改通知其他联系人好友
++ (WTProtoPresence *)userInfoChangedWithUpdateType:(NSString *)type value:(NSString *)value fromUser:(WTProtoUser *)fromUser{
+    
+    WTProtoPresence *presence = [WTProtoPresence presence];
+    [presence addAttributeWithName:@"from" stringValue:fromUser.full];
+    [presence addChild:[DDXMLElement elementWithName:@"status" stringValue:value]];
+
+    NSXMLElement *updateNode = [NSXMLElement elementWithName:@"update"];
+    [updateNode addAttributeWithName:@"type" stringValue:type];
+    [presence addChild:updateNode];
+    
+    return presence;
+}
+
+
+
+
 @end

@@ -24,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)parse_IQ_SearchUserInfo:(XMPPIQ *)iq
                     parseResult:(void (^)(BOOL succeed, id Info))parseResult;
 
+//更新用户个人信息
++ (WTProtoIQ *)IQ_updateUserInfoWithDict:(NSDictionary *)updateDict localUser:(WTProtoUser *)fromUser;
++ (void)parse_IQ_updateUserInfo:(XMPPIQ *)iq parseResult:(void (^)(BOOL succeed, id info))parseResult;
+
+
 
 NS_ASSUME_NONNULL_END
 

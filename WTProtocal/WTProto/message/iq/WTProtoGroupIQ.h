@@ -139,7 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 + (WTProtoIQ *)IQ_SetGroupAdminWithFromUser:(WTProtoUser *)fromUser
                                    Memebers:(NSArray *)member
-                                    roomJid:(NSString *)roomJid
+                                    roomJid:(WTProtoUser *)roomJid
                                       style:(NSString *)style;
 
 

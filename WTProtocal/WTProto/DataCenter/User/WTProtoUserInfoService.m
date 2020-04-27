@@ -184,7 +184,35 @@ static dispatch_once_t queueOnceToken;
 }
 
 
-#pragma mark -  XMPPStream Presence delegate
+-(void)request_IQ_UpdateUserInfoWithLocalUser:(WTProtoUser *)localUser
+                                   updateInfo:(NSDictionary *)infoDict
+                                     methodID:(NSString *)methodID
+{
+
+     WTProtoIQ* updateUserInfo_IQ = [WTProtoUserInfoIQ IQ_updateUserInfoWithDict:infoDict
+                                                                       localUser:localUser];
+    
+    [self IQ_Result_distributieWithSEL:@selector(handeleResult_IQ_UpdateUserInfo:methodID:)
+                              methodID:(methodID && methodID.length) ? methodID : @"UpdateUserInfo"
+                               fetchID:updateUserInfo_IQ.elementID];
+    
+    [_UserInfoServiceStream sendElement:(XMPPIQ*)updateUserInfo_IQ];
+    
+    [self addtracker:updateUserInfo_IQ timeout:WT_IQ_TIME_OUT_INTERVAL];
+}
+
+-(void)handeleResult_IQ_UpdateUserInfo:(XMPPIQ *)iq methodID:(NSString *)methodID{
+
+    WEAKSELF
+    [WTProtoUserInfoIQ parse_IQ_updateUserInfo:iq parseResult:^(BOOL succeed, id  _Nonnull Info) {
+        [self->proto_UserInfoService_MulticasDelegate WTProtoUserInfoService:weakSelf methodID:methodID updateUserInfoResult:succeed info:Info];
+    }];
+    
+}
+
+
+
+#pragma mark -  XMPPStream delegate
 
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(nonnull XMPPIQ *)iq
 {
@@ -208,9 +236,10 @@ static dispatch_once_t queueOnceToken;
         if ([dict objectForKey:@"sel"])
         {
             SEL sel = NSSelectorFromString([dict objectForKey:@"sel"]);
+            NSString * methodID = [dict objectForKey:@"methodID"];
             if ([self respondsToSelector:sel])
             {
-                 [self performSelector:sel withObjects:@[iq]];
+                 [self performSelector:sel withObjects:@[iq, methodID]];
             }
         }
         else
@@ -220,6 +249,14 @@ static dispatch_once_t queueOnceToken;
     }
     
     return YES;
+}
+
+- (void)xmppStream:(XMPPStream *)sender didFailToSendIQ:(XMPPIQ *)iq error:(NSError *)error
+{
+    NSLog(@"\n\n didFailToSendIQ %s___%d error = %@\n\n",__FUNCTION__,__LINE__,error);
+    [iq addChild:[XMPPElement elementWithName:@"error" stringValue:error.description]];
+    [iq addAttributeWithName:@"type" stringValue:@"error"];
+    [self xmppStream:sender didReceiveIQ:iq];
 }
 
 

@@ -76,6 +76,8 @@ NS_ASSUME_NONNULL_BEGIN
  **/
 - (NSArray*)blockingList;
 
+- (NSDictionary*)blockingDictionary;
+
 /**
  * Block JID.
  */

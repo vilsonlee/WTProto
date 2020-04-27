@@ -88,6 +88,12 @@ typedef enum XMPPBlockingQueryInfoType {
 	return self;
 }
 
+//改: 新增加
+- (NSMutableDictionary *)blockingDict
+{
+    return blockingDict;
+}
+
 - (BOOL)activate:(XMPPStream *)aXmppStream
 {
 	if ([super activate:aXmppStream])
@@ -406,21 +412,35 @@ typedef enum XMPPBlockingQueryInfoType {
         // </blocklist>
         // </iq>
 
+        //修改过:
+        //        <iq xmlns="jabber:client" lang="en" to="30896237283933@hill.gzemt.cn/wchat" from="30896237283933@hill.gzemt.cn" type="result" id="D7DF8165-0B8C-4F83-9537-05681F9E5037">
+        //        <blocklist xmlns="urn:xmpp:blocking">
+        //        <item_ext nickname="9999" jid="63684353954909@hill.gzemt.cn"/>
+        //        <item_ext nickname="8888" jid="60149573633826@hill.gzemt.cn"/>
+        //        </blocklist>
+        //        </iq>
+
 		if ([[iq type] isEqualToString:@"result"])
 		{
+            NSLog(@"blocklist iq = %@", [iq compactXMLString]);
+            
 			NSXMLElement *blocklist = [iq elementForName:@"blocklist" xmlns:@"urn:xmpp:blocking"];
 			if (blocklist == nil) return;
 
-			NSArray *listItems = [blocklist elementsForName:@"item"];
+//			NSArray *listItems = [blocklist elementsForName:@"item"];
+            NSArray *listItems = [blocklist elementsForName:@"item_ext"];//改:
 			for (NSXMLElement *listItem in listItems)
 			{
 				NSString *name = [listItem attributeStringValueForName:@"jid"];
+                //改: 新增的黑名单用户昵称
+                NSString *nickname = [listItem attributeStringValueForName:@"nickname"];
 				if (name)
 				{
 					id value = blockingDict[name];
 					if (value == nil)
 					{
-						blockingDict[name] = [NSNull null];
+//						blockingDict[name] = [NSNull null];
+                        blockingDict[name] = nickname;//改: jid:nickname
 					}
 				}
 			}

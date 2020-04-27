@@ -203,6 +203,9 @@ static dispatch_once_t queueOnceToken;
     return [_protoBlocking blockingList];
 }
 
+- (NSDictionary*)blockingDictionary{
+    return _protoBlocking.blockingDict;
+}
 
 - (void)blockWUser:(WTProtoUser*)WUser{
     [_protoBlocking blockJID:(XMPPJID *)WUser];

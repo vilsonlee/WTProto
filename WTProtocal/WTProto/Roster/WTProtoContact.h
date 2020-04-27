@@ -126,6 +126,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  将联系人从黑名单移除
 */
 
+#pragma mark - 个人信息修改通知
+- (void)sendUserInfoChangedPresenceWithUpeageType:(NSString *)type value:(NSString *)value fromUser:(WTProtoUser *)fromUser;
 
 /**
  *  设置好友备注名

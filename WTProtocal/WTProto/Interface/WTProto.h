@@ -37,6 +37,7 @@
 @class WTProtoShakeMessage;
 @class WTProtoshakedResultMessage;
 @class WTProtoUserInfoService;
+@class WTProtoOffLineMessageManager;
 @class XMPPMessage;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -110,6 +111,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)WTProto:(WTProto*)wtProto didReceiveShakeResultDecryptMessage:(WTProtoshakedResultMessage *)decryptMessage
                                                       OriginalMessage:(XMPPMessage *)originalMessage;
 
+-(void)WTProto:(WTProto*)wtProto didReceiveGroupDataUpDateInfo:(NSDictionary *)updateInfo
+                                               originalMessage:(XMPPMessage *)originalMessage;
+
+-(void)WTProto:(WTProto*)wtProto didReceiveAcceptPresenceMessage:(NSDictionary *)acceptInfo
+                                                 originalMessage:(XMPPMessage *)originalMessage;
+
+-(void)WTProto:(WTProto*)wtProto didReceiveMatchFriendWithMessage:(NSDictionary *)contactInfo
+                                                  originalMessage:(XMPPMessage *)originalMessage;
+
+
 
 
 #pragma mark - WTProto Contact
@@ -157,8 +168,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)WTProto:(WTProto*)wtProto removeMemberUnscribesChatRoom_Result:(BOOL)succeed info:(id)info;
 
+- (void)WTProto:(WTProto*)wtProto getGroupQuiteMemberList_Result:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto getGroupActivityMembers_Result:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto exChangeGroupOwner_Result:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto setGroupAdmin_Result:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto setRoomConfigure_ResultWithSucceed:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto setGroupSaveState_Result:(BOOL)succeed info:(id)info;
+- (void)WTProto:(WTProto*)wtProto setGroupPushState_Result:(BOOL)succeed info:(id)info;
+- (void)WTProto:(WTProto*)wtProto changeMyGroupNickName_Result:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto setGroupBannedAll_Result:(BOOL)succeed inf:(id)info;
+- (void)WTProto:(WTProto*)wtProto setGroupBannedMemberList_Result:(BOOL)succeed info:(id)info;
+- (void)WTProto:(WTProto*)wtProto getGroupBannedMemberList_Result:(BOOL)succeed info:(id)info;
+
+
 #pragma mark - WTProto UserInfo
 - (void)WTProto:(WTProto*)wtProto SearchUserInfoWithResult:(BOOL)result UserInfo:(NSDictionary *)userInfo;
+- (void)WTProto:(WTProto*)wtProto updateUserInfoResult:(BOOL)result info:(id)info methodID:(NSString *)methodID;
 
 
 #pragma mark - WTProto UserConfig Service
@@ -171,6 +202,17 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)WTProto:(WTProto*)wtProto updateUserChatSettingResult:(BOOL)result info:(id)info;
 
 -(void)WTProto:(WTProto*)wtProto removeUserChatSettingResult:(BOOL)result info:(id)info;
+
+
+#pragma mark - WTProto WTProtoOffLineMessageManager
+- (void)WTProto:(WTProto*)wtProto getSingleChatOfflineListDynamics_ResultWithSucceed:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto getSingleChatOfflineMessageDynamics_ResultWithSucceed:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto getGroupChatOfflineListDynamics_ResultWithSucceed:(BOOL)succeed info:(id)info;
+
+- (void)WTProto:(WTProto*)wtProto getGroupChatOfflineMessageDynamics_ResultWithSucceed:(BOOL)succeed info:(id)info;
+
 
 @end
 
@@ -282,6 +324,11 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
                                 keyType:(NSString *)type
                         searchFromGroup:(BOOL)fromGroup;
 
+//更新个人信息
+-(void)updateUserInfo:(NSDictionary *)info methodID:(NSString *)methodID;
+
+#pragma mark - 个人信息修改通知
+- (void)sendUserInfoChangedPresenceWithUpeageType:(NSString *)type value:(NSString *)value;
 
 -(void)sendWTProtoConversationMessage:(WTProtoConversationMessage *)message
                        encryptionType:(WTProtoMessageEncryptionType)encryptionType
@@ -342,6 +389,50 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
 
 - (void)removeMemberUnscribesChatRoomWithRoomJid:(WTProtoUser *)groupJId roomName:(NSString *)roomName roomOwnerJid:(WTProtoUser *)roomOwnerJid memberGroupNickName:(NSString *)nickName andFriends:(NSArray *)friends;
 
+//群私聊状态设置
+- (void)setGroupConfigPrivateChatFlagWithGroupJid:(WTProtoUser *)groupJId flag:(NSString *)flag;
+//群截屏通知状态设置
+- (void)setGroupScreenshotsnotifyWithGroupJid:(WTProtoUser *)groupJId flag:(NSString *)flag;
+//群邀请确认状态设置
+- (void)setGroupInviteConfirmWithGroupJid:(WTProtoUser *)groupJId flag:(NSString *)flag;
+// 群定时销毁开启状态 time>0 开启
+- (void)setGroupConfigdestoryWithGroupJid:(WTProtoUser *)groupJId time:(NSInteger)time;
+
+//群名称
+- (void)setGroupNameWithGroupJid:(WTProtoUser *)groupJId title:(NSString *)title;
+//群公告
+- (void)setGroupDescriptionWithGroupJid:(WTProtoUser *)groupJId desc:(NSString *)desc;
+//群图标
+- (void)setGroupIconWithGroupJid:(WTProtoUser *)groupJId iconUrl:(NSString *)iconUrl;
+
+//群保存到通讯列表
+- (void)setGroupSaveStateWithGroupJid:(WTProtoUser *)groupJId flag:(BOOL)flag;
+//群消息免打扰设置
+- (void)setGroupPushStateWithGroupJid:(WTProtoUser *)groupJId flag:(BOOL)flag;
+//我的群昵称修改
+- (void)changeMyGroupNickNameWithGroupJid:(WTProtoUser *)groupJId nickname:(NSString *)nickname changeflag:(NSInteger)changeflag;
+
+
+//获取退群成员列表
+- (void)getQuiteGroupMembersWithGroupJid:(WTProtoUser *)groupJId;
+
+//按活跃度获取群成员列表
+- (void)getActivityGroupMembersWithGroupJid:(WTProtoUser *)groupJId activityTime:(NSString *)time;
+
+- (void)exChangeGroupOwnerWithGroupJid:(WTProtoUser *)groupJId memberNickName:(NSString *)nickname memberJID:(WTProtoUser *)memberJID;
+
+- (void)setGroupAdminWithGroupJId:(WTProtoUser *)groupJId memebers:(NSArray *)members style:(NSString *)style;
+
+///设置群禁言
+- (void)setGroupBannedMemberListWithGroupJId:(WTProtoUser *)groupJId memebers:(NSArray *)members nickName:(NSString *)nickName
+                                       style:(NSString *)style;
+///设置群全员禁言
+- (void)setGroupBannedAllWithGroupJId:(WTProtoUser *)groupJId nickName:(NSString *)nickName style:(NSString *)style;
+/// 获取群禁言名单
+- (void)getGroupBannedMemberListWithGroupJid:(WTProtoUser *)groupJId;
+
+
+
 //用户配置相关方法
 /**
  *  获取用户偏好设置
@@ -367,6 +458,20 @@ typedef NS_ENUM(NSUInteger, WTGetContactDetailsKeyType) {
  *  移除用户聊天配置
 */
 - (void)removeUserChatSettingWithDict:(NSDictionary *)data;
+
+
+//离线消息相关方法 offlineMessage
+//获取离线有单聊消息的chatList
+- (void)getOfflineSingleChatList;
+
+//getOfflineGroupChatList  获取离线有群消息的会话列表
+-(void)getOfflineGroupChatList;
+
+//离线消息优化，动态拉取群聊离线消息，以区间信息拉取
+- (void)getGroupChatOfflineMessageWithStartIndex:(NSString *)start endIndex:(NSString *)end ascending:(BOOL)ascending groupid:(NSString *)groupid;
+
+//离线消息优化，动态拉取单聊离线消息，以区间信息拉取
+- (void)getSingleChatOfflineMessageWithStartIndex:(NSString *)start endIndex:(NSString *)end ascending:(BOOL)ascending chatJid:(NSString *)chatJid;
 
 @end
 

@@ -27,6 +27,7 @@
 #import "WTProtoContact.h"
 #import "WTProtoUserInfoService.h"
 #import "WTProtoUserConfigService.h"
+#import "WTProtoOffLineMessageManager.h"
 
 static WTProto *proto = nil;
 static dispatch_once_t onceToken;
@@ -47,7 +48,8 @@ static dispatch_once_t queueOnceToken;
                        WTProtoMessageCenterDelegate,
                        WTProtoContactDelegate,
                        WTProtoUserInfoServiceDelegate,
-                       WTProtoUserConfigServiceDelegate
+                       WTProtoUserConfigServiceDelegate,
+                       WTProtoOffLineMessageDelegate
                       >
 
 
@@ -70,6 +72,8 @@ static dispatch_once_t queueOnceToken;
     WTProtoMessageCenter             *_protoMessageCenter;
     WTProtoContact                   *_protoContact;
     WTProtoUserConfigService         *_protoUserConfigService;
+    WTProtoUserInfoService           *_protoUserInfoService;
+    WTProtoOffLineMessageManager     *_protoOffLineMessageService;
 }
 
 @end
@@ -277,11 +281,15 @@ static dispatch_once_t queueOnceToken;
     #pragma mark - init WTProtoContact to manager the Contact
     _protoContact = [WTProtoContact shareContactWithProtoStream:protoStream interface:@"contact"];
 
-    #pragma mark - init WTProtoContact to manager the UserInfoService
+    #pragma mark - init WTProtoUserInfoService to manager the UserInfoService
     _protoUserInfoService = [WTProtoUserInfoService shareUserInfoServiceWithProtoStream:protoStream                                                                                       interface:@"UserInfoService"];
     
-     #pragma mark - init WTProtoContact to manager the UserInfoService
+     #pragma mark - init WTProtoUserConfigService to manager the UserInfoService
     _protoUserConfigService = [WTProtoUserConfigService shareUserConfigServiceWithProtoStream:protoStream interface:@"userConfig"];
+    
+    #pragma mark - init WTProtoOffLineMessageManager to manager the UserInfoService
+    _protoOffLineMessageService = [WTProtoOffLineMessageManager shareOffLineMessageWithProtoStream:protoStream interface:@"offlineMessage"];
+
 }
 
 
@@ -300,7 +308,8 @@ static dispatch_once_t queueOnceToken;
     [_protoContact       addProtoContactDelegate:self        delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
     [_protoUserInfoService  addProtoUserInfoServiceDelegate:self delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
     [_protoUserConfigService  addProtoUserConfigServiceDelegate:self delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
-    
+    [_protoOffLineMessageService  addProtoOffLineMessageDelegate:self delegateQueue:[[WTProtoQueue mainQueue] nativeQueue]];
+
     protoMulticasDelegate = (GCDMulticastDelegate <WTProtoDelegate> *)[[GCDMulticastDelegate alloc] init];
     
 }
@@ -363,6 +372,7 @@ static dispatch_once_t queueOnceToken;
     _protoContact          = nil;
     _protoUserInfoService  = nil;
     _protoUserConfigService  = nil;
+    _protoOffLineMessageService = nil;
     
     [WTProtoStreamManager       dellocSelf];
     [WTProtoConnection          dellocSelf];
@@ -377,6 +387,7 @@ static dispatch_once_t queueOnceToken;
     [WTProtoContact             dellocSelf];
     [WTProtoUserInfoService     dellocSelf];
     [WTProtoUserConfigService   dellocSelf];
+    [WTProtoOffLineMessageManager dellocSelf];
 }
 
 
@@ -643,6 +654,18 @@ static dispatch_once_t queueOnceToken;
     
 }
 
+-(void)updateUserInfo:(NSDictionary *)info methodID:(NSString *)methodID
+{
+    [_protoUserInfoService request_IQ_UpdateUserInfoWithLocalUser:_protoUser
+                                                       updateInfo:info
+                                                         methodID:methodID];
+    
+}
+
+#pragma mark - 个人信息修改通知
+- (void)sendUserInfoChangedPresenceWithUpeageType:(NSString *)type value:(NSString *)value{
+    [_protoContact sendUserInfoChangedPresenceWithUpeageType:type value:value fromUser:_protoUser];
+}
 
 
 
@@ -748,7 +771,15 @@ static dispatch_once_t queueOnceToken;
 - (void)getBlockList{
     
     NSArray * blocklist = [_protoBlock blockingList];
-    [protoMulticasDelegate WTProto:self getBlockList_ResultWithSucceed:YES info:blocklist];
+    NSDictionary * b_dict = [_protoBlock blockingDictionary];
+    NSLog(@"_protoBlock %@ %@", b_dict, blocklist);
+    NSMutableArray * tempArr = [[NSMutableArray alloc] init];
+    for (NSString * blockjidStr in blocklist) {
+        NSString * nickName = [b_dict objectForKey:blockjidStr];
+        [tempArr addObject:@{@"jid":blockjidStr, @"nickName":nickName}];
+    }
+    
+    [protoMulticasDelegate WTProto:self getBlockList_ResultWithSucceed:YES info:tempArr];
     
 }
 
@@ -796,6 +827,120 @@ static dispatch_once_t queueOnceToken;
     [_protoGroup request_IQ_RemoveMemberUnscribesChatRoomWithFromUser:_protoUser RoomID:groupJId roomName:roomName roomOwnerID:roomOwnerJid memberGroupNickName:nickName Friends:friends];
 }
 
+
+//群私聊状态设置
+- (void)setGroupConfigPrivateChatFlagWithGroupJid:(WTProtoUser *)groupJId flag:(NSString *)flag{
+    
+    [_protoGroup setGroupConfigPrivateChatFlag:flag roomID:groupJId];
+    
+}
+
+//群截屏通知状态设置
+- (void)setGroupScreenshotsnotifyWithGroupJid:(WTProtoUser *)groupJId flag:(NSString *)flag{
+    
+    [_protoGroup setGroupConfigScreenshotsnotify:flag roomID:groupJId];
+}
+
+//群邀请确认状态设置
+- (void)setGroupInviteConfirmWithGroupJid:(WTProtoUser *)groupJId flag:(NSString *)flag{
+    
+    [_protoGroup setGroupConfigInviteConfirmWithFlag:flag roomID:groupJId];
+}
+
+// 群定时销毁开启状态 time>0 开启
+- (void)setGroupConfigdestoryWithGroupJid:(WTProtoUser *)groupJId time:(NSInteger)time{
+    [_protoGroup setGroupConfigdestoryWithTime:time roomID:groupJId];
+}
+
+//群名称
+- (void)setGroupNameWithGroupJid:(WTProtoUser *)groupJId title:(NSString *)title{
+    
+    [_protoGroup setGroupConfigGroupName:title roomID:groupJId];
+}
+
+//群公告
+- (void)setGroupDescriptionWithGroupJid:(WTProtoUser *)groupJId desc:(NSString *)desc{
+    
+    [_protoGroup setGroupConfigGroupDescription:desc roomID:groupJId];
+}
+
+//群图标
+- (void)setGroupIconWithGroupJid:(WTProtoUser *)groupJId iconUrl:(NSString *)iconUrl{
+    
+    [_protoGroup setGroupConfigGroupIcon:iconUrl roomID:groupJId];
+}
+
+
+//群保存到通讯列表
+- (void)setGroupSaveStateWithGroupJid:(WTProtoUser *)groupJId flag:(BOOL)flag{
+    
+    [_protoGroup request_IQ_SaveGroupToContactListWithFromUser:_protoUser RoomJid:groupJId state:flag];
+}
+
+//群消息免打扰设置
+- (void)setGroupPushStateWithGroupJid:(WTProtoUser *)groupJId flag:(BOOL)flag{
+    
+    [_protoGroup request_IQ_UnDisturbWithFromUser:_protoUser RoomID:groupJId state:flag];
+}
+
+//我的群昵称修改
+- (void)changeMyGroupNickNameWithGroupJid:(WTProtoUser *)groupJId nickname:(NSString *)nickname changeflag:(NSInteger)changeflag{
+    
+    [_protoGroup request_IQ_ModifyRoomNickNameWithFromUser:_protoUser RoomID:groupJId nickname:nickname changeflag:changeflag];
+}
+
+
+//获取退群成员列表
+- (void)getQuiteGroupMembersWithGroupJid:(WTProtoUser *)groupJId{
+    
+    [_protoGroup request_IQ_GetGroupQuiteMemberListWithFromUser:_protoUser RoomID:groupJId];
+    
+}
+
+//按活跃度获取群成员列表
+- (void)getActivityGroupMembersWithGroupJid:(WTProtoUser *)groupJId activityTime:(NSString *)time{
+    
+    [_protoGroup request_IQ_GetGroupActivityMemberWithFromUser:_protoUser RoomID:groupJId activityTime:time];
+    
+}
+
+/**
+*  设置群禁言
+*/
+- (void)setGroupBannedMemberListWithGroupJId:(WTProtoUser *)groupJId memebers:(NSArray *)members nickName:(NSString *)nickName
+ style:(NSString *)style{
+    [_protoGroup request_IQ_SetGroupBannedMemberListWithFromUser:_protoUser RoomID:groupJId memebers:members nickName:nickName style:style];
+}
+
+/**
+ *  设置群全员禁言
+*/
+- (void)setGroupBannedAllWithGroupJId:(WTProtoUser *)groupJId nickName:(NSString *)nickName style:(NSString *)style{
+    [_protoGroup request_IQ_SetGroupBannedAllWithFromUser:_protoUser RoomID:groupJId nickName:nickName style:style];
+}
+
+/**
+ *  获取群禁言名单
+*/
+- (void)getGroupBannedMemberListWithGroupJid:(WTProtoUser *)groupJId{
+    [_protoGroup request_IQ_GetGroupBannedMemberListWithFromUser:_protoUser RoomID:groupJId];
+}
+
+
+//群主转让
+- (void)exChangeGroupOwnerWithGroupJid:(WTProtoUser *)groupJId memberNickName:(NSString *)nickname memberJID:(WTProtoUser *)memberJID{
+    
+    [_protoGroup request_IQ_ExChangeGroupOwnerAuthorityWithFromUser:_protoUser RoomID:groupJId newOwernick:nickname newOwerID:memberJID];
+    
+}
+
+//管理员设置
+- (void)setGroupAdminWithGroupJId:(WTProtoUser *)groupJId memebers:(NSArray *)members style:(NSString *)style{
+    
+    [_protoGroup request_IQ_SetGroupAdminWithFromUser:_protoUser Memebers:members roomJid:groupJId style:style];
+    
+}
+
 #pragma mark - 用户配置相关方法
 /**
  *  获取用户偏好设置
@@ -832,6 +977,27 @@ static dispatch_once_t queueOnceToken;
     [_protoUserConfigService IQ_removeUserChatSettingWithDict:data fromUser:_protoUser];
 }
 
+#pragma mark - 离线消息
+//获取离线有单聊消息的chatList
+- (void)getOfflineSingleChatList{
+    [_protoOffLineMessageService getSingleChatOfflineListDynamicsWithFromUser:_protoUser];
+}
+
+//getOfflineGroupChatList  获取离线有群消息的会话列表
+-(void)getOfflineGroupChatList{
+    [_protoOffLineMessageService getGroupChatOfflineListDynamicsWithFromUser:_protoUser];
+}
+
+
+//离线消息优化，动态拉取群聊离线消息，以区间信息拉取
+- (void)getGroupChatOfflineMessageWithStartIndex:(NSString *)start endIndex:(NSString *)end ascending:(BOOL)ascending groupid:(NSString *)groupid{
+    [_protoOffLineMessageService getGroupChatOfflineMessageDynamicsWithFromUser:_protoUser startIndex:start endIndex:end ascending:ascending chatJid:groupid];
+}
+
+//离线消息优化，动态拉取单聊离线消息，以区间信息拉取
+- (void)getSingleChatOfflineMessageWithStartIndex:(NSString *)start endIndex:(NSString *)end ascending:(BOOL)ascending chatJid:(NSString *)chatJid{
+    [_protoOffLineMessageService getSingleChatOfflineMessageDynamicsWithFromUser:_protoUser startIndex:start endIndex:end ascending:ascending chatJid:chatJid];
+}
 
 #pragma mark Proto Ack/ReadAck Message
 - (void)Ack:(XMPPMessage*)message
@@ -1120,6 +1286,12 @@ static dispatch_once_t queueOnceToken;
     [protoMulticasDelegate WTProto:self SearchUserInfoWithResult:result UserInfo:userInfo];
 }
 
+- (void)WTProtoUserInfoService:(WTProtoUserInfoService *)UserInfoService methodID:(nonnull NSString *)methodID updateUserInfoResult:(BOOL)result info:(nonnull id)info{
+
+    [protoMulticasDelegate WTProto:self updateUserInfoResult:result info:info methodID:methodID];
+}
+
+
 
 #pragma mark - WTProtoMessageCenter Delegate - Receive Message
 - (void)protoMessageCenter:(WTProtoMessageCenter *)messageCenter
@@ -1154,6 +1326,19 @@ static dispatch_once_t queueOnceToken;
     
      [protoMulticasDelegate WTProto:self didReceiveShakeResultDecryptMessage:decryptMessage OriginalMessage:originalMessage];
 }
+
+-(void)protoMessageCenter:(WTProtoMessageCenter *)messageCenter didReceiveGroupDataUpDateInfo:(NSDictionary *)updateInfo originalMessage:(XMPPMessage *)originalMessage{
+    [protoMulticasDelegate WTProto:self didReceiveGroupDataUpDateInfo:updateInfo originalMessage:originalMessage];
+}
+
+- (void)protoMessageCenter:(WTProtoMessageCenter *)messageCenter didReceiveAcceptPresenceMessage:(NSDictionary *)acceptInfo originalMessage:(XMPPMessage *)originalMessage{
+    [protoMulticasDelegate WTProto:self didReceiveAcceptPresenceMessage:acceptInfo originalMessage:originalMessage];
+}
+
+- (void)protoMessageCenter:(WTProtoMessageCenter *)messageCenter didReceiveMatchFriendWithMessage:(NSDictionary *)contactInfo originalMessage:(XMPPMessage *)originalMessage{
+    [protoMulticasDelegate WTProto:self didReceiveMatchFriendWithMessage:contactInfo originalMessage:originalMessage];
+}
+
 
 #pragma mark - WTProtoContact Delegate
 - (void)WTProtoContact:(WTProtoContact *)protoContact getContacts_ResultWithSucceed:(BOOL)succeed matchcount:(NSUInteger)matchcount info:(id)info{
@@ -1227,6 +1412,15 @@ static dispatch_once_t queueOnceToken;
     [protoMulticasDelegate WTProto:self RoomDidCreate_ResultWithSucceed:NO info:info];
 }
 
+
+-(void)WTProtoGroup:(WTProtoGroup* )protoGroup RoomDidConfigure:(XMPPRoom *)room iqResult:(WTProtoIQ *)iqResult{
+    [protoMulticasDelegate WTProto:self setRoomConfigure_ResultWithSucceed:YES info:iqResult];
+}
+
+-(void)WTProtoGroup:(WTProtoGroup* )protoGroup RoomDidNotConfigure:(XMPPRoom *)room iqResult:(WTProtoIQ *)iqResult{
+    [protoMulticasDelegate WTProto:self setRoomConfigure_ResultWithSucceed:NO info:iqResult];
+}
+
 - (void)WTProtoGroup:(WTProtoGroup *)protoGroup InviteUserSubscribes_Result:(BOOL)resalut info:(id)info{
     [protoMulticasDelegate WTProto:self inviteUserSubscribes_Result:resalut info:info];
 }
@@ -1241,6 +1435,46 @@ static dispatch_once_t queueOnceToken;
 
 - (void)WTProtoGroup:(WTProtoGroup *)protoGroup RemoveMemberUnscribesChatRoom_Result:(BOOL)resalut info:(id)info{
     [protoMulticasDelegate WTProto:self removeMemberUnscribesChatRoom_Result:resalut info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup GetGroupQuiteMemberList_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self getGroupQuiteMemberList_Result:resalut info:info];
+}
+
+-(void)WTProtoGroup:(WTProtoGroup* )protoGroup GetGroupActivityMember_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self getGroupActivityMembers_Result:resalut info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup ExChangeGroupOwnerAuthority_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self exChangeGroupOwner_Result:resalut info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup SetGroupAdmin_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self setGroupAdmin_Result:resalut info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup SaveGroupToContactList_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self setGroupSaveState_Result:resalut info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup UnDisturb_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self setGroupPushState_Result:resalut info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup ModifyRoomNickName_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self changeMyGroupNickName_Result:resalut info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup SetGroupBannedAll_Result:(BOOL)resalut inf:(id)info{
+    [protoMulticasDelegate WTProto:self setGroupBannedAll_Result:resalut inf:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup SetGroupBannedMemberList_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self setGroupBannedMemberList_Result:resalut info:info];
+}
+
+- (void)WTProtoGroup:(WTProtoGroup *)protoGroup GetGroupBannedMemberList_Result:(BOOL)resalut info:(id)info{
+    [protoMulticasDelegate WTProto:self getGroupBannedMemberList_Result:resalut info:info];
 }
 
 
@@ -1274,6 +1508,65 @@ static dispatch_once_t queueOnceToken;
                            info:(id)info{
     [protoMulticasDelegate WTProto:self removeUserChatSettingResult:result info:info];
 }
+
+#pragma mark - WTProtoOffLineMessageManager Delegate
+- (void)WTProtoOffLineMessage:(WTProtoOffLineMessageManager* )protoOffLineMessage getSingleChatOfflineListDynamics_ResultWithSucceed:(BOOL)succeed info:(id)info{
+    [protoMulticasDelegate WTProto:self getSingleChatOfflineListDynamics_ResultWithSucceed:succeed info:info];
+}
+
+- (void)WTProtoOffLineMessage:(WTProtoOffLineMessageManager* )protoOffLineMessage getSingleChatOfflineMessageDynamics_ResultWithSucceed:(BOOL)succeed info:(id)info{
+    
+    if (succeed) {
+        
+        //单聊离线消息 xmppmessages 怎么转换到 WTProtoConversationMessage
+        NSArray * dataArr = info;
+        NSMutableArray * exChangeInfoArr = [[NSMutableArray alloc] init];
+        //
+        for (XMPPMessage * message in dataArr) {
+           WTProtoConversationMessage * exChangeMessage = [_protoMessageCenter decryptConversationMessage:[XMPPMessage messageFromElement:message]];
+            [exChangeInfoArr addObject:exChangeMessage];
+        }
+        
+        NSMutableDictionary *infoDic = [NSMutableDictionary dictionary];
+        [infoDic setObject:exChangeInfoArr forKey:@"decryptMessages"];
+        [infoDic setObject:dataArr forKey:@"OriginalMessages"];
+        
+        [protoMulticasDelegate WTProto:self getSingleChatOfflineMessageDynamics_ResultWithSucceed:succeed info:infoDic];
+        
+    }else{
+        [protoMulticasDelegate WTProto:self getSingleChatOfflineMessageDynamics_ResultWithSucceed:succeed info:info];
+    }
+
+}
+- (void)WTProtoOffLineMessage:(WTProtoOffLineMessageManager* )protoOffLineMessage getGroupChatOfflineListDynamics_ResultWithSucceed:(BOOL)succeed info:(id)info{
+    [protoMulticasDelegate WTProto:self getGroupChatOfflineListDynamics_ResultWithSucceed:succeed info:info];
+}
+- (void)WTProtoOffLineMessage:(WTProtoOffLineMessageManager* )protoOffLineMessage getGroupChatOfflineMessageDynamics_ResultWithSucceed:(BOOL)succeed info:(id)info{
+    
+    if (succeed) {
+        
+        //群聊离线消息 xmppmessages 怎么转换到 WTProtoConversationMessage
+        NSArray * dataArr = info;
+        NSMutableArray * exChangeInfoArr = [[NSMutableArray alloc] init];
+        //
+        for (XMPPMessage * message in dataArr) {
+           WTProtoConversationMessage * exChangeMessage = [_protoMessageCenter decryptConversationMessage:[XMPPMessage messageFromElement:message]];
+            [exChangeInfoArr addObject:exChangeMessage];
+        }
+        
+        NSMutableDictionary *infoDic = [NSMutableDictionary dictionary];
+        [infoDic setObject:exChangeInfoArr forKey:@"decryptMessages"];
+        [infoDic setObject:dataArr forKey:@"OriginalMessages"];
+        
+        [protoMulticasDelegate WTProto:self getGroupChatOfflineMessageDynamics_ResultWithSucceed:succeed info:infoDic];
+        
+    }else{
+        [protoMulticasDelegate WTProto:self getGroupChatOfflineMessageDynamics_ResultWithSucceed:succeed info:info];
+    }
+
+}
+
+
 
 
 @end
